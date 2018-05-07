@@ -1,0 +1,31 @@
+<html>
+<head>
+        <title>MY SITE</title>
+
+        {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/bootstrap-reboot.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/bootstrap-grid.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'login/css/login.css' %}" />
+
+</head>
+<body>
+
+
+
+<div class="allContent">
+    <div id="panel" class="login">
+        <form>
+            <p for="username" class="label2">Login</p>
+            <input type="text" id="username" name="username">
+            <p for="password" class="label2">Hasło:</p>
+            <input type="password" id="password" name="password">
+            <div id="lower">
+                <input type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
