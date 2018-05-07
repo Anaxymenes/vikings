@@ -6,46 +6,23 @@ body {
     background-size: cover;
 }
 
-.login {
+.loginPanel{
     display: inline-block;
+    width: 200px;
+    height: 180px;
     position: fixed;
-    top: 0;
-    bottom: 0;
+    top: 80;
     left: 0;
     right: 0;
-    width: 200px;
-    height: 150px;
+    bottom: 0;
     margin: auto;
 }
 
-.btn {
-    -webkit-border-radius: 8;
-    -moz-border-radius: 8;
-    border-radius: 8px;
-    font-family: Courier New;
-    color: #ffffff;
-    font-size: 20px;
-    background: #c27b00;
-    padding: 5px 15px 5px 15px;
-    border: solid #4d4a4d 2px;
-    text-decoration: none;
+.formLabel{
+    color: aqua;
 }
 
-.btn:hover {
-    background: #ff9900;
-    text-decoration: none;
-}
-
-.label2 {
-    display: block;
-    width: 260px;
-    padding: 100px;
-    color: #3b3b3b;
-    font-size: 16px;
-    text-shadow: 0 0 1px silver;
-}
-
-.asd {
+.alt {
     display: block;
     border: 1px solid red;
 }
