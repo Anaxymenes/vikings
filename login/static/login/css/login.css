@@ -6,7 +6,7 @@ body {
     background-size: cover;
 }
 
-.loginPanel{
+.loginPanel {
     display: inline-block;
     width: 200px;
     height: 180px;
@@ -18,9 +18,58 @@ body {
     margin: auto;
 }
 
-.formLabel{
-    color: aqua;
+.formLabel {
+    color: rgb(61, 61, 61);
+    display: block;
+    margin-left: 25%;
+    margin-bottom: 2px;
+    padding: 0px 20px;
+    font-size: 20px;
+    text-shadow: 0 0 1px silver;
+    font-weight: bold;
 }
+
+.textbox{
+    display: block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: 3px solid #666666;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    font: normal 16px/normal "Times New Roman", Times, serif;
+    color: rgba(96,96,96,1);
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: rgba(252,252,252,1);
+    -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
+    width:97%;
+    height:30px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.logButton {
+    margin-top:30px;
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
+    border-radius: 8px;
+    font-family: Georgia;
+    color: #000000;
+    font-size: 20px;
+    background: #e08600;
+    padding: 5px 20px 5px 20px;
+    border: solid #474747 3px;
+    text-decoration: none;
+    width: 100%;
+  }
+  
+  .logButton:hover {
+    background: #eb9d00;
+    text-decoration: none;
+  }
 
 .alt {
     display: block;
