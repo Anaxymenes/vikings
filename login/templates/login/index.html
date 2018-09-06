@@ -12,8 +12,15 @@
 </head>
 
 <body>
+    
     <div class="loginPanel">
-        <form method="post" class="loginForm">
+        <form 
+            role="form"
+            action="{% url 'user_login' %}"
+            method="post" class="loginForm" >
+            {% csrf_token %}
+
+            {{ form }}
             <p for="username" class="formLabel">Login</p>
             <input type="text" id="username" name="username" class="textbox">
             <br>
