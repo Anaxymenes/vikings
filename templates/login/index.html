@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MY SITE</title>
+
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/bootstrap-reboot.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/bootstrap-grid.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/index.css' %}" />
+
+</head>
+
+<body>
+    <section class="loginPanel">
+        <form method="post" class="loginForm">
+            <p for="username" class="formLabel"> Login </p>
+            <input type="text" id="username" name="username" required="true" placeholder="Wprowadź login" class="textbox">
+
+            <p for="password" class="formLabel"> Hasło </p>
+            <input type="password" id="password" name="password" required="true" placeholder="Wprowadź hasło" class="textbox">
+
+            <small>Nie masz konta? <a href="/register" class="alert-link">Zarejestruj się</a></small>
+
+            <div id="lower">
+                <input type="submit" value="Zaloguj" formaction="main/" class="logButton">
+            </div>
+        </form>
+    </section>
+
+</body>
+
+</html>

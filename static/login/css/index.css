@@ -1,0 +1,88 @@
+body {
+    background-color: #3b3b3b;
+    background-image: url("../img/bg_login2.jpg");
+    background-position-x: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.loginPanel {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+}
+.formLabel{
+    margin-bottom: 3%;
+    margin-top: 10%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #3b3b3b;
+    display: block;
+    font-size: 150%;
+    text-shadow: 0 0 1px silver;
+    font-weight: bold;
+}
+.textbox{
+    display: block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: 3px solid #666666;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    font: normal 16px/normal "Times New Roman", Times, serif;
+    color: rgba(96,96,96,1);
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: rgba(252,252,252,1);
+    -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
+    width:94%;
+    height:30px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 3%;
+}
+.textbox:hover{
+    border-color: #8a8a8a;
+}
+.logButton {
+    margin-top:30px;
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
+    border-radius: 8px;
+    font-family: Georgia;
+    font-weight: bold;
+    color: #000000;
+    font-size: 150%;
+    background: #e08600;
+    border: solid rgba(96,96,96,1) 3px;
+    text-decoration: none;
+    width: 80%;
+}
+  
+.logButton:hover {
+background: #eb9d00;
+text-decoration: none;
+}
+
+.alt {
+    border: 1px solid red;
+}
+
+@media screen and (max-width: 786px){
+    .loginPanel {
+        width: 60%;
+    }
+    .formLabel {
+        font-size: 200%;
+    }
+}
+@media screen and (max-width: 576px){
+    .loginPanel{
+        width: 90%;
+    }
+}

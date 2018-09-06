@@ -1,0 +1,114 @@
+body {
+    background-color: #3b3b3b;
+    background-image: url("../img/bg_wood.jpg");
+    background-position-x: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.board{
+    background-image: url("../img/bg_map.png");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 100%;
+    min-height: 400px;
+    min-width: 270px;
+    padding: 5rem 5rem;
+    padding-bottom: 8rem;
+    margin-top: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #3b3b3b;
+}
+.tabs{
+    margin-top: 4rem;
+    width: 80%;
+}
+.tabs li a{
+    border: 1px solid #858585;
+    border-radius: 15px 15px 0px 0px;
+    background-color: honeydew;
+    color: #3b3b3b;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    background-color: rgb(168, 167, 167);
+    border: 1px solid #858585;
+    border-radius: 10px 10px 0px 0px;
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(255, 255, 255);
+}
+.nav-tabs.nav-justified>li>a{
+    margin: 0;
+}
+.tabBorder{
+    border: 1px solid #858585;
+    border-top: 0;
+    border-radius: 0px 0px 15px 15px;
+    padding: 1rem 2rem;
+    background: honeydew;
+    min-height: 350px;
+}
+.nav-tabs>li>a {
+    margin: 0;
+}
+.tableHeader tr th{
+    text-align: center;
+}
+#detailsTd{
+    padding: 0 2rem;
+    background-color: #f7f7f7;
+}
+#details p{
+    text-indent: 30px;
+    padding: 0.4rem 1rem;
+    background: #e6e6e6;
+    border-radius: 5px;
+    word-wrap: break-word;
+}
+
+/* MEDALS */
+.medalImageField{
+    padding: 0 !important;
+}
+.medalImage{
+   width: 100%;
+}
+
+
+.alt{
+    border: 1px solid red;
+}
+
+@media screen and (max-width: 992px){
+    .board{
+       padding-left: 0;
+       padding-right: 0;
+    }
+}
+@media screen and (max-width: 767px){
+    /* ZADANIE GŁÓWNE */
+    #excercises h1{
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .average{
+        font-size: 2rem;
+    }
+    #details p{
+        white-space: normal;
+    }
+
+    /* MEDALE */
+    .medalImage{
+        width: 80px;
+    }
+}
+@media screen and (max-width: 576px){
+    /* ZADANIE GŁÓWNE */
+    #navProfile li a{
+        padding: 1%;
+    }
+}
