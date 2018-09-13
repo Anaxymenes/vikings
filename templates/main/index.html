@@ -14,71 +14,79 @@
 </head>
 
 <body>
-    <div id="main" class="main">
-        <div id="header" class = "header">
-            <div id="avatar" class="avatar">
-                <div  class="avatarName ">
-                    <p class="font-georgia text-center">Mateusz Bogacki</p>
+    <div class="container">
+        <div class="header row">
+            <div class="avatar col-2">
+                <div class="avatarName">
+                    {{ player }}
                 </div>
             </div>
-            <div id="statistic container" class="statistic">
-                <div id="healthPoints">
-                    <span class="font-georgia font-italic">HP: 90/100</span>
-                    <span class="font-georgia font-italic float-right">+20hp<img src="../../static/main/img/hp_potion.png" class="potion"></span>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:90%">
-                            <span class="sr-only"></span>
+            <div class="col-8">
+                <div class="stats">
+                    <div id="healthPoints" class="font-italic">
+                        <div class="pb-2">
+                            <span float="left">HP: 90/100</span>
+                            <span class="potion">+20hp</span>
+                            <img src="../../static/main/img/hp_potion.png" align="right"/>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:90%">
+                                <span class="sr-only"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="experience" class="experience">
-                    <span class="font-georgia font-italic">EXP: 100/200</span>
-                    <div class="progress">
+                    <div id="experience" class="experience">
+                        <span class="font-georgia font-italic">EXP: 100/200</span>
+                        <div class="progress">
                             <div class="progress-bar progress-bar-exp" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%">
                                 <span class="sr-only"></span>
                             </div>
                         </div>
-                </div>
-                <div class="row">
-                    <span class="col-6 font-georgia font-italic">Poziom: 1</span>
-                    <span class="col-6 font-georgia font-italic">Pkt Rankingowe: 11</span>
-                </div>
-                <div class="row">
-                    <div class="col-6 text-center">
-                        <img class="rankImg" src="../../static/main/img/rank.png">
-                        <div class="centered font-fantasy">12</div>
                     </div>
-                    <div class="col-6 text-center">
-                        <img class="rankImg" src="../../static/main/img/rank.png">
-                        <div class="centered font-fantasy">2</div>
+                    <div class="row">
+                        <span class="col-6 font-italic">Poziom: 1</span>
+                        <span class="col-6 font-italic">Punkty: 11</span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 font-georgia font-italic text-center rankDesc">
-                        <span>Ranking Światowy</span>
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <img class="rankImg" src="../../static/main/img/rank.png">
+                            <div class="centered font-fantasy">12</div>
+                        </div>
+                        <div class="col-6 text-center">
+                            <img class="rankImg" src="../../static/main/img/rank.png">
+                            <div class="centered font-fantasy">2</div>
+                        </div>
                     </div>
-                    <div class="col-6 font-georgia font-italic text-center rankDesc">
-                        <span>Ranking Grupowy</span>
+                    <div class="row">
+                        <div class="col-6 font-georgia font-italic text-center rankDesc">
+                            <span>Ranking Światowy</span>
+                        </div>
+                        <div class="col-6 font-georgia font-italic text-center rankDesc">
+                            <span>Ranking Grupowy</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="menu" class="menu">
+            <div id="menu" class="menu col-2">
                 <ul>
                     <li><img src="../../static/main/img/student_logout.png" alt="Wyloguj"></li>
                     <li><img src="../../static/main/img/settings.png" alt="Ustawienia"></li>
                     <li><img src="../../static/main/img/message.png" alt="Wiadomości"></li>
                     <li><img src="../../static/main/img/challenge.png" alt="Wyzwania"></li>
-                </ul>    
-                
+                </ul>   
             </div>
         </div>
-        <div id="map" class="map">
-            <img src="../../static/main/img/lesson1.png" class="lesson1">
-            <img src="../../static/main/img/lesson2.png" class="lesson2">
-            <img src="../../static/main/img/lesson3.png" class="lesson3">
-            <img src="../../static/main/img/lesson4.png" class="lesson4">
-            <img src="../../static/main/img/lesson5.png" class="lesson5">
-            <img src="../../static/main/img/lesson6.png" class="lesson6">
+        <div class="map">
+            <div>
+                {% for level in levels %}
+                    <img src="../../static/main/img/lesson{{level}}.png" class="lesson{{level}}">
+                    {% if level != levels|last %}
+                        <img src="../../static/main/img/okmark.png" class="xmark{{level}} top">
+                    {% else %}
+                        <img src="../../static/main/img/xmark.png" class="xmark{{level}} top">
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>
