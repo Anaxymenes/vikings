@@ -1,94 +1,16 @@
-<!DOCTYPE html>
-<html>
+{% extends "main/base.html" %}
 
-<head>
-    <title>MY SITE</title>
-
-    {% load staticfiles %}
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap-reboot.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap-grid.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/index.css' %}" />
-
-</head>
-
-<body>
-    <div class="container">
-        <div class="header row">
-            <div class="avatar col-2">
-                <div class="avatarName">
-                    {{ player }}
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="stats">
-                    <div id="healthPoints" class="font-italic">
-                        <div class="pb-2">
-                            <span float="left">HP: 90/100</span>
-                            <span class="potion">+20hp</span>
-                            <img src="../../static/main/img/hp_potion.png" align="right"/>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:90%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="experience" class="experience">
-                        <span class="font-georgia font-italic">EXP: 100/200</span>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-exp" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <span class="col-6 font-italic">Poziom: 1</span>
-                        <span class="col-6 font-italic">Punkty: 11</span>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 text-center">
-                            <img class="rankImg" src="../../static/main/img/rank.png">
-                            <div class="centered font-fantasy">12</div>
-                        </div>
-                        <div class="col-6 text-center">
-                            <img class="rankImg" src="../../static/main/img/rank.png">
-                            <div class="centered font-fantasy">2</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 font-georgia font-italic text-center rankDesc">
-                            <span>Ranking Światowy</span>
-                        </div>
-                        <div class="col-6 font-georgia font-italic text-center rankDesc">
-                            <span>Ranking Grupowy</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="menu" class="menu col-2">
-                <ul>
-                    <li><img src="../../static/main/img/student_logout.png" alt="Wyloguj"></li>
-                    <li><img src="../../static/main/img/settings.png" alt="Ustawienia"></li>
-                    <li><img src="../../static/main/img/message.png" alt="Wiadomości"></li>
-                    <li><img src="../../static/main/img/challenge.png" alt="Wyzwania"></li>
-                </ul>   
-            </div>
-        </div>
-        <div class="map">
-            <div>
-                {% for level in levels %}
-                    <img src="../../static/main/img/lesson{{level}}.png" class="lesson{{level}}">
-                    {% if level != levels|last %}
-                        <img src="../../static/main/img/okmark.png" class="xmark{{level}} top">
-                    {% else %}
-                        <img src="../../static/main/img/xmark.png" class="xmark{{level}} top">
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
+{% block content %}
+<div class="map">
+    <div>
+        {% for level in levels %}
+            <img src="../../static/img/lesson{{level}}.png" class="lesson{{level}}">
+            {% if level != levels|last %}
+                <a href="/main/lesson/"><img src="../../static/img/okmark.png" class="mark{{level}} top"></a>
+            {% else %}
+                <a href="/main/lesson/"><img src="../../static/img/xmark.png" class="mark{{level}} top"></a>
+            {% endif %}
+        {% endfor %}
     </div>
-</body>
-
-</html>
+</div>
+{% endblock %}

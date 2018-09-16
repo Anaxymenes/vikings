@@ -40,10 +40,9 @@ body {
 }
 .potion{
     float: right;
-    align: top;
 }
 .progress{
-    margin-top: 1%;
+    margin-top: 7px;
     margin-bottom: 1%;
     border: 2px solid #3b3b3b;
     background-color: rgba(0, 0, 0, 0.3);
@@ -141,31 +140,31 @@ body {
     width: 340px;
 }
 .top{
-    width: 3.5rem;
+    width: 5.0rem;
     z-index: 1;
     cursor: pointer;
 }
-.xmark1{
+.mark1{
     margin-top: 200px;
     margin-left: 170px;
 }
-.xmark2{
+.mark2{
     margin-top: 190px;
     margin-left: 540px;
 }
-.xmark3{
+.mark3{
     margin-top: 330px;
     margin-left: 680px;
 }
-.xmark4{
+.mark4{
     margin-top: 580px;
     margin-left: 220px;
 }
-.xmark5{
+.mark5{
     margin-top: 560px;
     margin-left: 430px;
 }
-.xmark6{
+.mark6{
     margin-top: 550px;
     margin-left: 580px;
 }

@@ -1,0 +1,84 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4">
+                <h3>Grupy</h3>
+                <h4>Stwórz nową grupę</h4>
+                <table class="table table-hover bg-light table-sm groupsTable">
+                    <thead>
+                        <tr>
+                        <th>Nazwa
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Grupa_10-45
+                            <td><button class="btn btn-primary">Pokaż</button>
+                            <td><button class="btn btn-info">Edytuj</button>
+                            <td><button class="btn btn-danger">Usuń</button>
+                            <td><button class="btn btn-basic">Napisz</button>
+                        </tr>
+                        <tr>
+                            <td>Grupa_11-30
+                            <td><button class="btn btn-primary">Pokaż</button>
+                            <td><button class="btn btn-info">Edytuj</button>
+                            <td><button class="btn btn-danger">Usuń</button>
+                            <td><button class="btn btn-basic">Napisz</button>
+                        </tr>
+                    </tbody>
+                </table>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nazwa</label>
+                        <input class="form-control" placeholder="Nazwa grupy..." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Stwórz grupę</button>
+                </form>
+            </div>
+            <div class="col-xl-8">
+                <h3>Ranking Światowy</h3>
+                <table class="table table-hover bg-light table-sm">
+                    <thead>
+                        <tr>
+                        <th>Lp.
+                        <th>Pkt rankingowe
+                        <th>Imię
+                        <th>Nazwisko
+                        <th>Nr albumu
+                        <th>Grupa
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1   
+                            <td>500
+                            <td>Mateusz
+                            <td>Bogacki
+                            <td>111222
+                            <td>Grupa_10-45
+                            <td><button class="btn btn-primary btn-sm">Pokaż</button>
+                            <td><button class="btn btn-info btn-sm">Edytuj</button>
+                            <td><button class="btn btn-danger btn-sm">Usuń</button>
+                            <td><button class="btn btn-basic btn-sm">Napisz</button>
+                        </tr>
+                        <tr>
+                            <td>1   
+                            <td>500
+                            <td>Mateusz
+                            <td>Bogacki
+                            <td>111222
+                            <td>Grupa_10-45
+                            <td><button class="btn btn-primary btn-sm">Pokaż</button>
+                            <td><button class="btn btn-info btn-sm">Edytuj</button>
+                            <td><button class="btn btn-danger btn-sm">Usuń</button>
+                            <td><button class="btn btn-basic btn-sm">Napisz</button>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

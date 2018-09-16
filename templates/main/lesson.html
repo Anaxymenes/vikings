@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="pl-PL">
+{% extends "main/base.html" %}
 
-<head>
-    <title>MY SITE</title>
-
-    {% load staticfiles %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap-reboot.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap-grid.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/lesson.css' %}" />
-    
-</head>
-
+{% block content %}
 <body>
   <section>
     <div class="container lesson-section pt-5">
@@ -25,7 +12,7 @@
 
         <div id="myBtn" class="row lesson">
           <div class="col-3 align-self-center">
-            <img class="img-fluid float-left image" src="../../static/main/img/zad1_1.png">
+            <img class="image" src="../../static/img/zad1_1.png">
           </div>
           <div class="col-9 lessonInfo align-self-center pt-md-1" align="center">
             <span class="d-block lessonInfo-Number">Zadanie 1</span>
@@ -34,8 +21,18 @@
         </div>
 
         <div class="row lesson">
+            <div class="col-3">
+              <img class="image" src="../../static/img/zad1_1.png">
+            </div>
+            <div class="col-9 lessonInfo" align="center">
+              <span class="lessonInfo-Number">Zadanie 1</span>
+              <span class="lessonInfo-Name">List</span>
+            </div>
+          </div>
+<!-- 
+        <div class="row lesson">
           <div class="col-3 align-self-center">
-            <img class="img-fluid float-left image" src="../../static/main/img/zad1_1.png">
+            <img class="img-fluid float-left image" src="../../static/img/zad1_1.png">
           </div>
           <div class="col-9 lessonInfo align-self-center pt-md-1" align="center">
             <span class="d-block lessonInfo-Number">Zadanie 2</span>
@@ -45,13 +42,13 @@
          
         <div class="row lesson" data-toggle="modal">
           <div class="col-3 align-self-center">
-              <img class="img-fluid float-left image" src="../../static/main/img/zad1_1.png">
+              <img class="img-fluid float-left image" src="../../static/img/zad1_1.png">
           </div>
           <div class="col-9 lessonInfo align-self-center pt-md-1" align="center">
             <span class="d-block lessonInfo-Number">Zadanie 1</span>
             <span class="d-block lessonInfo-Name">List</span>
           </div>
-        </div>
+        </div> -->
 
       </div>
     </div>
@@ -116,7 +113,9 @@
           modal.style.display = "none";
       }
   }
+
+
+
   </script>
 </body>
-
-</html>
+{% endblock %}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MY SITE</title>
+
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'cssbootstrap-reboot.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}" />
+    <!-- <link rel="stylesheet"  href="{% static 'css/bootstrap.min.css' %}" /> -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/playerProfile.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/lesson.css' %}" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="header row">
+            <div class="avatar col-2">
+                <div class="avatarName">
+                    {{player}}
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="stats">
+                    <div id="healthPoints" class="font-italic">
+                        <div class="pb-2">
+                            <span float="left">HP: 90/100</span>
+                            <span class="potion">+20hp</span>
+                            <img src="../../static/img/hp_potion.png" align="right"/>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:90%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="experience" class="experience">
+                        <span class="font-georgia font-italic">EXP: 100/200</span>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-exp" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-6 font-italic">Poziom: 1</span>
+                        <span class="col-6 font-italic">Punkty: 11</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <img class="rankImg" src="../../static/img/rank.png">
+                            <div class="centered font-fantasy">12</div>
+                        </div>
+                        <div class="col-6 text-center">
+                            <img class="rankImg" src="../../static/img/rank.png">
+                            <div class="centered font-fantasy">2</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-georgia font-italic text-center rankDesc">
+                            <span>Ranking Światowy</span>
+                        </div>
+                        <div class="col-6 font-georgia font-italic text-center rankDesc">
+                            <span>Ranking Grupowy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="menu" class="menu col-2">
+                <ul>
+                    <a href="/"><li><img src="../../static/img/student_logout.png" alt="Wyloguj"></li></a>
+                    <a href="/main/playerProfile"><li><img src="../../static/img/settings.png" alt="Ustawienia"></li></a>
+                    <a href=""><li><img src="../../static/img/message.png" alt="Wiadomości"></li></a>
+                    <a href="/main/"><li><img src="../../static/img/challenge.png" alt="Wyzwania"></li></a>
+                </ul>   
+            </div>
+        </div>
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,10 +1,3 @@
-body {
-    background-color: #3b3b3b;
-    background-image: url("../img/bg_wood.jpg");
-    background-position-x: center;
-    background-size: cover;
-    background-attachment: fixed;
-}
 .board{
     background-image: url("../img/bg_map.png");
     background-position: 50% 50%;
@@ -21,7 +14,6 @@ body {
 }
 .tabs{
     margin-top: 4rem;
-    width: 80%;
 }
 .tabs li a{
     border: 1px solid #858585;
@@ -31,6 +23,8 @@ body {
     font-style: italic;
     white-space: nowrap;
     overflow: hidden;
+    
+    display: block;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     background-color: rgb(168, 167, 167);
@@ -39,14 +33,17 @@ body {
     font-weight: bold;
     font-style: italic;
     color: rgb(255, 255, 255);
+    
+    display: block;
 }
 .nav-tabs.nav-justified>li>a{
     margin: 0;
 }
+
+
 .tabBorder{
     border: 1px solid #858585;
-    border-top: 0;
-    border-radius: 0px 0px 15px 15px;
+    border-radius: 0px 15px 15px 15px;
     padding: 1rem 2rem;
     background: honeydew;
     min-height: 350px;
@@ -82,12 +79,6 @@ body {
     border: 1px solid red;
 }
 
-@media screen and (max-width: 992px){
-    .board{
-       padding-left: 0;
-       padding-right: 0;
-    }
-}
 @media screen and (max-width: 767px){
     /* ZADANIE GŁÓWNE */
     #excercises h1{

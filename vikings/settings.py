@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'models',
     'login',
     'main',
+    'adminSite'
 ]
 
 MIDDLEWARE = [
