@@ -12,13 +12,23 @@ def index(request):
     return HttpResponseRedirect(reverse('login:login'))
 
 def lesson(request,stage_id):
-    stage = Stage.objects.filter(id=stage_id).first()
-    stageTasks = StageTasks.objects.filter(stageId=stage).order_by("?")[:5]
-    return render(request, 'main/lesson.html', {
-        "stage":stage,
-        "tasks":stageTasks
-    })
+    if request.user.is_authenticated:
+        task_id = None
+        task = None
+        if request.method == 'GET':
+            task_id = request.GET.get('task_id')
+            print(task_id)
+        stage = Stage.objects.filter(id=stage_id).first()
+        stageTasks = StageTasks.objects.filter(stageId=stage).order_by("?")[:5]
+        return render(request, 'main/lesson.html', {
+            "stage":stage,
+            "tasks":stageTasks,
+            "current_task": task,
+        })
+    return HttpResponseRedirect(reverse('login:login'))
 
 def playerProfile(request):
-    return render(request, 'main/playerProfile.html', {})
+    if request.user.is_authenticated:
+        return render(request, 'main/playerProfile.html', {})
+    return HttpResponseRedirect(reverse('login:login'))
 
