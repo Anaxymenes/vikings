@@ -18,37 +18,34 @@ class Achievement(models.Model):
 class Stage(models.Model):
     name = models.CharField(max_length=50)
 
-class Task(models.Model):
-    stageTaskId = models.ForeignKey(Stage, on_delete=models.PROTECT)
-    name = models.CharField(max_length=50)
+class StageTasks(models.Model):
+    stage = models.ForeignKey(Stage, on_delete=models.PROTECT)
     description = models.CharField(max_length=2500)
-    points = models.IntegerField(default=4)
+    title = models.CharField(max_length=120, default="Zadanie")
+    points = models.IntegerField(default=5)
+    exp_points = models.IntegerField(default=20)
     sampleAnswer = models.CharField(max_length=2500)
 
+
 class AchievementTask(models.Model):
-    achievementId = models.ForeignKey(Achievement, on_delete = models.PROTECT)
-    taskId = models.ForeignKey(Task, on_delete=models.CASCADE)
-    studentID = models.ForeignKey(User, on_delete=models.CASCADE)
+    achievement = models.ForeignKey(Achievement, on_delete = models.PROTECT)
+    task = models.ForeignKey(StageTasks, on_delete=models.CASCADE)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Answer(models.Model):
-    studentId = models.ForeignKey(User, on_delete = models.CASCADE)
-    taskID = models.ForeignKey(Task, on_delete=models.PROTECT)
+    student = models.ForeignKey(User, on_delete = models.CASCADE)
+    task = models.ForeignKey(StageTasks, on_delete=models.PROTECT)
     answerSql = models.CharField(max_length=2500)
 
 class StageStudent(models.Model):
-    stageId = models.ForeignKey(Stage, on_delete=models.PROTECT)
-    studentID = models.ForeignKey(User, on_delete=models.CASCADE)
+    stage = models.ForeignKey(Stage, on_delete=models.PROTECT)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
     databaseSql = models.CharField(max_length=5000)
     complete = models.BooleanField(default=0)
 
-class StageTasks(models.Model):
-    stageId = models.ForeignKey(Stage, on_delete=models.PROTECT)
-    name = models.CharField(max_length=80)
-    title = models.CharField(max_length=120, default="Zadanie")
-
 class StudentGroup(models.Model):
     name = models.CharField(max_length=50)
-    lecturerID = models.ForeignKey(User, on_delete=models.PROTECT)
+    lecturer = models.ForeignKey(User, on_delete=models.PROTECT)
 
 
 

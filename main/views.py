@@ -17,9 +17,9 @@ def lesson(request,stage_id):
         task = None
         if request.method == 'GET':
             task_id = request.GET.get('task_id')
-            print(task_id)
+            
         stage = Stage.objects.filter(id=stage_id).first()
-        stageTasks = StageTasks.objects.filter(stageId=stage).order_by("?")[:5]
+        stageTasks = StageTasks.objects.filter(stage=stage).order_by("?")[:5]
         return render(request, 'main/lesson.html', {
             "stage":stage,
             "tasks":stageTasks,
