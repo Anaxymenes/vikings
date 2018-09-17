@@ -39,6 +39,7 @@ class StageStudent(models.Model):
     stageId = models.ForeignKey(Stage, on_delete=models.PROTECT)
     studentID = models.ForeignKey(User, on_delete=models.CASCADE)
     databaseSql = models.CharField(max_length=5000)
+    complete = models.BooleanField(default=0)
 
 class StageTasks(models.Model):
     stageId = models.ForeignKey(Stage, on_delete=models.PROTECT)

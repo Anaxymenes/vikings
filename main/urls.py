@@ -6,6 +6,6 @@ app_name = 'main'
 
 urlpatterns = [
     path('', views.index, name='home'),
-    path('lesson/', views.lesson, name='lesson'),
+    path('lesson/<int:stage_id>/', views.lesson, name='lesson'),
     path('playerProfile/', views.playerProfile, name="playerProfile"),
 ]
