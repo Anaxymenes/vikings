@@ -6,11 +6,12 @@ class Account(models.Model):
 
 class AccountDetails(models.Model):
     account_id = models.ForeignKey(Account , on_delete = models.CASCADE)
-    first_name = models.CharField(max_length=50)
-    second_name = models.CharField(max_length=50, null=True)
-    last_name = models.CharField(max_length=80)
-    email = models.CharField(max_length=80)
-    pesel = models.CharField(max_length=11, null=True)
+    hp_max = models.IntegerField(default=100)
+    current_hp = models.IntegerField(default=100)
+    level = models.IntegerField(default=1)
+    points = models.IntegerField(default=0)
+    exp_max = models.IntegerField(default=100)
+    current_exp = models.IntegerField(default=0)
 
 class AccountRole(models.Model):
     name = models.CharField(max_length=50)
