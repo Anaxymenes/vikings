@@ -44,6 +44,7 @@ class StageStudent(models.Model):
 class StageTasks(models.Model):
     stageId = models.ForeignKey(Stage, on_delete=models.PROTECT)
     name = models.CharField(max_length=80)
+    title = models.CharField(max_length=120, default="Zadanie")
 
 class StudentGroup(models.Model):
     name = models.CharField(max_length=50)

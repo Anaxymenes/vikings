@@ -9,17 +9,18 @@
         <div class="title pb-3" align="center">
           <span class="h1">Etap {{stage.id}} : {{stage.name}}</span>
         </div>
-
-        <div id="myBtn" class="row lesson">
-          <div class="col-3 align-self-center">
-            <img class="image" src="../../static/img/zad1_1.png">
+        {% for task in tasks %}
+          <div id="myBtn" class="row lesson">
+            <div class="col-3 align-self-center">
+              <img class="image" src="../../static/img/zad1_{{ forloop.counter}}.png">
+            </div>
+            <div class="col-9 lessonInfo align-self-center pt-md-1" align="center">
+              <span class="d-block lessonInfo-Number">Zadanie {{ forloop.counter }}</span>
+              <span class="d-block lessonInfo-Name">List</span>
+            </div>
           </div>
-          <div class="col-9 lessonInfo align-self-center pt-md-1" align="center">
-            <span class="d-block lessonInfo-Number">Zadanie 1</span>
-            <span class="d-block lessonInfo-Name">List</span>
-          </div>
-        </div>
-
+        {% endfor %}
+<!--
         <div class="row lesson">
             <div class="col-3">
               <img class="image" src="../../static/img/zad1_1.png">
@@ -29,6 +30,7 @@
               <span class="lessonInfo-Name">List</span>
             </div>
           </div>
+        -->
 <!-- 
         <div class="row lesson">
           <div class="col-3 align-self-center">
