@@ -1,0 +1,45 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <div class="container excerciseContent">
+        <div class="row">
+            <div class="col-2 arrowIcon">
+                <i class="fa fa-angle-left fa-5x"></i>
+            </div>
+
+            <div class="col-8">
+                <h2 align="center">Lekcja 1</h2>
+                <h3 align="center">Zadanie 1</h3>
+                <label>Fabuła</label>
+                <p class="font-italic" align="center">Koszmar</p>
+                <p class="story">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+            
+                <form class="excerciseForm">
+                    <div class="form-group">
+                    <label>Treść zadania</label>
+                    <textarea class="form-control" rows="5" placeholder="Treść zadania..."></textarea>
+                    </div>
+                    <div class="form-group">
+                    <label>Podpowiedź</label>
+                    <textarea class="form-control" rows="2" placeholder="Treść podpowiedzi..."></textarea>
+                    </div>
+                    <div class="form-group">
+                    <label>Wariant</label>
+                    <input class="form-control">
+                    </div>
+                    <div class="form-group">
+                    <label>Nagroda</label>
+                    <input class="form-control">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary text-center">Akceptuj</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-2 arrowIcon">
+                <i class="fa fa-angle-right fa-5x"></i>
+            </div>
+        </div>
+    </div>
+{% endblock %}

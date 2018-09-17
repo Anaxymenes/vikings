@@ -5,7 +5,7 @@ from django.shortcuts import render
 player="Mateusz Bogacki"
 
 def index(request):
-    level=4
+    level=6
     levels = range(1, level + 1)
     return render(request, 'main/index.html', {"player": player, "levels": levels})
 

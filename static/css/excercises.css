@@ -1,0 +1,24 @@
+.excerciseContent{
+    padding-top: 20px;
+}
+.arrowIcon{
+    text-align: center;
+}
+.arrowIcon i {
+    cursor: pointer;
+}
+.excerciseContent h3, h6, p{
+    margin: 0;
+}
+.story {
+    font-size: 0.8rem;
+    padding-bottom: 10px;
+}
+label{
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 0;
+}
+.excerciseForm textarea{
+    line-height: 1.2rem;
+}

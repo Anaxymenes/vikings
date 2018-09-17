@@ -5,5 +5,7 @@ from . import views
 app_name = 'adminSite'
 
 urlpatterns = [
-    path('', views.adminSite, name='adminSite')
+    path('', views.groups, name='groups'),
+    path('responses', views.responses, name='responses'),
+    path('excercises', views.excercises, name='excercises'),
 ]

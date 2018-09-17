@@ -3,6 +3,7 @@ body {
     padding:0px;
     box-sizing:border-box;
     background:#ddffff;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .main_sidebar {
     min-height:100vh;
