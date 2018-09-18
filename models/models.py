@@ -10,11 +10,6 @@ class AccountDetails(models.Model):
     exp_max = models.IntegerField(default=100)
     current_exp = models.IntegerField(default=0)
     
-class Achievement(models.Model):
-    name = models.CharField(max_length=50)
-    points = models.IntegerField(default=0)
-    description = models.CharField(max_length=200)
-
 class Stage(models.Model):
     name = models.CharField(max_length=50)
 
@@ -26,10 +21,14 @@ class StageTasks(models.Model):
     exp_points = models.IntegerField(default=20)
     sampleAnswer = models.CharField(max_length=2500)
 
+class Achievement(models.Model):
+    name = models.CharField(max_length=50)
+    points = models.IntegerField(default=0)
+    description = models.CharField(max_length=200)
+    task = models.ForeignKey(StageTasks, on_delete=models.CASCADE)
 
 class AchievementTask(models.Model):
     achievement = models.ForeignKey(Achievement, on_delete = models.PROTECT)
-    task = models.ForeignKey(StageTasks, on_delete=models.CASCADE)
     student = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Answer(models.Model):

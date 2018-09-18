@@ -1,7 +1,6 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<body>
   <section>
     <div class="container lesson-section pt-5">
       <div class="container board px-md-5">
@@ -55,7 +54,7 @@
       </div>
     </div>
   </section>
-
+  
   <div id="myModal" class="modal">
 
     <div class="modal-content">
@@ -63,7 +62,7 @@
         <div align="center">
           <span class="close">&times;</span>
           <h2>Etap : {{stage.name}}</h2>
-          <h1>List</h1>
+          <h1></h1>
         </div>
         <p class="excerciseContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
         <p class="excerciseContent">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
@@ -85,7 +84,6 @@
         </form>
       </div>
     </div>
-      
   </div>
 
 
@@ -104,7 +102,17 @@
       modal.style.display = "block";
       var taskId = $(this).attr("taskId");
       console.log(taskId);
-      $.get("/main/lesson/{{stage.id}}/",{task_id: taskId},function(data){});
+      $.get("/main/lesson/{{stage.id}}/"+taskId+"/",{},function(data){
+        console.log(data);
+      });
+      $.ajax({
+        type : "GET",
+        url : "/main/lesson/{{stage.id}}/"+taskId+"/",
+        data : {},
+        success: function(response){
+          console.log(response);
+        }
+      });
   }
   
   // When the user clicks on <span> (x), close the modal
@@ -122,5 +130,4 @@
 
 
   </script>
-</body>
 {% endblock %}
