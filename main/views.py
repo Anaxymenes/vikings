@@ -29,7 +29,10 @@ def playerProfile(request):
         print(achievements_id_list)
         achivements = Achievement.objects.filter(id__in = achievements_id_list)
         print(achivements)
-        return render(request, 'main/playerProfile.html', {})
+        return render(request, 'main/playerProfile.html', {
+            "achievements" : achivements
+
+        })
     return HttpResponseRedirect(reverse('login:login'))
 
 def task_data(request, stage_id, task_id):

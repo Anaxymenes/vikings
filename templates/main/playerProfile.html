@@ -83,29 +83,33 @@
             <!-- MEDALE -->
             <div id="medals" class="tab-pane fade">
                 <h1 class="text-center">Medale</h1>
-                <p>Aktualnie nie posiadasz żadnych medali.</p>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                            <thead align="right">
-                                <tr>
-                                    <th>
-                                    <th>Nazwa
-                                    <th>Opis
-                                    <th>Bonus
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td  class="medalImageField"><img class="medalImage" src="../../static/img/Medals/medal_bear.png">
-                                <td>„Odważny jak niedźwiedź”
-                                <td>Przydzielany automatycznie przez system za udział w wzywaniu
-                                <td>+5 punktów rankingowych
-                            </tr>
-                            </tbody>
+                {% if  achievements == None %}
+                    <p>Aktualnie nie posiadasz żadnych medali.</p>
+                {% else %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                                <thead align="right">
+                                    <tr>
+                                        <th>
+                                        <th>Nazwa
+                                        <th>Opis
+                                        <th>Bonus
+                                    </tr>
+                                </thead>
+                                {% for achievement in achievements %}
+                                    <tbody>
+                                    <tr>
+                                        <td  class="medalImageField"><img class="medalImage" src="../../static/img/Medals/{{achievement.picture}}">
+                                        <td>„{{achievement.name}}” </td>
+                                        <td>{{achievement.description}} </td>
+                                        <td>+ {{achievement.points}} punktów rankingowych </td>
+                                    </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
                         </table>
-
-                    </table>
-                </div>
+                    </div>
+                {% endif %}
             </div>
 
             <!-- OCENA -->
