@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.models import User
-from models.models import AccountDetails, Stage, StageTasks, AchievementTask
+from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement
 
 import random
 
@@ -25,7 +25,10 @@ def lesson(request,stage_id):
 
 def playerProfile(request):
     if request.user.is_authenticated:
-        achievements = None
+        achievements_id_list = AchievementTask.objects.filter(student=request.user).values_list('achievement')
+        print(achievements_id_list)
+        achivements = Achievement.objects.filter(id__in = achievements_id_list)
+        print(achivements)
         return render(request, 'main/playerProfile.html', {})
     return HttpResponseRedirect(reverse('login:login'))
 
