@@ -1,0 +1,38 @@
+.board {
+    padding: 4rem 12rem 2rem 12rem;
+}
+table {
+    margin-top: 3rem;
+    border: 0;
+    border-collapse: separate;
+    border-spacing: 0.5em;
+    text-align: center;
+    background-color: #eeeeeea1;
+    border-radius: 10px;
+    border: 1px solid rgb(90, 90, 90);
+    padding: 5px 0 5px;
+}
+.messageTable thead th{
+    background-color: orange;
+    border: 0px !important;
+    border-radius: 7px;
+    box-shadow: 2px 2px rgb(107, 107, 107);
+    text-align: center;
+}
+.messageTable tbody th, td {
+    background-color: rgb(255, 214, 81);
+    border: 0px !important;
+    border-radius: 7px;
+    box-shadow: 2px 2px rgb(107, 107, 107);
+    text-align: center;
+    padding: 2px !important;
+}
+.messageTable tbody td:nth-last-child(2), td:last-child {
+    background-color: orange;
+    font-weight: bold;
+}
+@media screen and (max-width: 992px){
+    .board {
+        padding: 2rem 7rem 2rem 7rem !important;
+    }
+}
