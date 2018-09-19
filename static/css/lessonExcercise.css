@@ -1,0 +1,63 @@
+body {
+    background-color: rgb(29, 29, 29);
+    min-width: 500px;
+}
+.board {
+    background-image: url("../img/bg_modal.png");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #3b3b3b;
+    padding: 5rem;
+}
+.close {
+    color: white;
+    float: right;
+    font-size: 40px;
+    font-weight: bold;
+    margin-right: 3rem;
+    line-height: 0;
+}
+.close:hover,
+.close:focus {
+    color: #3b3b3b;
+    cursor: pointer;
+}
+.excerciseContent{
+    background-color: #eeeeeea1;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+.excerciseContent:first-of-type {
+    margin-top: 30px;
+}
+.promptButton{
+    float: right;
+}
+.responseLabel{
+    background-color: #eeeeeea1;
+    border-radius: 10px 10px 0 0;
+    padding: 0.2rem 1.2rem;
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+.response{
+    background-color: #eeeeeea1;
+    border-radius: 0 10px 10px 10px;
+    padding: 0.5rem;
+}
+.alt {
+    border: 1px solid red;
+}
+
+@media screen and (max-width: 992px){
+    .board {
+        padding: 4rem 2rem 2rem 2rem;
+    }
+    .close {
+        font-size: 60px;
+        line-height: 0.5;
+    }
+
+}

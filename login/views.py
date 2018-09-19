@@ -14,7 +14,7 @@ def index(request):
             login(request,user)
             return HttpResponseRedirect(reverse('main:home'))
         else :
-            return render(request, 'login/index.html', {'message' : 'Bad username or password'})
+            return render(request, 'login/index.html', {'message' : 'Login lub hasło są nieprawidłowe'})
     return render(request, 'login/index.html', {})
 
 def register(request):

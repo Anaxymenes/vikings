@@ -14,6 +14,9 @@ body {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: #3b3b3b;
 }
+.title{
+    margin-top: 30px;
+}
 .title span{
     font-size: 3vw;
 }
@@ -46,86 +49,6 @@ body {
     font-weight: bold;
 }
 
-/* modal */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: transparent;
-    background-image: url("../img/bg_modal.png");
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    position: relative;
-    margin: auto;
-    padding: 0;
-    width: 80%;
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-    border: none;
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-/* The Close Button */
-.close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-.modal-body {
-    padding: 5rem 5rem;
-}
-.excerciseContent{
-    background-color: #eeeeeea1;
-    border-radius: 10px;
-    padding: 0.5rem;
-}
-.promptButton{
-    position: absolute;
-}
-.responseLabel{
-    background-color: #eeeeeea1;
-    border-radius: 10px 10px 0 0;
-    padding: 0.2rem 1.2rem;
-    margin-bottom: 0;
-}
-.response{
-    background-color: #eeeeeea1;
-    border-radius: 0 10px 10px 10px;
-    padding: 0.5rem;
-}
-/* end modal */
 .alt{
     border: 2px solid red;
 

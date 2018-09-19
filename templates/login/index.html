@@ -17,17 +17,17 @@
     <section class="loginPanel">
         <form method="post" class="loginForm" action="">
             {% csrf_token %}
-            {% if message  %}
-                <p class="alert alert-danger">{{ message }}</p>
-            {% endif %}
             <p for="username" class="formLabel"> Login </p>
             <input type="text" id="username" name="username" required="true" placeholder="Wprowadź login" class="textbox">
 
             <p for="password" class="formLabel"> Hasło </p>
             <input type="password" id="password" name="password" required="true" placeholder="Wprowadź hasło" class="textbox">
 
-            <small>Nie masz konta? <a href="/register" class="alert-link">Zarejestrucj się</a></small>
+            <small>Nie masz konta? <a href="/register" class="alert-link">Zarejestruj się</a></small>
 
+            {% if message %}
+            <p class="alert alert-danger message">{{ message }}</p>
+            {% endif %}
             <div id="lower">
                 <input type="submit" value="Zaloguj"class="logButton">
             </div>

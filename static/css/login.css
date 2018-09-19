@@ -56,7 +56,7 @@ body {
     border-radius: 8px;
     font-family: Georgia;
     font-weight: bold;
-    color: #000000;
+    color: #252525;
     font-size: 150%;
     background: #e08600;
     border: solid rgba(96,96,96,1) 3px;
@@ -68,7 +68,11 @@ body {
 background: #eb9d00;
 text-decoration: none;
 }
-
+.message{
+    margin-top: 20px;
+    margin-bottom: 0;
+    position: relative;
+}
 .alt {
     border: 1px solid red;
 }
