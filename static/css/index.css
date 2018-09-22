@@ -40,6 +40,7 @@ body {
 }
 .potion{
     float: right;
+    cursor: pointer;
 }
 .progress{
     margin-top: 7px;
@@ -62,10 +63,11 @@ body {
 .rankImg{
     width: 70px;
 }
-.font-fantasy{
-    font-family: fantasy;
-    color: #3b3b3b;
-    font-size:25px;
+.number-font{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #2d580e;
+    font-size:30px;
+    font-weight: 500;
 }
 .rankDesc{
     padding-left:10%;

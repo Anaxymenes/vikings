@@ -8,5 +8,7 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('lesson/<int:stage_id>/', views.lesson, name='lesson'),
     path('playerProfile/', views.playerProfile, name="playerProfile"),
+    path('messages/', views.messages, name="messages"),
     path('lesson/<int:stage_id>/<int:task_id>/',views.task_data,name="task"),
+
 ]

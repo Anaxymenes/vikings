@@ -16,9 +16,9 @@
     margin-top: 4rem;
 }
 .tabs li a{
-    border: 1px solid #858585;
+    border: 1px solid #b4b4b4;
     border-radius: 15px 15px 0px 0px;
-    background-color: honeydew;
+    background-color: rgba(240, 255, 240, 0.767);
     color: #3b3b3b;
     font-style: italic;
     white-space: nowrap;
@@ -27,8 +27,8 @@
     display: block;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-    background-color: rgb(168, 167, 167);
-    border: 1px solid #858585;
+    background-color: orange;
+    border: 1px solid #b4b4b4;
     border-radius: 10px 10px 0px 0px;
     font-weight: bold;
     font-style: italic;
@@ -39,14 +39,25 @@
 .nav-tabs.nav-justified>li>a{
     margin: 0;
 }
-
-
+.detailsTable tbody td:nth-last-child(2) {
+    background-color: rgb(255, 214, 81) !important;
+}
+.detailsButton{
+    cursor: pointer;
+}
+.detailsButton:hover{
+    background-color: orangered;
+}
 .tabBorder{
-    border: 1px solid #858585;
+    border: 1px solid #b4b4b4;
     border-radius: 0px 15px 15px 15px;
     padding: 1rem 2rem;
-    background: honeydew;
+    background: rgba(240, 255, 240, 0.767);
     min-height: 350px;
+}
+.detailsTable{
+    border-spacing: 0.2em;
+    margin-top: 10px;
 }
 .nav-tabs>li>a {
     margin: 0;
@@ -55,17 +66,25 @@
     text-align: center;
 }
 #detailsTd{
-    padding: 0 2rem;
+    padding: 0 !important;
     background-color: #f7f7f7;
 }
-#details p{
+#detailsTd p{
     text-indent: 30px;
     padding: 0.4rem 1rem;
     background: #e6e6e6;
     border-radius: 5px;
     word-wrap: break-word;
+    font-weight: 1; 
+    margin: 5px;
 }
-
+#detailsTd h5{
+    margin: 0;
+    margin-top: 5px;
+}
+.small {
+    font-size: 1.1rem;
+}
 /* MEDALS */
 .medalImageField{
     padding: 0 !important;
@@ -73,8 +92,23 @@
 .medalImage{
    width: 100%;
 }
-
-
+.medalsTable{
+    margin-top: 0;
+}
+.medalsTable thead th{
+    background-color: orange; 
+    border-radius: 7px;
+    box-shadow: 2px 2px rgb(107, 107, 107);
+    border: 0 !important;
+}
+.medalsTable tbody{
+    font-size: 1.2rem;
+}
+.medalsTable tbody td{
+    background-color: rgb(255, 214, 81);
+    line-height: 1.2 !important;
+    font-weight: 100;
+}
 .alt{
     border: 1px solid red;
 }

@@ -7,9 +7,9 @@
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    
+    <link rel="shortcut icon" href="{% static 'img/Favicon/favicon.ico' %}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'cssbootstrap-reboot.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}" />
     <!-- <link rel="stylesheet"  href="{% static 'css/bootstrap.min.css' %}" /> -->
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
@@ -31,8 +31,8 @@
                     <div id="healthPoints" class="font-italic">
                         <div class="pb-2">
                             <span float="left">HP: {{ account.current_hp }}/ {{account.hp_max}}</span>
-                            <span class="potion">+20hp</span>
-                            <img src="../../static/img/hp_potion.png" align="right"/>
+                            <span class="potion" alt="Użyj eliksiru" title="Użyj eliksiru"><img src="/static/img/hp_potion.png" />+20hp</span>
+                            
                         </div>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="{{ account.current_hp }}" aria-valuemin="0" aria-valuemax="{{ account.hp_max }}" style="width:{{ hp_bar }}%">
@@ -54,12 +54,12 @@
                     </div>
                     <div class="row">
                         <div class="col-6 text-center">
-                            <img class="rankImg" src="../../static/img/rank.png">
-                            <div class="centered font-fantasy">12</div>
+                            <img class="rankImg" src="/static/img/rank.png">
+                            <div class="centered number-font">12</div>
                         </div>
                         <div class="col-6 text-center">
-                            <img class="rankImg" src="../../static/img/rank.png">
-                            <div class="centered font-fantasy">2</div>
+                            <img class="rankImg" src="/static/img/rank.png">
+                            <div class="centered number-font">2</div>
                         </div>
                     </div>
                     <div class="row">
@@ -75,10 +75,10 @@
 
             <div id="menu" class="menu col-2">
                 <ul>
-                    <a href="{% url 'login:logout' %}"><li><img src="../../static/img/student_logout.png" alt="Wyloguj"></li></a>
-                    <a href="/main/playerProfile"><li><img src="../../static/img/settings.png" alt="Ustawienia"></li></a>
-                    <a href=""><li><img src="../../static/img/message.png" alt="Wiadomości"></li></a>
-                    <a href="/main/"><li><img src="../../static/img/challenge.png" alt="Wyzwania"></li></a>
+                    <a href="{% url 'login:logout' %}"><li><img src="/static/img/student_logout.png" alt="Wyloguj" title="Wyloguj"></li></a>
+                    <a href="/main/playerProfile"><li><img src="/static/img/settings.png" alt="Ustawienia" title="Ustawienia"></li></a>
+                    <a href="/main/messages"><li><img src="/static/img/message.png" alt="Wiadomości" title="Wiadomości"></li></a>
+                    <a href="/main/"><li><img src="/static/img/challenge.png" alt="Wyzwania" title="Wyzwania"></li></a>
                 </ul>   
             </div>
         </div>

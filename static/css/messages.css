@@ -1,6 +1,3 @@
-.board {
-    padding: 4rem 12rem 2rem 12rem;
-}
 table {
     margin-top: 3rem;
     border: 0;
@@ -30,6 +27,12 @@ table {
 .messageTable tbody td:nth-last-child(2), td:last-child {
     background-color: orange;
     font-weight: bold;
+}
+.messageTableButton{
+    cursor: pointer;
+}
+.messageTableButton:hover{
+    background-color: orangered !important;
 }
 @media screen and (max-width: 992px){
     .board {

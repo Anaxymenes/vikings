@@ -22,10 +22,13 @@ body {
 }
 .lesson{
     margin: 1rem 3rem;
-    background-color: rgb(250, 193, 143);
+    background-color: rgb(255, 214, 81);
     border: 2px solid #3b3b3b;;
     border-radius: 20px;
     cursor: pointer;
+}
+.lesson:hover{
+    background-color: orange;
 }
 .image{
     display: inline;

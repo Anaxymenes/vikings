@@ -3,8 +3,10 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.models import User
 from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement
+import logging
 
 import random
+logger = logging.getLogger(__name__)
 
 def index(request):
     if request.user.is_authenticated:
@@ -26,14 +28,18 @@ def lesson(request,stage_id):
 def playerProfile(request):
     if request.user.is_authenticated:
         achievements_id_list = AchievementTask.objects.filter(student=request.user).values_list('achievement')
-        print(achievements_id_list)
+        # print(len(achievements_id_list))
         achivements = Achievement.objects.filter(id__in = achievements_id_list)
-        print(achivements)
+        
+        print(achivements[0].name)
         return render(request, 'main/playerProfile.html', {
             "achievements" : achivements
 
         })
     return HttpResponseRedirect(reverse('login:login'))
+
+def messages(request):
+    return render(request, 'main/messages.html')
 
 def task_data(request, stage_id, task_id):
     current_task = StageTasks.objects.filter(id=task_id).first()    

@@ -1,7 +1,7 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<div class="board">
+<div class="board profileBoard">
     <h1 class="text-center">Profil Gracza</h1>
     
     <div class="container tabs">
@@ -15,54 +15,70 @@
 
         <div class="tab-content tabBorder">
             <div id="excercises" class="tab-pane fade in active">
-                <h1 class="text-center">Wyniki z zadań głównych</h1>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead class="tableHeader">
-                            <tr>
-                                <th>#</th>
-                                <th>Lekcja</th>
-                                <th>Numer Zadania</th>
-                                <th>Wynik [%]</th>
-                                <th>
-                            </tr>
-                        </thead>
-                        <tbody align="center">
-                            <tr>
-                                <td>1 </td>
-                                <td>1 </td>
-                                <td>1 </td>
-                                <td>100% </td>
-                                <td>
-                                    <button class="btn btn-info" data-toggle="collapse" data-target="#details">Szczegóły</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id="detailsTd" colspan="5">
-                                    <div id="details" class="collapse">
+                <h3 class="text-center">Wyniki z zadań głównych</h3>
 
-                                        <h3>Treść zadania:</h3>
-                                        <p class="small text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin tristique diam in elementum. Donec blandit magna sed nisi sollicitudin elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse id tempus libero, porta euismod enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque faucibus urna metus, vitae posuere diam maximus et. Praesent tristique aliquet condimentum. </p>
-                                    
-                                        <h3>Odpowiedź:</h3>
-                                        <p class="small text-justify">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse id tempus libero, porta euismod enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque faucibus urna metus, vitae posuere diam maximus et. Praesent tristique aliquet condimentum.</p>
-                                    
-                                    </div>
-                                </td>
-                            </tr>
+                <table class="table messageTable detailsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Lekcja</th>
+                            <th>Numer Zadania</th>
+                            <th>Wynik [%]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 </td>
+                            <td>1 </td>
+                            <td>1 </td>
+                            <td>100% </td>
+                            <td class="detailsButton" data-toggle="collapse" data-target="#details">
+                                Szczegóły
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="detailsTd" colspan="5">
+                                <div id="details" class="collapse">
 
-                            <tr>
-                                <td>{{elo}} </td>
-                                <td>2 </td>
-                                <td>2 </td>
-                                <td>90% </td>
-                                <td>
-                                    <button class="btn btn-info">Szczegóły</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                    <h5>Treść zadania:</h3>
+                                    <p class="small text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin tristique diam in elementum. Donec blandit magna sed nisi sollicitudin elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse id tempus libero, porta euismod enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque faucibus urna metus, vitae posuere diam maximus et. Praesent tristique aliquet condimentum. </p>
+                                
+                                    <h5>Odpowiedź:</h3>
+                                    <p class="small text-justify">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse id tempus libero, porta euismod enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque faucibus urna metus, vitae posuere diam maximus et. Praesent tristique aliquet condimentum.</p>
+                                
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <!-- 2 row -->
+                        <tr>
+                            <td>2 </td>
+                            <td>1 </td>
+                            <td>1 </td>
+                            <td>100% </td>
+                            <td class="detailsButton" data-toggle="collapse" data-target="#details2">
+                                Szczegóły
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="detailsTd" colspan="5">
+                                <div id="details2" class="collapse">
+
+                                    <h5>Treść zadania:</h3>
+                                    <p class="small text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin tristique diam in elementum. Donec blandit magna sed nisi sollicitudin elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse id tempus libero, porta euismod enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque faucibus urna metus, vitae posuere diam maximus et. Praesent tristique aliquet condimentum. </p>
+                                
+                                    <h5>Odpowiedź:</h3>
+                                    <p class="small text-justify">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse id tempus libero, porta euismod enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque faucibus urna metus, vitae posuere diam maximus et. Praesent tristique aliquet condimentum.</p>
+                                
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 2 row -->
+
+
+                    </tbody>
+                  </table>
                 <div>
                     <p class="h3 average" align="center">Średnia z zadań: 77%</p>
                 </div>
@@ -70,27 +86,27 @@
             
             <!-- WYZWANIA -->
             <div id="challenges" class="tab-pane fade">
-                <h1 class="text-center">Wyzwania</h1>
+                <h3 class="text-center">Wyzwania</h3>
                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div>
 
             <!-- OBECNOŚCI -->
             <div id="presences" class="tab-pane fade">
-                <h1 class="text-center">Obecności</h1>
+                <h3 class="text-center">Obecności</h3>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
             </div>
 
             <!-- MEDALE -->
             <div id="medals" class="tab-pane fade">
-                <h1 class="text-center">Medale</h1>
-                {% if  achievements == None %}
+                <h3 class="text-center">Medale</h3>
+                {% if achievements == none %}
                     <p>Aktualnie nie posiadasz żadnych medali.</p>
                 {% else %}
                     <div class="table-responsive">
-                        <table class="table table-bordered">
-                                <thead align="right">
+                        <table class="table medalsTable">
+                                <thead align="center">
                                     <tr>
-                                        <th>
+                                        <th>Medal
                                         <th>Nazwa
                                         <th>Opis
                                         <th>Bonus
@@ -98,12 +114,12 @@
                                 </thead>
                                 {% for achievement in achievements %}
                                     <tbody>
-                                    <tr>
-                                        <td  class="medalImageField"><img class="medalImage" src="../../static/img/Medals/{{achievement.picture}}"> </td>
-                                        <td>„{{achievement.name}}” </td>
-                                        <td>{{achievement.description}} </td>
-                                        <td>+ {{achievement.points}} punktów rankingowych </td>
-                                    </tr>
+                                        <tr>
+                                            <td  class="medalImageField"><img class="medalImage" src="../../static/img/Medals/{{achievement.picture}}"> </td>
+                                            <td>„{{achievement.name}}” </td>
+                                            <td>{{achievement.description}} </td>
+                                            <td>+ {{achievement.points}} punktów rankingowych </td>
+                                        </tr>
                                     </tbody>
                                 {% endfor %}
                             </table>
@@ -114,7 +130,7 @@
 
             <!-- OCENA -->
             <div id="rating" class="tab-pane fade">
-                <h1 class="text-center">Ocena</h1>
+                <h3 class="text-center">Ocena</h3>
                 <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
             </div>
         </div>

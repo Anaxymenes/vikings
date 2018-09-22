@@ -4,12 +4,12 @@
 <section>
   <div class="container board">
         <div class="title" align="center">
-          <span class="h1">Etap {{stage.id}} : {{stage.name}}</span>
+          <span class="h3">Etap {{stage.id}} : {{stage.name}}</span>
         </div>
         {% for task in tasks %}
           <div id="myBtn" taskId="{{forloop.counter}}" class="row lesson">
             <div class="col-3 align-self-center">
-              <img class="image" src="../../static/img/zad1_{{ forloop.counter}}.png">
+              <img class="image" src="/static/img/Lesson/zad{{stage.id}}_{{forloop.counter}}.png">
             </div>
             <div class="col-9 lessonInfo align-self-center pt-md-1" align="center">
               <span class="d-block lessonInfo-Number">Zadanie {{ forloop.counter }}</span>
