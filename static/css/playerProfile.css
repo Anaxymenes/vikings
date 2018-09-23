@@ -85,6 +85,20 @@
 .small {
     font-size: 1.1rem;
 }
+/* OBECNOŚCI */
+.presencesTable{
+    margin-top: 10px;
+}
+.presencesTable th{
+    background-color: orange;
+    border-radius: 7px;
+    box-shadow: 2px 2px rgb(107, 107, 107);
+    border: 0 !important;
+}
+.presencesTable tbody td:last-child{
+    background-color:  rgb(255, 214, 81) !important;
+}
+
 /* MEDALS */
 .medalImageField{
     padding: 0 !important;

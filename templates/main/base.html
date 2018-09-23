@@ -7,7 +7,7 @@
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="{% static 'img/Favicon/favicon.ico' %}"/>
+    <link rel="icon" href="{% static 'img/lesson/zad2_1.png' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}" />
@@ -30,7 +30,7 @@
                 <div class="stats">
                     <div id="healthPoints" class="font-italic">
                         <div class="pb-2">
-                            <span float="left">HP: {{ account.current_hp }}/ {{account.hp_max}}</span>
+                            <span float="left">HP: {{ account.current_hp }}/{{account.hp_max}}</span>
                             <span class="potion" alt="Użyj eliksiru" title="Użyj eliksiru"><img src="/static/img/hp_potion.png" />+20hp</span>
                             
                         </div>
