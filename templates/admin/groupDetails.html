@@ -1,0 +1,126 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container groupDetails">
+    <div>
+        <h3>Ranking grupowy</h3>
+        <table class="table table-striped table-responsive-sm table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pkt rankingowe</th>
+                    <th scope="col">Imię</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Nr albumu</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Obecność</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>450</td>
+                    <td>Artur</td>
+                    <td>Czopek</td>
+                    <td>123455</td>
+                    <td>arturo@mail.com</td>
+                    <td><button class="btn btn-primary">Pokaż</button></td>
+                    <td><button class="btn btn-info">Edytuj</button></td>
+                    <td><button class="btn btn-danger">Usuń</button></td>
+                    <td><button class="btn">Napisz</button></td>
+                    <td>
+                        <div>
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>450</td>
+                    <td>Artur</td>
+                    <td>Czopek</td>
+                    <td>123455</td>
+                    <td>arturo@mail.com</td>
+                    <td><button class="btn btn-primary">Pokaż</button></td>
+                    <td><button class="btn btn-info">Edytuj</button></td>
+                    <td><button class="btn btn-danger">Usuń</button></td>
+                    <td><button class="btn">Napisz</button></td>
+                    <td>
+                        <div>
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                            <input type="checkbox" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary btn-sm">Zapisz obecności</button>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Grupa_10-45</h3>
+            <table class="table table-striped table-responsive-sm table-sm">
+                <thead>
+                        <tr>
+                            <th scope="col">Lekcja</th>
+                            <th scope="col">Start</th>
+                            <th scope="col">Koniec</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>
+                                <div class="form-group">
+                                    <input type="date" name="bday" max="3000-12-31" 
+                                        min="1000-01-01" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="date" name="bday" max="3000-12-31" 
+                                    min="1000-01-01" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>
+                                <div class="form-group">
+                                    <input type="date" name="bday" max="3000-12-31" 
+                                        min="1000-01-01" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="date" name="bday" max="3000-12-31" 
+                                    min="1000-01-01" class="form-control">
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary btn-sm">Zachowaj zmiany</button>
+        </div>
+        <div class="col">
+            <h3>Dodaj nowego studenta</h3>
+            <form>
+                <div class="form-group">
+                    <label for="Nr_albumu">Numer albumu</label>
+                    <input class="form-control" id="Nr_albumu" placeholder="Nr_albumu">
+                </div>
+                <button type="submit" class="btn btn-primary">Dodaj studenta</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
