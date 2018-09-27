@@ -59,6 +59,10 @@ def playerProfile(request):
 def messages(request):
     return render(request, 'main/messages.html')
 
+def excercise(request):
+    prompt = False
+    return render(request, 'main/excercise.html', {"prompt": prompt })
+
 def task_data(request, stage_id, task_id):
     current_task = StageTasks.objects.filter(id=task_id).first()    
     data = {
