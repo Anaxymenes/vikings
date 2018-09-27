@@ -38,8 +38,12 @@ def lesson(request,stage_id):
     return HttpResponseRedirect(reverse('login:login'))
 
 def exerciseDetails(request, stage_id):
-    prompt = False
-    return render(request, 'main/excercise.html', {"prompt": prompt })
+    if request.method == "POST":
+        task = StageTasks.objects.filter(id=request.POST.get('taskId')).first()
+        answer = Answer.objects.filter(task=task).filter(student=request.user).first()
+        return render(request, 'main/excercise.html', {"answer" : answer, "task":task})
+    else :
+        return render(request, 'main/index.html', {})
 
 def playerProfile(request):
     if request.user.is_authenticated:

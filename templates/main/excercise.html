@@ -21,38 +21,39 @@
     <div class="container">
       <div align="center">
         <span class="close">&times;</span>
-        <h2>Etap : {{stage.name}}</h2>
+        <h2>{{task.title}}</h2>
         <h1></h1>
       </div>
-      <p class="excerciseContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur.</p>
-      <p class="excerciseContent">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-        consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+      <p class="excerciseContent">{{task.description}}.</p>
+      <p class="excerciseContent">{{task.content}}</p>
 
       <div align="right">
-        {% if prompt %}
-          <p class="promptContent font-weight-light font-italic"><u>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</u></p>
+        {% if answer.usedPrompt %}
+          <p class="promptContent font-weight-light font-italic"><u>{{task.prompt}}</u></p>
         {% else %}
           <button type="button" class="btn btn-warning promptButton" data-toggle="modal" data-target="#myModal">Podpowiedź</button>
         {% endif %}
       </div>
-
-      <form>
-        <label class="font-italic responseLabel" for="comment">Odpowiedź:</label>
+      {% if answer.completed %}
         <div class="form-group response">
-          <textarea class="form-control" rows="5" id="comment" placeholder="Miejsce na odpowiedź..."></textarea>
-          <p>Nagroda:</p>
-          <div class="float-right mb-5">
-            <button class="btn btn-success">Wyślij</button>
+        <p>{{answer.answerSql}}</p>
+        <a href="/main/lesson/{{task.stage.id}}/" class="btn btn-success">Wróć</a>
+      </div>
+      {% else %}
+        <form>
+          {% csrf_token %}
+          <label class="font-italic responseLabel" for="comment">Odpowiedź:</label>
+          <div class="form-group response">
+            <textarea class="form-control" rows="5" id="comment" placeholder="Miejsce na odpowiedź..."></textarea>
+            <p>Nagroda:</p>
+            <div class="float-right mb-5">
+              <button class="btn btn-success">Wyślij</button>
+            </div>
+            <span>100 PKT EXP</span></br>
+            <span>100 PKT RANKINGOWYCH</span>
           </div>
-          <span>100 PKT EXP</span></br>
-          <span>100 PKT RANKINGOWYCH</span>
-        </div>
-      </form>
+        </form>
+      {% endif %}
       
     </div>
   </div>

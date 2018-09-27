@@ -10,6 +10,7 @@
           <form method="POST" action="/main/lesson/{{stage.id}}/excercise">
             {% csrf_token %}
             <button id="myBtn" taskId="{{forloop.counter}}" class="row lesson" type="submit">
+              <input type="hidden" name="taskId" value="{{task.task.id}}" />
               <div class="col-3 align-self-center">
                 <img class="image" src="/static/img/Lesson/zad{{stage.id}}_{{forloop.counter}}.png">
               </div>
