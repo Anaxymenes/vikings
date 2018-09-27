@@ -20,6 +20,13 @@ body {
     background-size: 100% 100%;
     padding: 0;
 }
+.avatar a{
+    text-decoration: none;
+    color: #3b3b3b;
+}
+.avatar a:hover{
+    color: #6e6e6e;
+}
 .avatarName{
     width: 100%;
     text-align: center;

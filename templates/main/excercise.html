@@ -36,8 +36,9 @@
         {% endif %}
       </div>
       {% if answer.completed %}
+      <label class="font-italic responseLabel" for="comment">Odpowiedź:</label>
         <div class="form-group response">
-        <p>{{answer.answerSql}}</p>
+        <p class="py-2 font-italic">"{{answer.answerSql}}"</p>
         <a href="/main/lesson/{{task.stage.id}}/" class="btn btn-success">Wróć</a>
       </div>
       {% else %}
