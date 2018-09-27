@@ -51,16 +51,29 @@ def showPrompt(request, stage_id):
         setattr(answer,'usedPrompt',1)
         answer.save()
     return exerciseDetails(request,stage_id)
+
 def playerProfile(request):
     if request.user.is_authenticated:
         achievements_id_list = AchievementTask.objects.filter(student=request.user).values_list('achievement')
-        # print(len(achievements_id_list))
         achivements = Achievement.objects.filter(id__in = achievements_id_list)
-        
-        print(achivements[0].name)
+        answers = Answer.objects.filter(student=request.user).filter(completed=1)
+        max_points = 0
+        actual_points = 0
+        result_points = 0
+        for answer in answers:
+            #max_points = StageTasks.objects.filter(id=answer.value('task_id')).first().value('points')
+            task = getattr(answer,"task")
+            max_points += getattr(task,"points")
+            actual_points = getattr(answer,"note")
+            #print(getattr(task,"id"))
+        if max_points != 0 :
+            result_points = actual_points * 100 / max_points
+        #print(result_points)
+        #print(achivements[0].name)
         return render(request, 'main/playerProfile.html', {
-            "achievements" : achivements
-
+            "achievements" : achivements,
+            "answers":answers,
+            "results_points": result_points
         })
     return HttpResponseRedirect(reverse('login:login'))
 

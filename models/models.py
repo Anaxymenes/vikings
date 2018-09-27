@@ -23,6 +23,7 @@ class StageTasks(models.Model):
     exp_points = models.IntegerField(default=20)
     sampleAnswer = models.CharField(max_length=2500)
     prompt = models.CharField(max_length = 2500)
+    difficulty_level = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(1)])
 
 class Achievement(models.Model):
     name = models.CharField(max_length=50)
@@ -42,6 +43,7 @@ class Answer(models.Model):
     answerSql = models.CharField(max_length=2500)
     usedPrompt = models.BooleanField(default=0)
     note = models.PositiveIntegerField(validators=[MaxValueValidator(100),MinValueValidator(0)], default=0)
+    rated = models.BooleanField(default=0)
     completed = models.BooleanField(default=0)
 
 class StageStudent(models.Model):
