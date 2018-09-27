@@ -170,6 +170,17 @@ body {
     margin-top: 550px;
     margin-left: 580px;
 }
+
+.logoutButton{
+    width: 8rem;
+}
+.logoutButton a{
+    text-decoration: none !important;
+    color: white;
+}
+.logoutButton a:hover{
+    color: white;
+}
 .alt{
     border: 2px solid red;
 

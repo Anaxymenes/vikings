@@ -32,10 +32,11 @@
                         <div class="pb-2">
                             <span float="left">HP: {{ account.current_hp }}/{{account.hp_max}}</span>
                             <span class="potion" alt="Użyj eliksiru" title="Użyj eliksiru"><img src="/static/img/hp_potion.png" />+20hp</span>
-                            
+
                         </div>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ account.current_hp }}" aria-valuemin="0" aria-valuemax="{{ account.hp_max }}" style="width:{{ hp_bar }}%">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ account.current_hp }}"
+                                aria-valuemin="0" aria-valuemax="{{ account.hp_max }}" style="width:{{ hp_bar }}%">
                                 <span class="sr-only"></span>
                             </div>
                         </div>
@@ -43,7 +44,8 @@
                     <div id="experience" class="experience">
                         <span class="font-georgia font-italic">EXP: {{ account.current_exp }}/{{ account.exp_max }}</span>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-exp" role="progressbar" aria-valuenow="{{ account.current_exp }}" aria-valuemin="0" aria-valuemax="{{ account.exp_max }}" style="width:{{ exp_bar }}%">
+                            <div class="progress-bar progress-bar-exp" role="progressbar" aria-valuenow="{{ account.current_exp }}"
+                                aria-valuemin="0" aria-valuemax="{{ account.exp_max }}" style="width:{{ exp_bar }}%">
                                 <span class="sr-only"></span>
                             </div>
                         </div>
@@ -75,20 +77,50 @@
 
             <div id="menu" class="menu col-2">
                 <ul>
-                    <a href="{% url 'login:logout' %}"><li><img src="/static/img/student_logout.png" alt="Wyloguj" title="Wyloguj"></li></a>
-                    <a href="/main/playerProfile"><li><img src="/static/img/settings.png" alt="Ustawienia" title="Ustawienia"></li></a>
-                    <a href="/main/messages"><li><img src="/static/img/message.png" alt="Wiadomości" title="Wiadomości"></li></a>
-                    <a href="/main/"><li><img src="/static/img/challenge.png" alt="Wyzwania" title="Wyzwania"></li></a>
-                </ul>   
+                    <a data-toggle="modal" data-target="#myModal">
+                        <li><img src="/static/img/student_logout.png" alt="Wyloguj" title="Wyloguj" ></li>
+                    </a>
+                    <a href="/main/playerProfile">
+                        <li><img src="/static/img/settings.png" alt="Ustawienia" title="Ustawienia"></li>
+                    </a>
+                    <a href="/main/messages">
+                        <li><img src="/static/img/message.png" alt="Wiadomości" title="Wiadomości"></li>
+                    </a>
+                    <a href="/main/">
+                        <li><img src="/static/img/challenge.png" alt="Wyzwania" title="Wyzwania"></li>
+                    </a>
+                </ul>
             </div>
         </div>
         <div>
             {% block content %}{% endblock %}
         </div>
     </div>
-    
+
+    <div class="container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><b>Wyloguj</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Jesteś pewien że chcesz się wylogować?</p>
+                    </div>
+                    <div class="modal-footer logoutModal">
+                        <!-- href="{% url 'login:logout' %}" -->
+                        <button data-target="{% url 'login:logout' %}" type="button" class="btn btn-success logoutButton"><a href="{% url 'login:logout' %}">Tak</a></button>
+                        <button type="button" class="btn btn-danger logoutButton" data-dismiss="modal">Nie</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>
