@@ -11,4 +11,5 @@ urlpatterns = [
     path('messages/', views.messages, name="messages"),
     path('lesson/<int:stage_id>/<int:task_id>/',views.task_data,name="task"),
     path('lesson/<int:stage_id>/excercise',views.exerciseDetails, name="excercise"),
+    path('lesson/<int:stage_id>/usePrompt',views.showPrompt, name="usePrompt"),
 ]

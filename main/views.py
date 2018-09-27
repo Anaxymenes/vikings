@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer
@@ -45,6 +45,12 @@ def exerciseDetails(request, stage_id):
     else :
         return render(request, 'main/index.html', {})
 
+def showPrompt(request, stage_id):
+    if request.method == "POST":
+        answer = Answer.objects.filter(id=request.POST.get('answerId')).filter(student=request.user).first()
+        setattr(answer,'usedPrompt',1)
+        answer.save()
+    return exerciseDetails(request,stage_id)
 def playerProfile(request):
     if request.user.is_authenticated:
         achievements_id_list = AchievementTask.objects.filter(student=request.user).values_list('achievement')

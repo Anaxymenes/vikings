@@ -22,7 +22,7 @@ class StageTasks(models.Model):
     points = models.IntegerField(default=5)
     exp_points = models.IntegerField(default=20)
     sampleAnswer = models.CharField(max_length=2500)
-    propmpt = models.CharField(max_length = 2500)
+    prompt = models.CharField(max_length = 2500)
 
 class Achievement(models.Model):
     name = models.CharField(max_length=50)

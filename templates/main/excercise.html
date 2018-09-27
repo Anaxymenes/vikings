@@ -20,7 +20,7 @@
   <div class="container board">
     <div class="container">
       <div align="center">
-        <span class="close">&times;</span>
+          <a href="/main/lesson/{{task.stage.id}}/"><span class="close">&times;</span></a>
         <h2>{{task.title}}</h2>
         <h1></h1>
       </div>
@@ -28,10 +28,11 @@
       <p class="excerciseContent">{{task.content}}</p>
 
       <div align="right">
-        {% if answer.usedPrompt %}
-          <p class="promptContent font-weight-light font-italic"><u>{{task.prompt}}</u></p>
-        {% else %}
+        {% if  answer.usedPrompt %}
+          <p class="font-weight-light font-italic"><u>Podpowiedź : {{task.prompt}}</u></p>
+        {% elif answer.completed == False and answer.usedPrompt == False %}
           <button type="button" class="btn btn-warning promptButton" data-toggle="modal" data-target="#myModal">Podpowiedź</button>
+        {% else %}
         {% endif %}
       </div>
       {% if answer.completed %}
@@ -48,9 +49,10 @@
             <p>Nagroda:</p>
             <div class="float-right mb-5">
               <button class="btn btn-success">Wyślij</button>
+              <a href="/main/lesson/{{task.stage.id}}/" class="btn btn-danger">Anuluj</a>
             </div>
-            <span>100 PKT EXP</span></br>
-            <span>100 PKT RANKINGOWYCH</span>
+            <span>{{task.exp_points}} PKT EXP</span></br>
+            <span>{{task.points}} PKT RANKINGOWYCH</span>
           </div>
         </form>
       {% endif %}
@@ -69,8 +71,14 @@
               <p>Odejmie to punkty czy coś tam...</p>
             </div>
             <div class="modal-footer modalButtons">
-                <button type="button" class="btn btn-success" >Akceptuj</button>
+                <form method="POST" action="/main/lesson/{{task.stage.id}}/usePrompt" >
+                  {% csrf_token %}
+                    <input type="hidden" name="answerId" value="{{answer.id}}" />
+                    <input type="hidden" name="taskId" value="{{task.id}}" />
+                    <input class="btn btn-success" type="submit" value="Akceptuj" />
+                </form>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Zamknij</button>
+                
             </div>
           </div>
           
@@ -80,6 +88,5 @@
     </div>
   
 </body>
-
 
 </html>
