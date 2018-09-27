@@ -34,6 +34,7 @@ body {
 }
 .promptButton{
     float: right;
+    cursor: pointer;
 }
 .responseLabel{
     background-color: #eeeeeea1;
@@ -46,6 +47,16 @@ body {
     background-color: #eeeeeea1;
     border-radius: 0 10px 10px 10px;
     padding: 0.5rem;
+}
+.modalButtons button{
+    cursor: pointer;
+}
+.promptContent{
+    width: 50%;
+    margin-left: 20%;
+    text-align: right;
+    position: absolute;
+    color: rgb(177, 0, 0);
 }
 .alt {
     border: 1px solid red;
