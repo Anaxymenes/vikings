@@ -31,7 +31,7 @@
                     <div id="healthPoints" class="font-italic">
                         <div class="pb-2">
                             <span float="left">HP: {{ account.current_hp }}/{{account.hp_max}}</span>
-                            <span class="potion" alt="Użyj eliksiru" title="Użyj eliksiru"><img src="/static/img/hp_potion.png" />+20hp</span>
+                            <span class="potion" alt="Użyj eliksiru" title="Użyj eliksiru"><a data-toggle="modal" data-target="#usePotion"><img src="/static/img/hp_potion.png" />+20hp</a></span>
 
                         </div>
                         <div class="progress">
@@ -77,8 +77,8 @@
 
             <div id="menu" class="menu col-2">
                 <ul>
-                    <a data-toggle="modal" data-target="#myModal">
-                        <li><img src="/static/img/student_logout.png" alt="Wyloguj" title="Wyloguj" ></li>
+                    <a data-toggle="modal" data-target="#logout">
+                        <li><img src="/static/img/student_logout.png" alt="Wyloguj" title="Wyloguj"></li>
                     </a>
                     <a href="/main/playerProfile">
                         <li><img src="/static/img/settings.png" alt="Ustawienia" title="Ustawienia"></li>
@@ -98,7 +98,7 @@
     </div>
 
     <div class="container">
-        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal fade" id="logout" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -109,8 +109,29 @@
                         <p>Jesteś pewien że chcesz się wylogować?</p>
                     </div>
                     <div class="modal-footer logoutModal">
-                        <!-- href="{% url 'login:logout' %}" -->
-                        <button data-target="{% url 'login:logout' %}" type="button" class="btn btn-success logoutButton"><a href="{% url 'login:logout' %}">Tak</a></button>
+                        <button data-target="{% url 'login:logout' %}" type="button" class="btn btn-success logoutButton"><a
+                                href="{% url 'login:logout' %}">Tak</a></button>
+                        <button type="button" class="btn btn-danger logoutButton" data-dismiss="modal">Nie</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="modal fade" id="usePotion" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><b>Kup mikstrurę, aby się uleczyć:</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><b>+20</b> hp,</p>
+                        <p><b>-20</b> pkt rankingowych,</p>
+                        <p>aby użyć musisz mieć mniej niż <b>90 hp</b>.</p>
+                    </div>
+                    <div class="modal-footer logoutModal">
+                        <button type="button" class="btn btn-success logoutButton"><a>Tak</a></button>
                         <button type="button" class="btn btn-danger logoutButton" data-dismiss="modal">Nie</button>
                     </div>
                 </div>
