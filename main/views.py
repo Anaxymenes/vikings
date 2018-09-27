@@ -67,6 +67,9 @@ def playerProfile(request):
 def messages(request):
     return render(request, 'main/messages.html')
 
+def settings(request):
+    return render(request, 'main/settings.html')
+
 def excercise(request):
     prompt = False
     return render(request, 'main/excercise.html', {"prompt": prompt })

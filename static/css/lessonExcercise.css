@@ -10,6 +10,7 @@ body {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: #3b3b3b;
     padding: 5rem;
+    min-height: 900px;
 }
 .close {
     color: white;
