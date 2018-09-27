@@ -38,10 +38,8 @@ def lesson(request,stage_id):
     return HttpResponseRedirect(reverse('login:login'))
 
 def exerciseDetails(request):
-
-    return render(request, 'main/excercise.html',{
-
-    })
+    prompt = True
+    return render(request, 'main/excercise.html', {"prompt": prompt })
 
 def playerProfile(request):
     if request.user.is_authenticated:
