@@ -10,5 +10,5 @@ urlpatterns = [
     path('playerProfile/', views.playerProfile, name="playerProfile"),
     path('messages/', views.messages, name="messages"),
     path('lesson/<int:stage_id>/<int:task_id>/',views.task_data,name="task"),
-
+    path('lesson/<int:stage_id>',views.exerciseDetails, name="excercise"),
 ]

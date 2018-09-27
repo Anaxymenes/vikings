@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.models import User
-from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement
+from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer
 import logging
 
 import random
@@ -17,13 +17,31 @@ def lesson(request,stage_id):
     if request.user.is_authenticated:
         
         stage = Stage.objects.filter(id=stage_id).first()
-        stageTasks = StageTasks.objects.filter(stage=stage).order_by("?")[:5]
-        
+        currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user)
+        if currentTasks.count()==0 :
+            stageTasks = StageTasks.objects.filter(stage=stage).order_by("?")[:5]
+            for task in stageTasks:
+                Answer.objects.create(
+                    answerSql = "",
+                    stage = stage,
+                    student = request.user,
+                    task = task,
+                    usedPrompt = 0,
+                    note = 0,
+                    completed = 0
+                )
+            currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user)
         return render(request, 'main/lesson.html', {
             "stage":stage,
-            "tasks":stageTasks,
+            "tasks":currentTasks,
         })
     return HttpResponseRedirect(reverse('login:login'))
+
+def exerciseDetails(request):
+
+    return render(request, 'main/excercise.html',{
+
+    })
 
 def playerProfile(request):
     if request.user.is_authenticated:
