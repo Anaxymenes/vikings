@@ -37,8 +37,8 @@ def lesson(request,stage_id):
         })
     return HttpResponseRedirect(reverse('login:login'))
 
-def exerciseDetails(request):
-    prompt = True
+def exerciseDetails(request, stage_id):
+    prompt = False
     return render(request, 'main/excercise.html', {"prompt": prompt })
 
 def playerProfile(request):
