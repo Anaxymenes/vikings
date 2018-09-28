@@ -77,6 +77,9 @@ def playerProfile(request):
 def messages(request):
     return render(request, 'main/messages.html')
 
+def message(request):
+    return render(request, 'main/message.html')
+
 def settings(request):
     return render(request, 'main/settings.html')
 
