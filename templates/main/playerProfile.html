@@ -90,27 +90,31 @@
             <!-- OBECNOŚCI -->
             <div id="presences" class="tab-pane fade">
                 <h3 class="text-center">Obecności</h3>
-                <table class="table presencesTable">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Data</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1. </td>
-                            <td>10-10-2018 </td>
-                            <td style="color: red">Nieobecny </td>
-                        </tr>
-                        <tr>
-                            <td>2. </td>
-                            <td>17-10-2018 </td>
-                            <td style="color: green">Obecny </td>
-                        </tr>
-                    </tbody>
-                </table>
+                {% if absences.count > 0 %}
+                    <table class="table presencesTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                    {% for absence in absences %}    
+                            <tbody>
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{absence.date}}</td>
+                                    {% if absence.absence %}
+                                    <td style="color: green">Obecny </td>
+                                    {% else %}
+                                        <td style="color: red">Nieobecny </td>
+                                    {% endif %}
+                            </tbody>
+                    {% endfor %}
+                    </table>
+                {% else %}
+                    <p>Brak danych</p>
+                {% endif %}
             </div>
 
             <!-- MEDALE -->

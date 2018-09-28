@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
-from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer
+from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer, UserAbsence
 import logging
 
 import random
@@ -15,7 +15,6 @@ def index(request):
 
 def lesson(request,stage_id):
     if request.user.is_authenticated:
-        
         stage = Stage.objects.filter(id=stage_id).first()
         currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user)
         if currentTasks.count()==0 :
@@ -57,19 +56,21 @@ def playerProfile(request):
         achievements_id_list = AchievementTask.objects.filter(student=request.user).values_list('achievement')
         achivements = Achievement.objects.filter(id__in = achievements_id_list)
         answers = Answer.objects.filter(student=request.user).filter(completed=1)
+        absences = UserAbsence.objects.filter(student=request.user).order_by('date')
         max_points = 0
         actual_points = 0
         result_points = 0
         for answer in answers:
             task = getattr(answer,"task")
             max_points += getattr(task,"points")
-            actual_points = getattr(answer,"note")
+            actual_points += getattr(task,"points") * (getattr(answer,"note") / 100)
         if max_points != 0 :
             result_points = actual_points * 100 / max_points
         return render(request, 'main/playerProfile.html', {
             "achievements" : achivements,
             "answers":answers,
-            "results_points": result_points
+            "results_points": result_points,
+            "absences":absences,
         })
     return HttpResponseRedirect(reverse('login:login'))
 
