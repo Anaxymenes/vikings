@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+import datetime
 
 class AccountDetails(models.Model):
     user = models.ForeignKey(User , on_delete = models.CASCADE)
@@ -25,6 +26,11 @@ class StageTasks(models.Model):
     prompt = models.CharField(max_length = 2500)
     difficulty_level = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(1)])
 
+class UserAbsence(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    absence = models.BooleanField(default=0)
+    date = models.DateField(default=datetime.datetime.now)
+
 class Achievement(models.Model):
     name = models.CharField(max_length=50)
     points = models.IntegerField(default=0)
@@ -45,6 +51,7 @@ class Answer(models.Model):
     note = models.PositiveIntegerField(validators=[MaxValueValidator(100),MinValueValidator(0)], default=0)
     rated = models.BooleanField(default=0)
     completed = models.BooleanField(default=0)
+    closed = models.BooleanField(default=0)
 
 class StageStudent(models.Model):
     stage = models.ForeignKey(Stage, on_delete=models.PROTECT)

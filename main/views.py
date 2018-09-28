@@ -61,15 +61,11 @@ def playerProfile(request):
         actual_points = 0
         result_points = 0
         for answer in answers:
-            #max_points = StageTasks.objects.filter(id=answer.value('task_id')).first().value('points')
             task = getattr(answer,"task")
             max_points += getattr(task,"points")
             actual_points = getattr(answer,"note")
-            #print(getattr(task,"id"))
         if max_points != 0 :
             result_points = actual_points * 100 / max_points
-        #print(result_points)
-        #print(achivements[0].name)
         return render(request, 'main/playerProfile.html', {
             "achievements" : achivements,
             "answers":answers,
