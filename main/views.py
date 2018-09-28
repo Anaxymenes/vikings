@@ -18,18 +18,19 @@ def lesson(request,stage_id):
         stage = Stage.objects.filter(id=stage_id).first()
         currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user)
         if currentTasks.count()==0 :
-            stageTasks = StageTasks.objects.filter(stage=stage).order_by("?")[:5]
-            for task in stageTasks:
-                Answer.objects.create(
-                    answerSql = "",
-                    stage = stage,
-                    student = request.user,
-                    task = task,
-                    usedPrompt = 0,
-                    note = 0,
-                    completed = 0
-                )
-            currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user)
+            for x in range(1,6):
+                stageTasks = StageTasks.objects.filter(stage=stage).filter(difficulty_level=x).order_by("?")[:1]
+                for task in stageTasks:
+                    Answer.objects.create(
+                        answerSql = "",
+                        stage = stage,
+                        student = request.user,
+                        task = task,
+                        usedPrompt = 0,
+                        note = 0,
+                        completed = 0
+                    )
+            currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user).order_by('task.difficult_level')
         return render(request, 'main/lesson.html', {
             "stage":stage,
             "tasks":currentTasks,
