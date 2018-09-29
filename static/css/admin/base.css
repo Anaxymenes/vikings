@@ -93,6 +93,13 @@ body {
 .mainPlace{
     margin-left: 200px;
 }
+.custom-file{
+    margin-bottom: 10px;
+}
+.custom-file-input{
+    opacity: 1 !important;
+    
+}
 
 
 
