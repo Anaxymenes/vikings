@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container responseContent">
+    <form>
+        <h1 align="center">Dodawanie wyzwania</h1>
+        <h4 class="pt-2">Treść wyzwania:</h4>
+        <textarea class="form-control" rows="4" placeholder="Treść wyzwania..." required="true" minlength="10"></textarea>
+
+        <h4 class="pt-3">Ilość punktów</h4>
+        <input class="form-control" placeholder="40" required="true" type="number" min="10">
+        <small class="form-text text-muted">Maksymalna ilość punktów do uzyskania.</small>
+
+        <div class="form-group">
+            <h4 class="pt-3">Grupy</h4>
+            <select multiple class="form-control" required="true">
+                <option value="Grupa_10-45">Grupa_10-45</option>
+                <option value="Grupa_13-16">Grupa_13-16</option>
+                <option value="Grupa_13-17">Grupa_13-17</option>
+                <option value="Grupa_13-18">Grupa_13-18</option>
+                <option value="Grupa_13-19">Grupa_13-19</option>
+                <option value="Grupa_13-20">Grupa_13-20</option>
+                <option value="Grupa_13-21">Grupa_13-21</option>
+            </select>
+            <small class="form-text text-muted">Przytrzymaj przycisk 'Ctrl' aby wybrać kilka grup.</small>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Wyślij</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
