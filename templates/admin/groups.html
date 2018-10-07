@@ -29,14 +29,16 @@
                         </tr>
                     </tbody>
                 </table>
-                <form>
+                <form method="POST" action="{% url 'adminSite:addGroup' %}">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label>Nazwa</label>
                         <input class="form-control" placeholder="Nazwa grupy..." required minlength="5">
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
+                        <input type="file" class="custom-file-input" id="groupFile" name="groupFile">
                     </div>
+                    <input class="form-control" placeholder="Nazwa grupy..." required id="groupName">
                     <button type="submit" class="btn btn-primary">Stwórz grupę</button>
                 </form>
             </div>
