@@ -11,6 +11,9 @@ def responses(request):
 def excercises(request):
     return render(request, 'admin/excercises.html')
 
+def challenges(request):
+    return render(request, 'admin/challenges.html')
+
 def groupDetails(request):
     return render(request, 'admin/groupDetails.html')
 
