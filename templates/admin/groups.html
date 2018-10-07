@@ -29,16 +29,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <form method="POST" action="{% url 'adminSite:addGroup' %}">
+                <form method="POST" action="{% url 'adminSite:addGroup' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label>Nazwa</label>
-                        <input class="form-control" placeholder="Nazwa grupy..." required id="groupName">
+                        <label for="{{ form.groupName.id_for_label }}">Nazwa grupy</label>
+                        {{ form.groupName }}
+                        <label for="{{ form.groupFile.id_for_label }}">Wybierz plik</label>
+                        {{ form.groupFile }}
+                        <button type="submit" class="btn btn-primary" value="Submit">Stwórz grupę</button>
                     </div>
-                    <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="groupFile" name="groupFile">
-                          </div>
-                    <button type="submit" class="btn btn-primary">Stwórz grupę</button>
                 </form>
             </div>
             <div class="col-xl-8">
