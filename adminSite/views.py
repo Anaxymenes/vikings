@@ -22,6 +22,9 @@ def challenges(request):
 def groupDetails(request):
     return render(request, 'admin/groupDetails.html')
 
+def messages(request):
+    return render(request, 'admin/messages.html')
+
 def addGroup(request):
     if request.method == "POST":
         print(request.POST)

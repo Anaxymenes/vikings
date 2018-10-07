@@ -10,6 +10,7 @@ urlpatterns = [
     path('excercises', views.excercises, name='excercises'),
     path('challenges', views.challenges, name='challenges'),
     path('groupDetails', views.groupDetails, name='groupDetails'),
+    path('messages', views.messages, name='messages'),
     path('addGroup/',views.addGroup, name='addGroup'),
 ]
 
