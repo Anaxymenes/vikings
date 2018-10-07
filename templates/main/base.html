@@ -113,8 +113,8 @@
                         <p>Jesteś pewien że chcesz się wylogować?</p>
                     </div>
                     <div class="modal-footer logoutModal">
-                        <button data-target="{% url 'login:logout' %}" type="button" class="btn btn-success logoutButton"><a
-                                href="{% url 'login:logout' %}">Tak</a></button>
+                        <a href="{% url 'login:logout' %}">
+                            <button type="button" class="btn btn-success logoutButton">Tak</button></a>
                         <button type="button" class="btn btn-danger logoutButton" data-dismiss="modal">Nie</button>
                     </div>
                 </div>

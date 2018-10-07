@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 
 def index(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('main:home'))
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -21,7 +23,8 @@ def register(request):
     return render(request, 'login/register.html', {})
 
 def changePassword(request):
-    return render(request, 'login/changePassword.html', {})
+    if request.user.is_authenticated:
+        return render(request, 'login/changePassword.html', {})
 
 def logout_view(request):
     logout(request)
