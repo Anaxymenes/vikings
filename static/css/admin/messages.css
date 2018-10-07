@@ -1,0 +1,16 @@
+.messagesBody{
+    margin: 20px 80px 0 40px;
+    width: auto;
+}
+.messagesBody h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.messagesBody table tbody{
+    font-size: 1rem;
+    text-align: justify;
+    line-height: 1.2rem;
+}
+.messagesBody tbody tr td:last-child{
+    text-indent: 1%;
+}

@@ -1,0 +1,58 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container messagesBody">
+    <h1>Wiadomości</h1>
+    <form>
+        <table class="table table-striped table-sm">
+            <thead align="center">
+                <tr>
+                    <th scope="col"><input id="all" class="checkjq" type="checkbox" /></th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Od</th>
+                    <th scope="col">Treść</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><input type="checkbox" /></th>
+                    <td>21.09.2018</td>
+                    <td>Marek DDD</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation </td>
+                </tr>
+                <tr>
+                    <th scope="row"><input type="checkbox" /></th>
+                    <td>21.09.2018</td>
+                    <td>Jacob DDDD</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation </td>
+                </tr>
+                <tr>
+                    <th scope="row"><input type="checkbox" /></th>
+                    <td>21.09.2018</td>
+                    <td>Artur DDDDD</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sLorem ipsum dolor sit amet,
+                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Bird</td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" class="btn btn-danger float-right" value="Usuń zaznaczone" disabled/>
+    </form>
+</div>
+
+<script>
+    $('#all').on('click', function () {
+        $(':checkbox').prop("checked", $(this).is(':checked'));
+    });
+
+    var checkboxes = $(":checkbox"),
+    submitButt = $("input[type='submit']");
+
+    checkboxes.click(function() {
+    submitButt.attr("disabled", !checkboxes.is(":checked"));
+    });
+</script>
+{% endblock %}
