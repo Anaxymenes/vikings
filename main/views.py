@@ -10,6 +10,8 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     if request.user.is_authenticated:
+        if request.user.is_superuser :
+            return HttpResponseRedirect(reverse('adminSite:groups'))
         return render(request, 'main/index.html', {})
     return HttpResponseRedirect(reverse('login:login'))
 

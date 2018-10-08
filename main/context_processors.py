@@ -13,7 +13,7 @@ def add_variable_to_context(request):
             "levels": levels, 
             "account": accountDetails,
             "exp_bar": exp_bar,
-            "hp_bar": hp_bar
+            "hp_bar": hp_bar,
             }
     return {
         

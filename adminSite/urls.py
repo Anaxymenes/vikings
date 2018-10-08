@@ -9,7 +9,11 @@ urlpatterns = [
     path('responses', views.responses, name='responses'),
     path('excercises', views.excercises, name='excercises'),
     path('challenges', views.challenges, name='challenges'),
-    path('groupDetails', views.groupDetails, name='groupDetails'),
+    path('students', views.students, name='students'),
+    path('groupDetails/<int:group_id>/', views.groupDetails, name='groupDetails'),
+    path('deleteStudent/<int:student_id>/', views.deleteStudent, name='deleteStudent'),
+    path('editStudent/<int:student_id>/', views.editStudent, name='editStudent'),
+    path('deleteGroup/<int:group_id>/', views.deleteGroup, name='deleteGroup'),
     path('messages', views.messages, name='messages'),
     path('addGroup/',views.addGroup, name='addGroup'),
 ]

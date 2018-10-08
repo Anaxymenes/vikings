@@ -59,9 +59,13 @@ class StageStudent(models.Model):
     databaseSql = models.CharField(max_length=5000)
     complete = models.BooleanField(default=0)
 
-class StudentGroup(models.Model):
+class Group(models.Model):
     name = models.CharField(max_length=50)
     lecturer = models.ForeignKey(User, on_delete=models.PROTECT)
+
+class StudentGroup(models.Model):
+    group = models.ForeignKey(Group, on_delete = models.CASCADE)
+    student = models.ForeignKey(User, on_delete = models.CASCADE)
 
 
 

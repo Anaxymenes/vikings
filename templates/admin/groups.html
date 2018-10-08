@@ -5,30 +5,34 @@
         <div class="row">
             <div class="col-xl-4">
                 <h3>Grupy</h3>
+                {% if groups.count > 0 %}
+                    <table class="table table-hover bg-light table-sm groupsTable">
+                        <thead>
+                            <tr>
+                            <th>Nazwa
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for group in groups %}
+                                <tr>
+                                    <td>{{group.name}}
+                                    <td><a href="{% url 'adminSite:groupDetails' group.id %}"><button class="btn btn-primary">Pokaż</button></a>
+                                    <td><button class="btn btn-info">Edytuj</button>
+                                    <td><a href="{% url 'adminSite:deleteGroup' group.id %}"><button class="btn btn-danger">Usuń</button></a>
+                                    <td><button class="btn btn-basic">Napisz</button>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="alert alert-warning" role="alert"> Brak prowadzonych grup</div>
+                {% endif %}
+                {% if message != None and message %}
+                    <div class="alert alert-success" role="alert"> Grupa pomyślnie utworzona </div>
+                {% elif message != None and message == False %}
+                    <div class="alert alert-danger" role="alert"> Grupa nie została utworzona </div>
+                {% endif %}
                 <h4>Stwórz nową grupę</h4>
-                <table class="table table-hover bg-light table-sm groupsTable">
-                    <thead>
-                        <tr>
-                        <th>Nazwa
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Grupa_10-45
-                            <td><button class="btn btn-primary" onclick="location.href = 'groupDetails';">Pokaż</button>
-                            <td><button class="btn btn-info">Edytuj</button>
-                            <td><button class="btn btn-danger">Usuń</button>
-                            <td><button class="btn btn-basic">Napisz</button>
-                        </tr>
-                        <tr>
-                            <td>Grupa_11-30
-                            <td><button class="btn btn-primary">Pokaż</button>
-                            <td><button class="btn btn-info">Edytuj</button>
-                            <td><button class="btn btn-danger">Usuń</button>
-                            <td><button class="btn btn-basic">Napisz</button>
-                        </tr>
-                    </tbody>
-                </table>
                 <form method="POST" action="{% url 'adminSite:addGroup' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
