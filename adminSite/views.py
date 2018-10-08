@@ -1,5 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, reverse
 from django.contrib.auth.hashers import make_password, check_password
 from models.models import StudentGroup, Group, AccountDetails
 from io import BytesIO
@@ -8,6 +8,8 @@ from .forms import CreateGroup
 from django.contrib.auth.models import User
 
 def groups(request):
+    if request.user.is_superuser == False:
+        return HttpResponseRedirect(reverse('main:home'))
     return render(request, 'admin/groups.html',{'form' : CreateGroup(), "groups":getGroups(request)})
 
 def deleteGroup(request, group_id):
