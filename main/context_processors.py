@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from models.models import AccountDetails
 
 def add_variable_to_context(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_superuser == False: 
         accountDetails = AccountDetails.objects.filter(user=request.user).first()
         level = accountDetails.level
         levels = range(1, level + 1)
@@ -15,7 +15,7 @@ def add_variable_to_context(request):
             "exp_bar": exp_bar,
             "hp_bar": hp_bar,
             }
-    elif request.user.is_superuser :
+    elif request.user.is_authenticated and request.user.is_superuser :
         return {}
     else :
         return {}

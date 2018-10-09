@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
-import datetime
+from datetime import datetime, timedelta
 
 class AccountDetails(models.Model):
     user = models.ForeignKey(User , on_delete = models.CASCADE)
@@ -15,21 +15,23 @@ class AccountDetails(models.Model):
 class Stage(models.Model):
     name = models.CharField(max_length=50)
 
+class DifficultyLevel(models.Model):
+    level = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(1)])
+    title = models.CharField(max_length=120)
+
 class StageTasks(models.Model):
     stage = models.ForeignKey(Stage, on_delete=models.PROTECT)
     description = models.CharField(max_length=2500)
-    content = models.CharField(max_length = 2500)
-    title = models.CharField(max_length=120, default="Zadanie")
     points = models.IntegerField(default=5)
     exp_points = models.IntegerField(default=20)
     sampleAnswer = models.CharField(max_length=2500)
     prompt = models.CharField(max_length = 2500)
-    difficulty_level = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(1)])
+    difficulty_level = models.ForeignKey(DifficultyLevel, on_delete = models.CASCADE)
 
 class UserAbsence(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     absence = models.BooleanField(default=0)
-    date = models.DateField(default=datetime.datetime.now)
+    date = models.DateField(default=datetime.now())
 
 class Achievement(models.Model):
     name = models.CharField(max_length=50)
@@ -42,22 +44,23 @@ class AchievementTask(models.Model):
     achievement = models.ForeignKey(Achievement, on_delete = models.PROTECT)
     student = models.ForeignKey(User, on_delete=models.CASCADE)
 
+class StageStudent(models.Model):
+    stage = models.ForeignKey(Stage, on_delete=models.PROTECT)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    databaseSql = models.CharField(max_length=5000)
+    complete = models.BooleanField(default=0)
+    start_at = models.DateTimeField(default=datetime.now())
+    end_at = models.DateTimeField(default=datetime.now()+timedelta(days=7))
+
 class Answer(models.Model):
-    student = models.ForeignKey(User, on_delete = models.CASCADE)
-    stage = models.ForeignKey(Stage, on_delete = models.CASCADE)
+    stage = models.ForeignKey(StageStudent, on_delete = models.CASCADE)
     task = models.ForeignKey(StageTasks, on_delete=models.PROTECT)
     answerSql = models.CharField(max_length=2500)
     usedPrompt = models.BooleanField(default=0)
     note = models.PositiveIntegerField(validators=[MaxValueValidator(100),MinValueValidator(0)], default=0)
     rated = models.BooleanField(default=0)
     completed = models.BooleanField(default=0)
-    closed = models.BooleanField(default=0)
-
-class StageStudent(models.Model):
-    stage = models.ForeignKey(Stage, on_delete=models.PROTECT)
-    student = models.ForeignKey(User, on_delete=models.CASCADE)
-    databaseSql = models.CharField(max_length=5000)
-    complete = models.BooleanField(default=0)
+    completed_at = models.DateTimeField(default=datetime.now())
 
 class Group(models.Model):
     name = models.CharField(max_length=50)
@@ -67,6 +70,10 @@ class StudentGroup(models.Model):
     group = models.ForeignKey(Group, on_delete = models.CASCADE)
     student = models.ForeignKey(User, on_delete = models.CASCADE)
 
-
+class StoryLevel(models.Model):
+    stage = models.ForeignKey(Stage, on_delete = models.CASCADE)
+    difficulty_level = models.ForeignKey(DifficultyLevel, on_delete = models.CASCADE)
+    title = models.CharField(max_length=120)
+    content = models.CharField(max_length=1200)
 
 
