@@ -1,18 +1,63 @@
 .excerciseContent{
-    padding-top: 20px;
+    padding: 20px;
 }
-.arrowIcon{
+
+.stage{
+    cursor: pointer;
+    background-color: orange;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 40px;
+    line-height: 50px;
+    align-self: center;
+    text-align: center;
+    border-radius: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    box-shadow: 3px 3px ;
+    font-size: 1.3rem;
+}
+.stage:hover{
+    background-color: orangered;
+    box-shadow: 4px 4px;
+    font-size: 1.4rem;
+}
+.excerciseContent a:active{
+    outline: none;
+    background-color: orangered;
+}
+.excerciseContent table{
     text-align: center;
 }
-.arrowIcon i {
+.excercisesList{
+    margin-top: 30px;
+}
+.excercisesList .addButton{
+    margin: 30px;
+}
+
+/* Excercise details */
+.excerciseDetailsContent{
+    padding: 30px;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+.excerciseDetailsContent h3{
+    margin-top: 10px;
+}
+.backArrow {
     cursor: pointer;
+    position: absolute;
+    color: rgb(53, 53, 53);
+}
+.backArrow:hover {
+    color: rgb(102, 102, 102);
+}
+.form-control{
+    margin-bottom: 1rem;
 }
 .excerciseContent h3, h6, p{
     margin: 0;
-}
-.story {
-    font-size: 0.8rem;
-    padding-bottom: 10px;
 }
 label{
     font-size: 0.8rem;

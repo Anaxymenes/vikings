@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.groups, name='groups'),
     path('responses', views.responses, name='responses'),
     path('excercises', views.excercises, name='excercises'),
+    path('excerciseDetails', views.excerciseDetails, name='excerciseDetails'),
     path('challenges', views.challenges, name='challenges'),
     path('students', views.students, name='students'),
     path('groupDetails/<int:group_id>/', views.groupDetails, name='groupDetails'),

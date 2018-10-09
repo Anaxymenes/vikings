@@ -32,6 +32,9 @@ def editStudent(request,student_id):
 def excercises(request):
     return render(request, 'admin/excercises.html')
 
+def excerciseDetails(request):
+    return render(request, 'admin/excerciseDetails.html')
+
 def challenges(request):
     return render(request, 'admin/challenges.html')
 
