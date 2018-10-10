@@ -1,5 +1,5 @@
 .messagesBody{
-    margin: 20px 80px 0 40px;
+    margin: 20px 40px 0 40px;
     width: auto;
 }
 .messagesBody h1{
@@ -13,4 +13,12 @@
 }
 .messagesBody tbody tr td:last-child{
     text-indent: 1%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media screen and (max-width: 768px){
+    .messagesBody{
+        margin: 20px 5px 0 5px;
+    }
 }

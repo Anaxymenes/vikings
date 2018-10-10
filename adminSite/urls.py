@@ -7,6 +7,7 @@ app_name = 'adminSite'
 urlpatterns = [
     path('', views.groups, name='groups'),
     path('responses', views.responses, name='responses'),
+    path('responseDetails', views.responseDetails, name='responseDetails'),
     path('excercises', views.excercises, name='excercises'),
     path('excerciseDetails', views.excerciseDetails, name='excerciseDetails'),
     path('challenges', views.challenges, name='challenges'),

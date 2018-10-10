@@ -19,6 +19,9 @@ def deleteGroup(request, group_id):
 def responses(request):
     return render(request, 'admin/responses.html')
 
+def responseDetails(request):
+    return render(request, 'admin/responseDetails.html')
+
 def students(request):
     return render(request, 'admin/students.html',{'students':getStudentsList()})
 

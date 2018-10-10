@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container responseDetailsContent">
+    <a href="/adminSite/responses"><i class="fa fa-arrow-circle-left fa-3x backArrow" title="Wstecz"></i></a>
+    <h1 align="center">Rozwiązanie zadania</h1>
+    <h4>Treść</h4>
+    <p>a) Wszystkie postacie które mają w swojej nazwie 'a' wsadź na statek Bjorna.
+        b) Lorem ddddddddddddddddd sa fsad fgsd f s daf adsf sdf gsdfgdsf af as dasd
+    </p>
+    <h4>Rozwiązanie</h4>
+    <p>a) Wszystkie postacie które mają w swojej nazwie 'a' wsadź na statek Bjorna.
+        b) Lorem ddddddddddddddddd sa fsad fgsd f s daf adsf sdf gsdfgdsf af as dasd
+    </p>
+    <h4>Nagroda</h4>
+    <p>100</p>
+    <form>
+        <div class="form-group">
+            <label><b>Przyznaj punkty</b></label>
+            <input class="form-control mb-0" placeholder="100" required type="number" min="0" max="100">
+            <small class="form-text text-muted">Przyznaj odpowiednią ilość punktów.</small>
+        </div>
+        <div class="form-group">
+            <label><b>Medal</b></label>
+            <select class="form-control mb-0">
+                <option value="" selected>-</option>
+                <option value="Medal precyzja Odyna">Medal precyzja Odyna</option>
+                <option value="Szybkie kopytko">Szybkie kopytko</option>
+                <option value="Medal za wytrwałość">Medal za wytrwałość</option>
+                <option value="Odważny jak niedźwiedź">Odważny jak niedźwiedź</option>
+            </select>
+            <small class="form-text text-muted">Zasłużył na medal?</small>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Oceń</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
