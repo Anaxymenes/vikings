@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
-from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer, UserAbsence
+from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer, UserAbsence, DifficultyLevel, StageStudent
 import logging
 
 import random
@@ -18,19 +18,22 @@ def index(request):
 def lesson(request,stage_id):
     if request.user.is_authenticated:
         stage = Stage.objects.filter(id=stage_id).first()
-        currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user)
+        stageStudent = StageStudent.objects.filter(student=request.user).filter(stage=stage).first()
+        currentTasks = Answer.objects.filter(stage=stageStudent).filter(student=request.user)
         if currentTasks.count()==0 :
-            for x in range(1,6):
+            levels = DifficultyLevel.objects.all()[:6]
+            for x in levels:
                 stageTasks = StageTasks.objects.filter(stage=stage).filter(difficulty_level=x).order_by("?")[:1]
                 for task in stageTasks:
                     Answer.objects.create(
                         answerSql = "",
-                        stage = stage,
+                        stage = stageStudent,
                         student = request.user,
                         task = task,
                         usedPrompt = 0,
                         note = 0,
-                        completed = 0
+                        completed = 0,
+                        rated = 0
                     )
             currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user).order_by('task.difficult_level')
         return render(request, 'main/lesson.html', {
