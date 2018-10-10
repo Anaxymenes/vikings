@@ -1,3 +1,31 @@
 .responseContent{
-    padding: 2% 20% 0 20%;
+    padding: 2% 5% ;
+}
+.responseContent h1{
+    align: center;
+    margin-bottom: 15px;
+}
+.responseContent table{
+    width: 100%;
+    text-align: center
+}
+.responseContent table td button{
+    width: 80%;
+}
+
+/* ResponseDetails */
+.responseDetailsContent{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.responseDetailsContent h1{
+    margin-bottom: 40px;
+}
+.responseDetailsContent p {
+    background-color: rgba(153, 152, 152, 0.199);
+    padding: 4px 8px;
+    border-radius: 10px;
+}
+.responseDetailsContent button{
+    width: 25%;
 }

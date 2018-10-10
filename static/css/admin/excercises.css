@@ -1,30 +1,37 @@
 .excerciseContent{
     padding: 20px;
 }
-
+.excerciseContent .tiles{
+    background-color: rgba(153, 152, 152, 0.199);
+    border-radius: 20px;
+}
 .stage{
     cursor: pointer;
-    background-color: orange;
+    background-color: #293749;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     line-height: 50px;
     align-self: center;
     text-align: center;
     border-radius: 20px;
     display: inline-block;
     vertical-align: middle;
-    box-shadow: 3px 3px ;
+    box-shadow: 4px 4px;
     font-size: 1.3rem;
+    font-weight: 500;
+    color: white !important;
 }
 .stage:hover{
-    background-color: orangered;
-    box-shadow: 4px 4px;
+    background-color: orange;
+    box-shadow: 1px 1px;
     font-size: 1.4rem;
 }
 .excerciseContent a:active{
     outline: none;
-    background-color: orangered;
+    background-color: orange;
 }
 .excerciseContent table{
     text-align: center;
@@ -48,10 +55,10 @@
 .backArrow {
     cursor: pointer;
     position: absolute;
-    color: rgb(53, 53, 53);
+    color: #293749;
 }
 .backArrow:hover {
-    color: rgb(102, 102, 102);
+    color: orange;
 }
 .form-control{
     margin-bottom: 1rem;
