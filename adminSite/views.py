@@ -6,6 +6,8 @@ from io import BytesIO
 from openpyxl import load_workbook, workbook, cell
 from .forms import CreateGroup
 from django.contrib.auth.models import User
+from django.db import transaction
+import operator
 
 def groups(request):
     if request.user.is_superuser == False:
@@ -30,6 +32,7 @@ def deleteStudent(request, student_id):
     return render(request, 'admin/students.html',{'students':getStudentsList()})
 
 def editStudent(request,student_id):
+    print(getStudentDetails(student_id))
     return render(request, 'admin/studentDetails.html',{'student':getStudentDetails(student_id)})
 
 def excercises(request):
@@ -51,13 +54,19 @@ def messages(request):
 
 def addGroup(request):
     if request.method == "POST":
+        sid = transaction.savepoint()
         print(request.POST)
         form = CreateGroup(request.POST, request.FILES)
         if form.is_valid():
             file_in_memory = request.FILES['groupFile'].read()
             group = Group.objects.create(name=request.POST.get('groupName'),lecturer=request.user)
-            group.save()
+            
             is_created = createUsersFromWorkbook(file_in_memory, group)
+            if is_created == False:
+                transaction.savepoint_rollback(sid)
+                Group.objects.filter(id=group.id).first().delete()
+            else :
+                transaction.savepoint_commit(sid)
             return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':is_created})
     return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup()})
 
@@ -71,8 +80,16 @@ def getGroupDetails(group_id):
     studentsGroup = StudentGroup.objects.filter(group=group)
     for stg in studentsGroup:
         st = User.objects.filter(id=stg.student.id).first()
-        students.append(st)
+        stDetails = AccountDetails.objects.filter(user=st).first()
+        students.append({
+            'first_name': st.first_name,
+            'last_name' : st.last_name,
+            'username' : st.username,
+            'email' : st.email,
+            'points' : stDetails.points
+        })
         print(st)
+    students = sorted(students, key=lambda k: k.get('points'),reverse = True)
     return students
 
 def getGroups(request):
@@ -128,7 +145,8 @@ def getStudentDetails(student_id):
     user = User.objects.filter(id=student_id).first()
     studentGroup = StudentGroup.objects.filter(student=user).first()
     group = Group.objects.filter(id=studentGroup.group.id).first()
-    accountDetails = AccountDetails.objects.filter(user=user)
+    print(group.name)
+    accountDetails = AccountDetails.objects.filter(user=user).first()
     index_number = str(user.username[1:])
     details = {
         'id' : user.id,
@@ -136,7 +154,7 @@ def getStudentDetails(student_id):
         'last_name': user.last_name,
         'username': user.username,
         'index_number': index_number,
-        'current_group': group.name,
+        'group': group,
         'level': accountDetails.level,
         'current_hp': accountDetails.current_hp,
         'current_exp': accountDetails.current_exp,

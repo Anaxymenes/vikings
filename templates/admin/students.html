@@ -23,7 +23,7 @@
                         <td>{{student.first_name}}</td>
                         <td>{{student.last_name}}</td>
                         <td>{{student.email}}</td>
-                        <td><a href="{% url 'adminSite:editStudent' student.id %}" class="badge badge-primary">Edytuj</a></td>
+                        <td><a href="{% url 'adminSite:editStudent' student.id %}" class="badge badge-primary">Detale</a></td>
                         <td><a href="{% url 'adminSite:deleteStudent' student.id %}" class="badge badge-danger">Usuń</a></td>
                     </tr>
                 {% endfor %}

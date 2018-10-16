@@ -10,6 +10,51 @@
                     <th scope="col">Opis</th>
                     <th scope="col"></th>
                 </tr>
+                <tr>
+                    <td>Id</td>
+                    <td>{{ student.id }}</td>
+                </tr>
+                <tr>
+                    <td>Imię</td>
+                    <td>{{ student.first_name }}</td>
+                </tr>
+                <tr>
+                    <td>Nazwisko</td>
+                    <td>{{ student.last_name }}</td>
+                </tr>
+                <tr>
+                    <td>Nazwa użytkownika</td>
+                    <td>{{ student.username }}</td>
+                </tr>
+                <tr>
+                    <td>Nr indeksu</td>
+                    <td>{{ student.index_number }}</td>
+                </tr>
+                <tr>
+                    <td>Aktualna grupa</td>
+                    {% if student.group != None %}
+                        
+                        <td>{{student.group.name}}</td>
+                    {% else %}
+                        <td>Brak grupy</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Na którym etapie jest</td>
+                    <td>{{ student.level }}</td>
+                </tr>
+                <tr>
+                    <td>Aktualny poziom życia</td>
+                    <td>{{ student.current_hp }}</td>
+                </tr>
+                <tr>
+                    <td>Poziom doświadczenia</td>
+                    <td>{{ student.current_exp }} / {{student.max_exp}}</td>
+                </tr>
+                <tr>
+                    <td>Punkty</td>
+                    <td>{{ student.points }}</td>
+                </tr>
             </thead>
             <tbody>
                 <tr>

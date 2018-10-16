@@ -17,9 +17,10 @@ def index(request):
 
 def lesson(request,stage_id):
     if request.user.is_authenticated:
+        user = User.objects.filter(id=request.user.id).first()
         stage = Stage.objects.filter(id=stage_id).first()
-        stageStudent = StageStudent.objects.filter(student=request.user).filter(stage=stage).first()
-        currentTasks = Answer.objects.filter(stage=stageStudent).filter(student=request.user)
+        stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
+        currentTasks = Answer.objects.filter(stage=stageStudent)
         if currentTasks.count()==0 :
             levels = DifficultyLevel.objects.all()[:6]
             for x in levels:
@@ -33,7 +34,7 @@ def lesson(request,stage_id):
                         usedPrompt = 0,
                         note = 0,
                         completed = 0,
-                        rated = 0
+                        rated = False
                     )
             currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user).order_by('task.difficult_level')
         return render(request, 'main/lesson.html', {
