@@ -6,7 +6,7 @@ body {
     background-attachment: fixed;
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: #3b3b3b;
-    font-size: 15px;
+    font-size: 1.5rem;
     min-width: 850px;
 }
 .container{
@@ -34,7 +34,7 @@ body {
     text-align: center;
     position: absolute;
     bottom: 7%;
-    font-size: 17px;
+    font-size: 1.7rem;
     font-weight: bold;
     line-height: 1.1;
     padding-left: 10%;
@@ -45,7 +45,7 @@ body {
 .stats{
     background-image: url("../img/bg_statistic.png");
     background-size: 100% 100%;
-    padding: 5% 10% 2% 10%;
+    padding: 5% 10% 3% 10%;
 }
 .potion{
     float: right;
@@ -70,12 +70,12 @@ body {
     transform: translate(-50%, -50%);
 }
 .rankImg{
-    width: 70px;
+    width: 8rem;
 }
 .number-font{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #2d580e;
-    font-size:30px;
+    font-size:3.2rem;
     font-weight: 500;
 }
 .rankDesc{
@@ -104,8 +104,8 @@ body {
 }
 
 .menu ul li img{
-   width: 35px;
-   margin-top: 5%;
+   width: 3rem;
+   margin-top: 13%;
    cursor: pointer;
 }
 
@@ -211,5 +211,85 @@ body {
 @media (min-width: 1200px){
     .container {
     max-width: 1140px;
+    }
+}
+@media (min-width: 1600px){
+    .container {
+    max-width: 1540px;
+    }
+    .avatarName{
+        font-size: 2rem;
+    }
+    body{
+        font-size: 2rem;
+    }
+    .menu ul li img{
+        width: 4rem;
+        margin-top: 10%;
+    }
+    
+    .progress{
+        height: 2.2rem;
+    }
+
+    .map{
+        height: 900px;
+    }
+    .lesson1{
+        margin-top: 15px;
+        margin-left: 50px;
+        width: 540px;
+    }
+    .lesson2{
+        margin-top: 140px;
+        margin-left: 210px;
+        width: 600px;
+    }
+    .lesson3{
+        margin-top:272px;
+        margin-left: 298px;
+        width: 729px;
+    }
+    .lesson4{
+        margin-top:454px;
+        margin-left: 100px;
+        width: 900px; 
+    }
+    .lesson5{
+        margin-top:607px;
+        margin-left: 283px;
+        width: 489px;
+    }
+    .lesson6{
+        margin-top:528px;
+        margin-left: 589px;
+        width: 439px;
+    }
+    .mark1{
+        margin-top: 280px;
+        margin-left: 260px;
+    }
+    .mark2{
+        margin-top: 245px;
+        margin-left: 700px;
+    }
+    .mark3{
+        margin-top: 440px;
+        margin-left: 900px;
+    }
+    .mark4{
+        margin-top: 740px;
+        margin-left: 260px;
+    }
+    .mark5{
+        margin-top: 730px;
+        margin-left: 570px;
+    }
+    .mark6{
+        margin-top: 715px;
+        margin-left: 755px;
+    }
+    .top{
+        width: 7rem;
     }
 }
