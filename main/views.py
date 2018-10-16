@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer, UserAbsence, DifficultyLevel, StageStudent
 import logging
+from datetime import datetime, timedelta
 
 import random
 logger = logging.getLogger(__name__)
@@ -22,6 +23,16 @@ def lesson(request,stage_id):
         stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
         currentTasks = Answer.objects.filter(stage=stageStudent)
         if currentTasks.count()==0 :
+            if stageStudent == None:
+                stageStudent = StageStudent.objects.create(
+                    stage = stage,
+                    student = request.user,
+                    databaseSql = "",
+                    complete = 0,
+                    start_at = datetime.now(),
+                    end_at = datetime.now()+timedelta(days=7)
+                )
+                stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
             levels = DifficultyLevel.objects.all()[:6]
             for x in levels:
                 stageTasks = StageTasks.objects.filter(stage=stage).filter(difficulty_level=x).order_by("?")[:1]
@@ -29,14 +40,13 @@ def lesson(request,stage_id):
                     Answer.objects.create(
                         answerSql = "",
                         stage = stageStudent,
-                        student = request.user,
                         task = task,
                         usedPrompt = 0,
                         note = 0,
                         completed = 0,
-                        rated = False
+                        rated = 0
                     )
-            currentTasks = Answer.objects.filter(stage=stage).filter(student=request.user).order_by('task.difficult_level')
+            currentTasks = Answer.objects.filter(stage=stageStudent).order_by('task.difficult_level')
         return render(request, 'main/lesson.html', {
             "stage":stage,
             "tasks":currentTasks,
@@ -46,7 +56,7 @@ def lesson(request,stage_id):
 def exerciseDetails(request, stage_id):
     if request.method == "POST":
         task = StageTasks.objects.filter(id=request.POST.get('taskId')).first()
-        answer = Answer.objects.filter(task=task).filter(student=request.user).first()
+        answer = Answer.objects.filter(task=task).filter(stage=getStageStudentByStageId(request.user,stage_id)).first()
         return render(request, 'main/excercise.html', {"answer" : answer, "task":task})
     else :
         return render(request, 'main/index.html', {})
@@ -104,3 +114,8 @@ def task_data(request, stage_id, task_id):
         "current_task" : current_task,
     }
     return HttpResponse(data)
+
+def getStageStudentByStageId(user, stage_id):
+    stage = Stage.objects.filter(id=stage_id).first()
+    stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
+    return stageStudent
