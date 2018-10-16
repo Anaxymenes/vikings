@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
-from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer, UserAbsence, DifficultyLevel, StageStudent
+from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer, UserAbsence, DifficultyLevel, StageStudent, StoryLevel
 import logging
 from datetime import datetime, timedelta
 
@@ -23,29 +23,7 @@ def lesson(request,stage_id):
         stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
         currentTasks = Answer.objects.filter(stage=stageStudent)
         if currentTasks.count()==0 :
-            if stageStudent == None:
-                stageStudent = StageStudent.objects.create(
-                    stage = stage,
-                    student = request.user,
-                    databaseSql = "",
-                    complete = 0,
-                    start_at = datetime.now(),
-                    end_at = datetime.now()+timedelta(days=7)
-                )
-                stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
-            levels = DifficultyLevel.objects.all()[:6]
-            for x in levels:
-                stageTasks = StageTasks.objects.filter(stage=stage).filter(difficulty_level=x).order_by("?")[:1]
-                for task in stageTasks:
-                    Answer.objects.create(
-                        answerSql = "",
-                        stage = stageStudent,
-                        task = task,
-                        usedPrompt = 0,
-                        note = 0,
-                        completed = 0,
-                        rated = 0
-                    )
+            createTaskForStudent(user,stage)
             currentTasks = Answer.objects.filter(stage=stageStudent).order_by('task.difficult_level')
         return render(request, 'main/lesson.html', {
             "stage":stage,
@@ -56,14 +34,17 @@ def lesson(request,stage_id):
 def exerciseDetails(request, stage_id):
     if request.method == "POST":
         task = StageTasks.objects.filter(id=request.POST.get('taskId')).first()
+        stage = Stage.objects.filter(id=stage_id).first()
         answer = Answer.objects.filter(task=task).filter(stage=getStageStudentByStageId(request.user,stage_id)).first()
-        return render(request, 'main/excercise.html', {"answer" : answer, "task":task})
+        difficultyLevel = DifficultyLevel.objects.filter(id = task.difficulty_level.id).first()
+        story = StoryLevel.objects.filter(stage = stage).filter(difficulty_level = difficultyLevel).first()
+        return render(request, 'main/excercise.html', {"answer" : answer, "task":task,'story':story})
     else :
         return render(request, 'main/index.html', {})
 
 def showPrompt(request, stage_id):
     if request.method == "POST":
-        answer = Answer.objects.filter(id=request.POST.get('answerId')).filter(student=request.user).first()
+        answer = Answer.objects.filter(id=request.POST.get('answerId')).filter(stage=getStageStudentByStageId(request.user,stage_id)).first()
         setattr(answer,'usedPrompt',1)
         answer.save()
     return exerciseDetails(request,stage_id)
@@ -72,7 +53,11 @@ def playerProfile(request):
     if request.user.is_authenticated:
         achievements_id_list = AchievementTask.objects.filter(student=request.user).values_list('achievement')
         achivements = Achievement.objects.filter(id__in = achievements_id_list)
-        answers = Answer.objects.filter(student=request.user).filter(completed=1)
+        answers = []
+        stagesStudent = StageStudent.objects.filter(student = request.user)
+        for stageStudent in stagesStudent:
+            for answer in Answer.objects.filter(stage=stageStudent):
+                answers.append(answer)
         absences = UserAbsence.objects.filter(student=request.user).order_by('date')
         max_points = 0
         actual_points = 0
@@ -119,3 +104,38 @@ def getStageStudentByStageId(user, stage_id):
     stage = Stage.objects.filter(id=stage_id).first()
     stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
     return stageStudent
+
+def createStageStudent(stage, user):
+    stageStudent = StageStudent.objects.create(
+        stage = stage,
+        student = user,
+        databaseSql = "",
+        complete = 0,
+        start_at = datetime.now(),
+        end_at = datetime.now()+timedelta(days=7)
+    )
+    return stageStudent
+
+def createTaskForStudent(user, stage):
+    stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
+    if stageStudent == None:
+        createStageStudent(stage,user)
+        stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
+    levels = DifficultyLevel.objects.all()[:6]
+    for x in levels:
+        stageTasks = StageTasks.objects.filter(stage=stage).filter(difficulty_level=x).order_by("?")[:1]
+        for task in stageTasks:
+            Answer.objects.create(
+                answerSql = "",
+                stage = stageStudent,
+                task = task,
+                usedPrompt = 0,
+                note = 0,
+                completed = 0,
+                rated = 0
+                )
+    return True
+
+def getAnswer(task,user,stage_id):
+    answer = Answer.objects.filter(task=task).filter(stage=getStageStudentByStageId(user,stage_id)).first()
+    return answer

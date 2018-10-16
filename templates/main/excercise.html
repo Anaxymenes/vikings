@@ -21,11 +21,11 @@
     <div class="container">
       <div align="center">
           <a href="/main/lesson/{{task.stage.id}}/"><span class="close">&times;</span></a>
-        <h2>{{task.title}}</h2>
+        <h2>{{story.title}}</h2>
         <h1></h1>
       </div>
-      <p class="excerciseContent">{{task.description}}.</p>
-      <p class="excerciseContent">{{task.content}}</p>
+      <p class="excerciseContent">{{story.content}}.</p>
+      <p class="excerciseContent">{{task.description}}</p>
 
       <div align="right">
         {% if  answer.usedPrompt %}

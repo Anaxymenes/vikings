@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, reverse
 from django.contrib.auth.hashers import make_password, check_password
-from models.models import StudentGroup, Group, AccountDetails
+from models.models import *
 from io import BytesIO
 from openpyxl import load_workbook, workbook, cell
 from .forms import CreateGroup
@@ -37,6 +37,23 @@ def editStudent(request,student_id):
 
 def excercises(request):
     return render(request, 'admin/excercises.html')
+
+def excercisesWithTasks(request,stage_id):
+    stage = Stage.objects.filter(id = stage_id).first()
+    tasks = getAllTaskByStage(stage)
+    return render(request,'admin/excercises.html',{'tasks': tasks})
+
+def getAllTaskByStage(stage):
+    tasks = StageTasks.objects.filter(stage = stage)
+    result =[]
+    for task in tasks:
+        difficulty_level = DifficultyLevel.objects.filter(id=task.difficulty_level.id).first()
+        result.append({
+            'title' : difficulty_level.title,
+            'level' : difficulty_level.level,
+            'id' : task.id,
+        })
+    return result
 
 def excerciseDetails(request):
     return render(request, 'admin/excerciseDetails.html')

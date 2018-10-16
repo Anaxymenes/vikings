@@ -5,52 +5,47 @@
         <h1 align="center">Ćwiczenia</h1>
         <div class="tiles">
             <div class="row">
-                <a class="col stage">Lekcja 1</a>
-                <a class="col stage">Lekcja 2</a>
-                <a class="col stage">Lekcja 3</a>
+                <a href="{% url 'adminSite:excercisesWithTable' stage_id=1 %}" class="col stage">Lekcja 1</a>
+                <a href="{% url 'adminSite:excercisesWithTable' stage_id=2 %}" class="col stage">Lekcja 2</a>
+                <a href="{% url 'adminSite:excercisesWithTable' stage_id=3 %}" class="col stage">Lekcja 3</a>
             </div>
             <div class="row">
-                <a class="col stage">Lekcja 4</a>
-                <a class="col stage">Lekcja 5</a>
-                <a class="col stage">Lekcja 6</a>
+                <a href="{% url 'adminSite:excercisesWithTable' stage_id=4 %}" class="col stage">Lekcja 4</a>
+                <a href="{% url 'adminSite:excercisesWithTable' stage_id=5 %}" class="col stage">Lekcja 5</a>
+                <a href="{% url 'adminSite:excercisesWithTable' stage_id=6 %}" class="col stage">Lekcja 6</a>
             </div>
         </div>
-
-        <div class="row excercisesList">
-            <div class="col-6">
-                <table class="table table-hover bg-light table-sm">
-                    <thead>
-                        <tr>
-                            <th>Numer zadania
-                            <th>Poziom trudności
-                        </tr>
-                    </thead>
-                    <tbody>
+        {% if tasks != None %}
+            
+            <div class="row excercisesList">
+                <div class="col-6">
+                    <table class="table table-hover bg-light table-sm">
+                        <thead>
                             <tr>
-                                <td>1
-                                <td>1
-                                <td><button class="btn btn-info">Edytuj</button>
-                                <td><a href=""><button class="btn btn-danger">Usuń</button></a>
+                                <th>Id</th>
+                                <th>Numer zadania
+                                <th>Poziom trudności
                             </tr>
-                            <tr>
-                                <td>5
-                                <td>4
-                                <td><button class="btn btn-info">Edytuj</button>
-                                <td><a href=""><button class="btn btn-danger">Usuń</button></a>
-                            </tr>
-                            <tr>
-                                <td>1221
-                                <td>5
-                                <td><button class="btn btn-info">Edytuj</button>
-                                <td><a href=""><button class="btn btn-danger">Usuń</button></a>
-                            </tr>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                                {% for task in tasks %}
+                                    <tr>
+                                        <td>{{task.id}}</td>
+                                        <td>{{task.title}}
+                                        <td>{{task.level}}
+                                        <td><a href="" ><button class="btn btn-info">Edytuj</button></a>
+                                        <td><a href=""><button class="btn btn-danger">Usuń</button></a>
+                                    </tr>
+                                {% endfor %}                    
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <a class="addButton" href="/adminSite/excerciseDetails"><button class="btn btn-primary"> Dodaj nowe zadanie </button></a>
+                </div>
             </div>
-            <div class="col-6">
-                <a class="addButton" href="/adminSite/excerciseDetails"><button class="btn btn-primary"> Dodaj nowe zadanie </button></a>
-            </div>
-        </div>
+            
+        {% endif %}
 
     </div>
 {% endblock %}
