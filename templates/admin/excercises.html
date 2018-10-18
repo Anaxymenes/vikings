@@ -33,15 +33,15 @@
                                         <td>{{task.id}}</td>
                                         <td>{{task.title}}
                                         <td>{{task.level}}
-                                        <td><a href="" ><button class="btn btn-info">Edytuj</button></a>
-                                        <td><a href=""><button class="btn btn-danger">Usuń</button></a>
+                                        <td><a href="{% url 'adminSite:excerciseDetails' task.id %}" ><button class="btn btn-info">Edytuj</button></a>
+                                        <td><a href="{% url 'adminSite:deleteExcercise' stage_id=stageId task_id=task.id %}"><button class="btn btn-danger">Usuń</button></a>
                                     </tr>
                                 {% endfor %}                    
                         </tbody>
                     </table>
                 </div>
                 <div class="col-6">
-                    <a class="addButton" href="/adminSite/excerciseDetails"><button class="btn btn-primary"> Dodaj nowe zadanie </button></a>
+                    <a class="addButton" href="{% url 'adminSite:newExcercise' stage_id=stageId %}"><button class="btn btn-primary"> Dodaj nowe zadanie </button></a>
                 </div>
             </div>
             

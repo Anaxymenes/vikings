@@ -41,7 +41,7 @@ def excercises(request):
 def excercisesWithTasks(request,stage_id):
     stage = Stage.objects.filter(id = stage_id).first()
     tasks = getAllTaskByStage(stage)
-    return render(request,'admin/excercises.html',{'tasks': tasks})
+    return render(request,'admin/excercises.html',{'tasks': tasks, 'stageId':stage_id})
 
 def getAllTaskByStage(stage):
     tasks = StageTasks.objects.filter(stage = stage)
@@ -55,8 +55,74 @@ def getAllTaskByStage(stage):
         })
     return result
 
-def excerciseDetails(request):
-    return render(request, 'admin/excerciseDetails.html')
+def excerciseDetails(request,task_id):
+    task = StageTasks.objects.filter(id=task_id).first()
+    stage = Stage.objects.filter(id=task.stage.id).first()
+    if request.method == 'POST':
+        task_content = request.POST.get("task_content")
+        prompt = request.POST.get('prompt')
+        points = request.POST.get("points")
+        sampleAnswer = request.POST.get("sampleAnswer")
+        difficulty_level_post = request.POST.get('difficulty_level')
+        difficulty_level = DifficultyLevel.objects.filter(level = difficulty_level_post).first()
+        task.description = task_content
+        task.points = points
+        task.exp_points = points
+        task.sampleAnswer = sampleAnswer
+        task.prompt = prompt
+        task.difficulty_level = difficulty_level
+        task.save()
+    task = StageTasks.objects.filter(id=task_id).first()
+    difficulty_level = DifficultyLevel.objects.filter(id=task.difficulty_level.id).first()
+    
+    result = {
+        'stage_name' : stage.name,
+        'stage_id' : stage.id,
+        'difficulty_name' : difficulty_level.title,
+        'difficulty_level' : difficulty_level.level,
+        'difficulty_id':difficulty_level.id,
+        'task_content' : task.description,
+        'prompt' : task.prompt,
+        'points' : task.points,
+        'task_id' : task.id,
+        'sample_answer': task.sampleAnswer
+    }
+    return render(request, 'admin/excerciseDetails.html',{'task': result, 'range': range(5)})
+
+
+def newExcercise(request,stage_id):
+    stage = Stage.objects.filter(id=stage_id).first()
+    if request.method == "POST":
+        task_content = request.POST.get("task_content")
+        prompt = request.POST.get('prompt')
+        points = request.POST.get("points")
+        sampleAnswer = request.POST.get("sampleAnswer")
+        difficulty_level_post = request.POST.get('difficulty_level')
+        difficulty_level = DifficultyLevel.objects.filter(level = difficulty_level_post).first()
+        StageTasks.objects.create(
+            stage = stage,
+            description = task_content,
+            points = points,
+            exp_points = points,
+            sampleAnswer = sampleAnswer,
+            prompt = prompt,
+            difficulty_level = difficulty_level
+        )
+        return excercisesWithTasks(request,stage_id)
+    if request.method == 'GET':
+        return render(request, 'admin/newExcercise.html',{
+            'stage_id' : stage_id,
+            'stage_name': stage.name,
+            'range': range(5)
+        })
+    
+
+def deleteExcercise(request, stage_id, task_id):
+    stage = Stage.objects.filter(id=stage_id).first()
+    task = StageTasks.objects.filter(stage=stage).filter(id=task_id).first()
+    if task != None:
+        task.delete()
+    return excercisesWithTasks(request,stage_id)
 
 def challenges(request):
     return render(request, 'admin/challenges.html')

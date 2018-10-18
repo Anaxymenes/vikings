@@ -1,0 +1,45 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <div class="container excerciseDetailsContent">
+        
+           <a href="/adminSite/excercises"><i class="fa fa-arrow-circle-left fa-3x backArrow" title="Wstecz"></i></a>
+            <h2 align="center">
+                    {{stage_name}}
+            </h2>
+            <h3 align="center">
+                        Nowe zadanie
+            </h3>
+        
+            <form class="excerciseForm" action="{% url 'adminSite:newExcercise' stage_id=stage_id %}" method="POST">
+                {% csrf_token %}
+                <label>Poziom trudności</label>
+                <select class="form-control" required id="difficulty_level" name="difficulty_level">
+                    {% for x in range %}
+                        <option value="{{forloop.counter}}">{{forloop.counter}}</option>
+                    {% endfor %}
+                </select>
+                <div class="form-group">
+                    <label>Treść zadania</label>
+                    <textarea class="form-control" rows="5" placeholder="Treść zadania..." required minlength="20" id="task_content" name="task_content"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Odpowiedź</label>
+                    <textarea class="form-control" rows="5" placeholder="Odpowiedź..." required minlength="20" id="sampleAnswer" name="sampleAnswer"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Podpowiedź</label>
+                    <textarea class="form-control" rows="2" placeholder="Treść podpowiedzi..." required minlength="10" id="prompt" name="prompt"></textarea>
+                    </div>
+                <div class="form-group">
+                    <label>Nagroda</label>
+                    <input placeholder="100" class="form-control" title="Nagroda" required type="number" min="10" value="10" name="points" id="points">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary text-center w-25">Dodaj</button>
+                    <a href="{% url 'adminSite:excercisesWithTable' stage_id=stage_id %}"><button type="button" class="btn btn-danger text-center w-25">Wróć</button></a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

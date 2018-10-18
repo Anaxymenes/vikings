@@ -24,7 +24,7 @@ def lesson(request,stage_id):
         currentTasks = Answer.objects.filter(stage=stageStudent)
         if currentTasks.count()==0 :
             createTaskForStudent(user,stage)
-            currentTasks = Answer.objects.filter(stage=stageStudent).order_by('task.difficult_level')
+            currentTasks = Answer.objects.filter(stage=stageStudent)
         return render(request, 'main/lesson.html', {
             "stage":stage,
             "tasks":currentTasks,
