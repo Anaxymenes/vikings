@@ -3,32 +3,41 @@
 {% block content %}
 <div class="container responseDetailsContent">
     <a href="/adminSite/responses"><i class="fa fa-arrow-circle-left fa-3x backArrow" title="Wstecz"></i></a>
-    <h1 align="center">Rozwiązanie zadania</h1>
+    <h1 align="center">Rozwiązanie zadania studenta {{answer.student_firstname}} {{answer.student_lastname}}</h1>
     <h4>Treść</h4>
-    <p>a) Wszystkie postacie które mają w swojej nazwie 'a' wsadź na statek Bjorna.
-        b) Lorem ddddddddddddddddd sa fsad fgsd f s daf adsf sdf gsdfgdsf af as dasd
+    <p>{{answer.task_description}}
     </p>
     <h4>Rozwiązanie</h4>
-    <p>a) Wszystkie postacie które mają w swojej nazwie 'a' wsadź na statek Bjorna.
-        b) Lorem ddddddddddddddddd sa fsad fgsd f s daf adsf sdf gsdfgdsf af as dasd
+    <p>{{answer.answer}}
     </p>
     <h4>Nagroda</h4>
-    <p>100</p>
-    <form>
+    <p>{{answer.max_task_points}}</p>
+    <form class="" action="{% url 'adminSite:rateAnswer' %}" method="POST">
+        {% csrf_token %}
+        
         <div class="form-group">
-            <label><b>Przyznaj punkty</b></label>
-            <input class="form-control mb-0" placeholder="100" required type="number" min="0" max="100">
+            <label>
+                <b>Przyznaj punkty</b>
+                {% if answer.usedPrompt == 1 %}
+                <span class="badge badge-pill badge-danger">Pula pukntów do zdobycia zmniejszona. Student użył podpowiedzi.</span>
+                {%endif%}
+            </label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                {%for point in answer.point_scale%}
+                <option>{{forloop.counter}}</option>
+                {%endfor%}
+              </select>
             <small class="form-text text-muted">Przyznaj odpowiednią ilość punktów.</small>
         </div>
-        <div class="form-group">
-            <label><b>Medal</b></label>
-            <select class="form-control mb-0">
-                <option value="" selected>-</option>
-                <option value="Medal precyzja Odyna">Medal precyzja Odyna</option>
-                <option value="Szybkie kopytko">Szybkie kopytko</option>
-                <option value="Medal za wytrwałość">Medal za wytrwałość</option>
-                <option value="Odważny jak niedźwiedź">Odważny jak niedźwiedź</option>
-            </select>
+        <div class="form-group  media-body">
+            <label><b>Wybierz medale</b></label><br/>
+            {%for medal in medals %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="medal{{medal.id}}" name="{{medal.id}}" value="{{medal.id}}">
+                <label for="medal{{medal.id}}">{{medal.name}}</label>
+                <img class="ml-3 medalMini" src="/static/img/Medals/{{medal.picture}}" alt="{{medal.name}}">
+            </div>
+            {%endfor%}
             <small class="form-text text-muted">Zasłużył na medal?</small>
         </div>
         <div class="text-center">

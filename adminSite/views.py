@@ -21,8 +21,11 @@ def deleteGroup(request, group_id):
 def responses(request):
     return render(request, 'admin/responses.html')
 
-def responseDetails(request):
-    return render(request, 'admin/responseDetails.html')
+def responseDetails(request,answer_id):
+    lecturer = User.objects.filter(id=request.user.id).first()
+    return render(request, 'admin/responseDetails.html',{
+        'answer': getDataAboutAnswer(answer_id, lecturer)[0],
+        'medals': getAllMedals()})
 
 def students(request):
     return render(request, 'admin/students.html',{'students':getStudentsList()})
@@ -32,8 +35,11 @@ def deleteStudent(request, student_id):
     return render(request, 'admin/students.html',{'students':getStudentsList()})
 
 def editStudent(request,student_id):
-    print(getStudentDetails(student_id))
-    return render(request, 'admin/studentDetails.html',{'student':getStudentDetails(student_id)})
+    return render(request, 'admin/studentDetails.html',
+        {
+            'student':getStudentDetails(student_id),
+            'stages': getStudentStages(student_id)
+        })
 
 def excercises(request):
     return render(request, 'admin/excercises.html')
@@ -129,7 +135,6 @@ def challenges(request):
 
 def groupDetails(request, group_id):
     students = getGroupDetails(group_id)
-    print(students)
     return render(request, 'admin/groupDetails.html',{'students':students})
 
 def messages(request):
@@ -138,7 +143,6 @@ def messages(request):
 def addGroup(request):
     if request.method == "POST":
         sid = transaction.savepoint()
-        print(request.POST)
         form = CreateGroup(request.POST, request.FILES)
         if form.is_valid():
             file_in_memory = request.FILES['groupFile'].read()
@@ -171,7 +175,6 @@ def getGroupDetails(group_id):
             'email' : st.email,
             'points' : stDetails.points
         })
-        print(st)
     students = sorted(students, key=lambda k: k.get('points'),reverse = True)
     return students
 
@@ -208,10 +211,8 @@ def createUsersFromWorkbook(file_in_memory, group):
                 password = ws.cell(row=i,column=firstname_index).value [:3]
                 password += ws.cell(row=i,column=lastname_index).value [:3]
                 password += str(ws.cell(row=i,column=pesel_index).value) [-3:]
-
                 username = 's'+str(ws.cell(row=i,column=index_number_index).value)
                 email = str(ws.cell(row=i,column=email_index).value)
-                print(password)
                 user = User.objects.create_user(username,email,password)
                 user.first_name = ws.cell(row=i,column=firstname_index).value
                 user.last_name = ws.cell(row=i,column=lastname_index).value 
@@ -228,7 +229,6 @@ def getStudentDetails(student_id):
     user = User.objects.filter(id=student_id).first()
     studentGroup = StudentGroup.objects.filter(student=user).first()
     group = Group.objects.filter(id=studentGroup.group.id).first()
-    print(group.name)
     accountDetails = AccountDetails.objects.filter(user=user).first()
     index_number = str(user.username[1:])
     details = {
@@ -245,3 +245,89 @@ def getStudentDetails(student_id):
         'points': accountDetails.points
     }
     return details
+
+def getStudentTaksForStage(stage_id, student_id):
+    student = User.objects.filter(id=student_id).first()
+    stage = Stage.objects.filter(id=stage_id)
+    studentStage = StageStudent.objects.filter(stage = stage).filter(student=student).first()
+    tasks = Answer.objects.filter()
+
+def getStudentStages(student_id):
+    user = User.objects.filter(id=student_id).first()
+    studentStage = StageStudent.objects.filter(student=user)
+    stageDetails = []
+    for stageStudent in studentStage:
+        stage = Stage.objects.filter(id=stageStudent.stage.id).first()
+        answers = Answer.objects.filter(stageStudent=stageStudent)
+        answerDetails = []
+        for answer in answers:
+            task = StageTasks.objects.filter(id=answer.task.id).first()
+            difficultyLevel = DifficultyLevel.objects.filter(id=task.difficulty_level.id).first()
+            answerDetails.append({
+                "task_id" : task.id,
+                "answer_id": answer.id,
+                "completed" : answer.completed,
+                "rated": answer.rated,
+                "note": answer.note,
+                "difficulty_level_id": difficultyLevel.id,
+                "title" : difficultyLevel.title
+            })
+        stageDetails.append({
+            "id": stage.id,
+            "name": stage.name,
+            "tasks": answerDetails
+        })
+    return stageDetails
+
+def getDataAboutAnswer(answer_id, lecturer):
+    answer = Answer.objects.filter(id=answer_id).first()
+    stageStudent = StageStudent.objects.filter(id=answer.stageStudent.id).first()
+    student = User.objects.filter(id=stageStudent.student.id).first()
+    task = StageTasks.objects.filter(id=answer.task.id).first()
+    difficultyLevel = DifficultyLevel.objects.filter(id=task.difficulty_level.id).first()
+    stage = Stage.objects.filter(id=task.stage.id).first()
+    studentGroup = StudentGroup.objects.filter(student = student).first()
+    group = Group.objects.filter(id=studentGroup.group.id).filter(lecturer=lecturer).first()
+    response = []
+    if(group == None ):
+        return response
+    minus_points = 0
+    if answer.usedPrompt == 1:
+        minus_points = task.points * 0.2
+    max_points_to_gain = task.points - minus_points
+    response.append({
+        "task_description": task.description,
+        "answer": answer.answerSql,
+        "answer_id": answer_id,
+        "usedPrompt": answer.usedPrompt,
+        "note": answer.note,
+        "rated": answer.rated,
+        "completed_at":answer.completed_at,
+        "group_id": group.id, 
+        "group_name": group.name,
+        "student_id": student.id,
+        "student_firstname": student.first_name,
+        "student_lastname": student.last_name,
+        "max_task_points" : task.points,
+        "max_points_to_gain": max_points_to_gain,
+        "point_scale": range(int(max_points_to_gain))
+    })
+    return response
+
+def getAllMedals():
+    medalsObjects = Achievement.objects.all().order_by('id')
+    result = []
+    for medal in medalsObjects:
+        result.append({
+            "id" : medal.id,
+            "name" : medal.name,
+            "points" : medal.points,
+            "description" : medal.description,
+            "picture": medal.picture
+        })
+    return result
+
+def rateAnswer(request):
+    if request.method == 'POST':
+        print(request.POST)
+    return responses(request)

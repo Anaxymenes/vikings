@@ -37,7 +37,6 @@ class Achievement(models.Model):
     name = models.CharField(max_length=50)
     points = models.IntegerField(default=0)
     description = models.CharField(max_length=200)
-    task = models.ForeignKey(StageTasks, on_delete=models.CASCADE)
     picture = models.CharField(max_length=250,default="404.png")
 
 class AchievementTask(models.Model):
@@ -53,7 +52,7 @@ class StageStudent(models.Model):
     end_at = models.DateTimeField(default=datetime.now()+timedelta(days=7))
 
 class Answer(models.Model):
-    stage = models.ForeignKey(StageStudent, on_delete = models.CASCADE)
+    stageStudent = models.ForeignKey(StageStudent, on_delete = models.CASCADE)
     task = models.ForeignKey(StageTasks, on_delete=models.PROTECT)
     answerSql = models.CharField(max_length=2500)
     usedPrompt = models.BooleanField(default=0)
