@@ -2,7 +2,7 @@ body {
     margin:0px;
     padding:0px;
     box-sizing:border-box;
-    background:#ddffff;
+    background: rgb(213, 213, 213);
     font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .main_sidebar {
@@ -101,9 +101,27 @@ body {
     
 }
 
+<<<<<<< HEAD
 .myCard {
     margin-bottom: 10px;
     color: #000;
+=======
+@media screen and (min-width: 1200px){
+    .studentListButton{
+        font-size: 1rem;
+        width: 80%;
+        height: 30%;
+    }
+}
+@media screen and (min-width: 1600px){
+    .container{
+        max-width: 1540px;
+    }
+    .label{
+        font-size: 2rem;
+    }
+    
+>>>>>>> a1806f8d4bc62067cda8f5d057bb209acde93d56
 }
 
 .myCard .title{
