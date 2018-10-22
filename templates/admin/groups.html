@@ -1,12 +1,12 @@
 {% extends "admin/base.html" %}
 
 {% block content %}
-    <div class="container">
+    <div class="container groupsContainer">
         <div class="row">
             <div class="col-xl-4">
                 <h3>Grupy</h3>
                 {% if groups.count > 0 %}
-                    <table class="table table-hover bg-light table-sm groupsTable">
+                    <table class="table table-hover table-dark table-stripped table-sm groupsTable">
                         <thead>
                             <tr>
                             <th>Nazwa
@@ -32,10 +32,10 @@
                 {% elif message != None and message == False %}
                     <div class="alert alert-danger" role="alert"> Grupa nie została utworzona </div>
                 {% endif %}
-                <h4>Stwórz nową grupę</h4>
-                <form method="POST" action="{% url 'adminSite:addGroup' %}" enctype="multipart/form-data">
+                <h4 class="pt-4">Stwórz nową grupę</h4>
+                <form method="POST" action="{% url 'adminSite:addGroup' %}" enctype="multipart/form-data" class="addGroup">
                     {% csrf_token %}
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="{{ form.groupName.id_for_label }}">Nazwa grupy</label>
                         {{ form.groupName }}
                         {{ form.groupFile }}
@@ -45,7 +45,7 @@
             </div>
             <div class="col-xl-8">
                 <h3>Ranking Światowy</h3>
-                <table class="table table-hover bg-light table-sm">
+                <table class="table table-hover table-dark table-stripped table-sm">
                     <thead>
                         <tr>
                         <th>Lp.

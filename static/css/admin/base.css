@@ -2,7 +2,7 @@ body {
     margin:0px;
     padding:0px;
     box-sizing:border-box;
-    background:#ddffff;
+    background: rgb(213, 213, 213);
     font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .main_sidebar {
@@ -101,6 +101,22 @@ body {
     
 }
 
+@media screen and (min-width: 1200px){
+    .studentListButton{
+        font-size: 1rem;
+        width: 80%;
+        height: 30%;
+    }
+}
+@media screen and (min-width: 1600px){
+    .container{
+        max-width: 1540px;
+    }
+    .label{
+        font-size: 2rem;
+    }
+    
+}
 
 
 
