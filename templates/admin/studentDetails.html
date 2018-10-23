@@ -4,60 +4,37 @@
 <div class="card text-white bg-dark mb-3" style="max-width: 80%;margin:10px auto;">
     <div class="card-header">Informacje szczegółowe</div>
     <div class="card-body">
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark table-responsive-xl">
             <thead>
                 <tr>
-                    <th scope="col">Opis</th>
-                    <th scope="col"></th>
-                </tr>
-                <tr>
-                    <td>Id</td>
-                    <td>{{ student.id }}</td>
-                </tr>
-                <tr>
-                    <td>Imię</td>
-                    <td>{{ student.first_name }}</td>
-                </tr>
-                <tr>
-                    <td>Nazwisko</td>
-                    <td>{{ student.last_name }}</td>
-                </tr>
-                <tr>
-                    <td>Nazwa użytkownika</td>
-                    <td>{{ student.username }}</td>
-                </tr>
-                <tr>
-                    <td>Nr indeksu</td>
-                    <td>{{ student.index_number }}</td>
-                </tr>
-                <tr>
-                    <td>Aktualna grupa</td>
-                    {% if student.group != None %}
-
-                    <td>{{student.group.name}}</td>
-                    {% else %}
-                    <td>Brak grupy</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>Na którym etapie jest</td>
-                    <td>{{ student.level }}</td>
-                </tr>
-                <tr>
-                    <td>Aktualny poziom życia</td>
-                    <td>{{ student.current_hp }}</td>
-                </tr>
-                <tr>
-                    <td>Poziom doświadczenia</td>
-                    <td>{{ student.current_exp }} / {{student.max_exp}}</td>
-                </tr>
-                <tr>
-                    <td>Punkty</td>
-                    <td>{{ student.points }}</td>
+                    <th>Id</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Nazwa użytkownika</th>
+                    <th>Nr indeksu</th>
+                    <th>Grupa</th>
+                    <th>Etap</th>
+                    <th>Poziom życia</th>
+                    <th>Poziom doświadczenia</th>
+                    <th>Punkty</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.first_name }}</td>
+                    <td>{{ student.last_name }}</td>
+                    <td>{{ student.username }}</td>
+                    <td>{{ student.index_number }}</td>
+                    {% if student.group != None %}
+                        <td>{{student.group.name}}</td>
+                    {% else %}
+                        <td>Brak grupy</td>
+                    {% endif %}
+                    <td>{{ student.level }}</td>
+                    <td>{{ student.current_hp }}</td>
+                    <td>{{ student.current_exp }} / {{student.max_exp}}</td>
+                    <td>{{ student.points }}</td>
                 </tr>
             </tbody>
         </table>
@@ -68,7 +45,7 @@
         <div class="card myCard">
             <div class="card-header title">
                 {{stage.name}}
-                
+
             </div>
             <div class="card-body">
                 <div class="row myCardBody panelTitle">
@@ -76,8 +53,8 @@
                         Id odpowiedzi
                     </div>
                     <div class="col-sm">
-                            Nazwa zadania
-                        </div>
+                        Nazwa zadania
+                    </div>
                     <div class="col-sm">
                         Czy ukończony
                     </div>
@@ -95,18 +72,19 @@
                     </div>
                     <div class="col-sm">
                         {% if answer.completed == 0 %}
-                            W trakcie
+                        W trakcie
                         {% else %}
-                            Ukończony
+                        Ukończony
                         {% endif %}
                     </div>
                     <div class="col-sm">
                         {% if answer.completed == 1 and answer.rated == 1%}
-                            <a href="{% url 'adminSite:responseDetails' answer.answer_id %}" class="badge badge-success">Oceniony</a>
+                        <a href="{% url 'adminSite:responseDetails' answer.answer_id %}" class="badge badge-success">Oceniony</a>
                         {% elif answer.completed == 1 and answer.rated == 0 %}
-                            <a href="{% url 'adminSite:responseDetails' answer.answer_id %}" class="badge badge-warning">Do oceny</a>
+                        <a href="{% url 'adminSite:responseDetails' answer.answer_id %}" class="badge badge-warning">Do
+                            oceny</a>
                         {% else %}
-                            <p class="badge badge-secondary">Nie można ocenić</p>
+                        <p class="badge badge-secondary">Nie można ocenić</p>
                         {% endif %}
                     </div>
                 </div>
@@ -114,47 +92,7 @@
             </div>
         </div>
         {% endfor%}
-        <table class="table table-dark table-hover">
-            <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                </tr>
-
-            </tbody>
-        </table>
     </div>
 
 </div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
 {% endblock %}
