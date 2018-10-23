@@ -1,8 +1,12 @@
 {% extends "admin/base.html" %}
 
 {% block content %}
-<div class="card text-white bg-dark mb-3" style="max-width: 80%;margin:10px auto;">
-    <div class="card-header">Informacje szczegółowe</div>
+<div class="card text-white bg-dark mb-3 studentDetails" style="max-width: 80%;margin:10px auto;">
+    <div class="card-header">
+        Informacje szczegółowe
+    
+        <a class="backButton" href="{% url 'adminSite:students' %}" title="Powrót do listy studentów"><button type="button" class="btn btn-danger text-center w-25"><i class="fa fa-arrow-left mr-2"></i>Powrót</button></a>
+    </div>
     <div class="card-body">
         <table class="table table-striped table-dark table-responsive-xl">
             <thead>

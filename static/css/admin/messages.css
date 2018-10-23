@@ -1,9 +1,13 @@
 .messagesBody{
-    margin: 20px 40px 0 40px;
+    margin-top: 1%;
+    padding-bottom: 60px;
     width: auto;
+    background-color: rgb(179, 177, 177);
+    border-radius: 25px;
 }
 .messagesBody h1{
     text-align: center;
+    padding-top: 10px;
     margin-bottom: 20px;
 }
 .messagesBody table tbody{

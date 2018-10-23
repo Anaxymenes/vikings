@@ -16,8 +16,8 @@
             {% for answer in answers%}
             <tr class="col-1">
                 <td>{{answer.id}} </td>
-                <td><a href="{% url 'adminSite:editStudent' answer.student_id %}">{{answer.student}}</a> </td>
-                <td><a href="{% url 'adminSite:groupDetails' answer.group_id %}">{{answer.group_name}}</a> </td>
+                <td><a class="redirectClick" href="{% url 'adminSite:editStudent' answer.student_id %}" title="Pokaż {{answer.student}}">{{answer.student}}</a> </td>
+                <td><a class="redirectClick" href="{% url 'adminSite:groupDetails' answer.group_id %}" title="Pokaż grupę '{{answer.group_name}}'">{{answer.group_name}}</a> </td>
                 <td>{{answer.date}} </td>
                 <td><a href="{% url 'adminSite:responseDetails' answer.id %}"><button class="btn btn-danger">Oceń</button></a> </td>
             </tr>
