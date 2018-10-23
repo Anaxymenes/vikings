@@ -19,7 +19,8 @@ def deleteGroup(request, group_id):
     return render(request, 'admin/groups.html',{'form' : CreateGroup(), "groups":getGroups(request)})
 
 def responses(request):
-    return render(request, 'admin/responses.html')
+    lecturer = User.objects.filter(id=request.user.id).first()
+    return render(request, 'admin/responses.html',{'answers': getAllNotRatedAnswers(lecturer)})
 
 def responseDetails(request,answer_id):
     lecturer = User.objects.filter(id=request.user.id).first()
@@ -331,3 +332,49 @@ def rateAnswer(request):
     if request.method == 'POST':
         print(request.POST)
     return responses(request)
+
+def getAllLecturerStudents(lecturer):
+    students =[]
+    groups = Group.objects.filter(lecturer=lecturer)
+    if groups.count() == 0 or groups == None:
+        return students
+    for group in groups:
+        studentsGroup = StudentGroup.objects.filter(group=group)
+        if studentsGroup != None:
+            for studentGroup in studentsGroup:
+                students.append(User.objects.filter(id=studentGroup.student.id).first())
+    
+    return students
+
+def getIdList(objs):
+    lista = []
+    for obj in objs:
+        lista.append(obj.id)
+    return lista
+
+def getAllNotRatedAnswers(lecturer):
+    results =[]
+    students = getAllLecturerStudents(lecturer)
+    if students != None :
+        for student in students:
+            stageStudentList = StageStudent.objects.filter(student=student)
+            group = getStudentGroup(student)
+            if stageStudentList != None:
+                for stageStudent in stageStudentList:
+                    answers = Answer.objects.filter(stageStudent=stageStudent).filter(rated = 0).filter(completed=1)
+                    if answers != None :
+                        for answer in answers:
+                            results.append({
+                                'id' : answer.id,
+                                'student_id':student.id,
+                                'student' : student.first_name + ' ' + student.last_name,
+                                'group_id': group.id,
+                                'group_name': group.name,
+                                'date': answer.completed_at
+                            })
+    return results
+
+def getStudentGroup(student):
+    studentGroup = StudentGroup.objects.filter(student=student).first()
+    group = Group.objects.filter(id=studentGroup.group.id).first()
+    return group
