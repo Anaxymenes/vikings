@@ -33,8 +33,14 @@
     outline: none;
     background-color: orange;
 }
+.excerciseContent table .btn{
+    width: 90px !important;
+    height: auto;
+    font-size: 1rem;
+}
 .excerciseContent table{
     text-align: center;
+    font-size: 1.2rem;
 }
 .excercisesList{
     margin-top: 30px;
@@ -48,6 +54,8 @@
     padding: 30px;
     padding-left: 15%;
     padding-right: 15%;
+    background-color: rgb(179, 177, 177);
+    border-radius: 25px;
 }
 .excerciseDetailsContent h3{
     margin-top: 10px;

@@ -1,16 +1,32 @@
 .responseContent{
-    padding: 2% 5% ;
+    padding: 1% 5% ;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: rgb(179, 177, 177);
+    border-radius: 25px;
 }
 .responseContent h1{
     align: center;
     margin-bottom: 15px;
+}
+.responseContent .form-control{
+    margin-bottom: 0 !important;
+}
+.redirectClick{
+    text-decoration: none;
+    color: white;
+}
+.redirectClick:hover{
+    color: rgb(206, 206, 206);
 }
 .responseContent table{
     width: 100%;
     text-align: center
 }
 .responseContent table td button{
-    width: 80%;
+    width: 90px;
+    padding: 1%;
+    margin: 1%;
 }
 
 /* ResponseDetails */
