@@ -166,16 +166,21 @@ def addGroup(request):
         sid = transaction.savepoint()
         form = CreateGroup(request.POST, request.FILES)
         if form.is_valid():
-            file_in_memory = request.FILES['groupFile'].read()
-            group = Group.objects.create(name=request.POST.get('groupName'),lecturer=request.user)
-            
-            is_created = createUsersFromWorkbook(file_in_memory, group)
-            if is_created == False:
-                transaction.savepoint_rollback(sid)
-                Group.objects.filter(id=group.id).first().delete()
+            filepath = request.FILES['groupFile'] if 'groupFile' in request.FILES else False
+            if filepath != False:
+                file_in_memory = request.FILES['groupFile'].read()
+                group = Group.objects.create(name=request.POST.get('groupName'),lecturer=request.user)
+                
+                is_created = createUsersFromWorkbook(file_in_memory, group)
+                if is_created == False:
+                    transaction.savepoint_rollback(sid)
+                    Group.objects.filter(id=group.id).first().delete()
+                else :
+                    transaction.savepoint_commit(sid)
+                return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':is_created})
             else :
-                transaction.savepoint_commit(sid)
-            return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':is_created})
+                group = Group.objects.create(name=request.POST.get('groupName'),lecturer=request.user)
+                return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':True})
     return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup()})
 
 def getStudentsList():
