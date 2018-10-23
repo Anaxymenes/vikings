@@ -21,10 +21,10 @@ def lesson(request,stage_id):
         user = User.objects.filter(id=request.user.id).first()
         stage = Stage.objects.filter(id=stage_id).first()
         stageStudent = StageStudent.objects.filter(student=user).filter(stage=stage).first()
-        currentTasks = Answer.objects.filter(stage=stageStudent)
+        currentTasks = Answer.objects.filter(stageStudent=stageStudent)
         if currentTasks.count()==0 :
             createTaskForStudent(user,stage)
-            currentTasks = Answer.objects.filter(stage=stageStudent)
+            currentTasks = Answer.objects.filter(stageStudent=stageStudent)
         return render(request, 'main/lesson.html', {
             "stage":stage,
             "tasks":currentTasks,
@@ -35,7 +35,7 @@ def exerciseDetails(request, stage_id):
     if request.method == "POST":
         task = StageTasks.objects.filter(id=request.POST.get('taskId')).first()
         stage = Stage.objects.filter(id=stage_id).first()
-        answer = Answer.objects.filter(task=task).filter(stage=getStageStudentByStageId(request.user,stage_id)).first()
+        answer = Answer.objects.filter(task=task).filter(stageStudent=getStageStudentByStageId(request.user,stage_id)).first()
         difficultyLevel = DifficultyLevel.objects.filter(id = task.difficulty_level.id).first()
         story = StoryLevel.objects.filter(stage = stage).filter(difficulty_level = difficultyLevel).first()
         return render(request, 'main/excercise.html', {"answer" : answer, "task":task,'story':story})
@@ -44,7 +44,7 @@ def exerciseDetails(request, stage_id):
 
 def showPrompt(request, stage_id):
     if request.method == "POST":
-        answer = Answer.objects.filter(id=request.POST.get('answerId')).filter(stage=getStageStudentByStageId(request.user,stage_id)).first()
+        answer = Answer.objects.filter(id=request.POST.get('answerId')).filter(stageStudent=getStageStudentByStageId(request.user,stage_id)).first()
         setattr(answer,'usedPrompt',1)
         answer.save()
     return exerciseDetails(request,stage_id)
@@ -56,7 +56,7 @@ def playerProfile(request):
         answers = []
         stagesStudent = StageStudent.objects.filter(student = request.user)
         for stageStudent in stagesStudent:
-            for answer in Answer.objects.filter(stage=stageStudent):
+            for answer in Answer.objects.filter(stageStudent=stageStudent):
                 answers.append(answer)
         absences = UserAbsence.objects.filter(student=request.user).order_by('date')
         max_points = 0
@@ -127,7 +127,7 @@ def createTaskForStudent(user, stage):
         for task in stageTasks:
             Answer.objects.create(
                 answerSql = "",
-                stage = stageStudent,
+                stageStudent = stageStudent,
                 task = task,
                 usedPrompt = 0,
                 note = 0,
@@ -137,5 +137,5 @@ def createTaskForStudent(user, stage):
     return True
 
 def getAnswer(task,user,stage_id):
-    answer = Answer.objects.filter(task=task).filter(stage=getStageStudentByStageId(user,stage_id)).first()
+    answer = Answer.objects.filter(task=task).filter(stageStudent=getStageStudentByStageId(user,stage_id)).first()
     return answer
