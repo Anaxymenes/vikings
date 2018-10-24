@@ -1,0 +1,35 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container messagesBody newMessageContainer">
+    <div>
+        <a class="backLink" href="{% url 'adminSite:messages' %}" title="Wstecz"><i class="fa fa-arrow-left"></i></a>
+        <h1 align="center">Nowa wiadomość</h1>
+    </div>
+    <form>
+        <div class="form-group">
+            <label for="recipient">Wybierz odbiorcę</label>
+            <select class="form-control" id="recipient" required>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="messageTopic">Temat wiadomości</label>
+            <input type="text" class="form-control" id="messageTopic" placeholder="Wpisz temat wiadomości.." autofocus
+                required maxlength="80">
+        </div>
+        <div class="form-group">
+            <label for="messageContent">Treść wiadomości</label>
+            <textarea class="form-control" id="messageContent" rows="5" placeholder="Tu wpisz swoją wiadomość..."
+                required maxlength="500"></textarea>
+        </div>
+        <div align="center">
+            <button type="submit" class="btn btn-primary" title="Wyślij wiadomość">Wyślij</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

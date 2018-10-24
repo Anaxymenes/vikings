@@ -24,6 +24,8 @@ urlpatterns = [
     path('deleteFromGroup/<int:student_id>/',views.deleteFromGroup, name='deleteFromGroup'),
     path('addStudentToGroup/<int:group_id>/',views.addStudentToGroup,name="addStudentToGroup"),
     path('messages', views.messages, name='messages'),
+    path('readMessage', views.readMessage, name='readMessage'),
+    path('sendMessage', views.sendMessage, name='sendMessage'),
     path('addGroup/',views.addGroup, name='addGroup'),
 ]
 

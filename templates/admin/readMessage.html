@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container messagesBody readMessageContainer">
+    <div>
+        <a href="{% url 'adminSite:messages' %}" class="sendMessageButton"><i
+                    class="fa fa-arrow-left"></i></a>
+        <h1>Wiadomość</h1>
+        <div class="messageContent">
+            <h4 class="pb-4">Adresat: <b>Mateusz Nowacki</b></h4>
+            <h4>Temat:</h4>
+            <p>sssssssssssss das adsa ads asd a dsads asd asd as</p>
+            <h4>Treść:</h4>
+            <p>asdasdasdvadbfas vdfasdfvsadfv adsfvsadfsssssssssssssssssssssssssssssssssss asdvsadfsssssssssssssssssssssssssssssssssssssssssss vdsavfsa dfasvdfa svsadfv asdfvads dsaf asdf ds </p>
+            <div class="mt-4" align="center">
+                <a href="{% url 'adminSite:sendMessage' %}" class=""><button class="btn btn-primary"><i
+                            class="fa fa-paper-plane"></i>Odpowiedz</button></a>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+{% endblock %}
