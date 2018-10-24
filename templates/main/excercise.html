@@ -20,7 +20,7 @@
   <div class="container board">
     <div class="container">
       <div align="center">
-          <a href="/main/lesson/{{task.stage.id}}/"><span class="close">&times;</span></a>
+          <a href="{% url 'main:lesson' stage_id=task.stage.id%}"><span class="close">&times;</span></a>
         <h2>{{story.title}}</h2>
         <h1></h1>
       </div>
@@ -39,18 +39,21 @@
       <label class="font-italic responseLabel" for="comment">Odpowiedź:</label>
         <div class="form-group response">
         <p class="py-2 font-italic">"{{answer.answerSql}}"</p>
-        <a href="/main/lesson/{{task.stage.id}}/" class="btn btn-success">Wróć</a>
+        <a href="{% url 'main:lesson' stage_id=task.stage.id%}" class="btn btn-success">Wróć</a>
       </div>
       {% else %}
-        <form>
+        <form method="POST" action="{% url 'main:excercise' stage_id=task.stage.id%}">
           {% csrf_token %}
+          <input type="hidden" name="usedPrompt" value="{{answer.usedPrompt}}"/>
+          <input type="hidden" name="taskId" value="{{answer.id}}" />
           <label class="font-italic responseLabel" for="comment">Odpowiedź:</label>
           <div class="form-group response">
-            <textarea class="form-control" rows="5" id="comment" placeholder="Miejsce na odpowiedź..."></textarea>
+            <textarea class="form-control" name="answerSql" rows="5" id="comment" placeholder="Miejsce na odpowiedź...">{{answer.answerSql}}</textarea>
             <p>Nagroda:</p>
             <div class="float-right mb-5">
-              <button class="btn btn-success">Wyślij</button>
-              <a href="/main/lesson/{{task.stage.id}}/" class="btn btn-danger">Anuluj</a>
+              <button type="submit" name="action" value="close" class="btn btn-success">Wyślij</button>
+              <button type="submit" name="action" value="save" class="btn btn-secondary">Zapisz</button>
+              <a href="{% url 'main:lesson' stage_id=task.stage.id%}" class="btn btn-danger">Anuluj</a>
             </div>
             <span>{{task.exp_points}} PKT EXP</span></br>
             <span>{{task.points}} PKT RANKINGOWYCH</span>

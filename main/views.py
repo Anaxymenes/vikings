@@ -33,6 +33,21 @@ def lesson(request,stage_id):
 
 def exerciseDetails(request, stage_id):
     if request.method == "POST":
+        action = request.POST.get('action')
+        if action == "save" or action == "close":
+            answer_id = request.POST.get('taskId')
+            usedPrompt = request.POST.get('usedPrompt')
+            answerSql = request.POST.get('answerSql')
+            student = User.objects.filter(id=request.user.id).first()
+            stage = Stage.objects.filter(id=stage_id).first()
+            stageStudent = StageStudent.objects.filter(student=student).filter(stage=stage).first()
+            answer = Answer.objects.filter(id=answer_id).filter(stageStudent=stageStudent).first()
+            answer.answerSql = answerSql
+            answer.usedPrompt = usedPrompt
+            if action == "close":
+                answer.completed = 1
+                answer.completed_at = datetime.now()
+            answer.save()
         task = StageTasks.objects.filter(id=request.POST.get('taskId')).first()
         stage = Stage.objects.filter(id=stage_id).first()
         answer = Answer.objects.filter(task=task).filter(stageStudent=getStageStudentByStageId(request.user,stage_id)).first()
@@ -44,6 +59,7 @@ def exerciseDetails(request, stage_id):
 
 def showPrompt(request, stage_id):
     if request.method == "POST":
+        print(request.POST)
         answer = Answer.objects.filter(id=request.POST.get('answerId')).filter(stageStudent=getStageStudentByStageId(request.user,stage_id)).first()
         setattr(answer,'usedPrompt',1)
         answer.save()

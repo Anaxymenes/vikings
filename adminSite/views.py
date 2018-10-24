@@ -254,8 +254,10 @@ def createUsersFromWorkbook(file_in_memory, group):
 
 def getStudentDetails(student_id):
     user = User.objects.filter(id=student_id).first()
-    studentGroup = StudentGroup.objects.filter(student=user).first()
-    group = Group.objects.filter(id=studentGroup.group.id).first()
+    group = None
+    if StudentGroup.objects.filter(student=user).exists():
+        studentGroup = StudentGroup.objects.filter(student=user).first()
+        group = Group.objects.filter(id=studentGroup.group.id).first()
     accountDetails = AccountDetails.objects.filter(user=user).first()
     index_number = str(user.username[1:])
     details = {
