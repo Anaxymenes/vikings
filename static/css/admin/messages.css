@@ -20,7 +20,10 @@
     padding-right: 15px;
     padding-left: 15px;
 }
-
+.newMessage {
+    border-color: red;
+    color: darkred;
+}
 @media screen and (max-width: 768px){
     .messagesBody{
         margin: 20px 5px 0 5px;
