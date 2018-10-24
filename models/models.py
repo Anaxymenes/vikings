@@ -84,5 +84,5 @@ class Messages(models.Model):
     send_date = models.DateTimeField(default=datetime.now())
 
 class MessagesAnswer(models.Model):
-    massage = models.ForeignKey(Messages, related_name="messageId", on_delete=models.CASCADE)
+    message = models.ForeignKey(Messages, related_name="messageId", on_delete=models.CASCADE)
     answer_to = models.ForeignKey(Messages,related_name='answerMessage', on_delete=models.CASCADE)    
