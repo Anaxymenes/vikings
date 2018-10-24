@@ -2,9 +2,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
-from models.models import AccountDetails, Stage, StageTasks, AchievementTask, Achievement, Answer, UserAbsence, DifficultyLevel, StageStudent, StoryLevel
+from models.models import *
 import logging
 from datetime import datetime, timedelta
+from .msgUtil import *
 
 import random
 logger = logging.getLogger(__name__)
@@ -93,13 +94,41 @@ def playerProfile(request):
     return HttpResponseRedirect(reverse('login:login'))
 
 def messages(request):
-    return render(request, 'main/messages.html')
+    user = User.objects.filter(id=request.user.id).first()
+    errors = None
+    if request.method == 'POST':
+        content = request.POST.get('messageContent')
+        title = request.POST.get('messageTopic')
+        studentGroup = StudentGroup.objects.filter(student=user).first()
+        group = Group.objects.filter(id = studentGroup.group.id).first()
+        lecturer = User.objects.filter(id=group.lecturer.id).first()
+        
+        if request.POST.get('answer_to_message').exists():
+            answer_to_message = request.POST.get('answer_to_message')
+            msg = Messages.objects.filter(id=answer_to_message)
+            error = createMessageAnswer(msg,user,lecturer,content,title)
+        else :
+            error = createMessage(user,lecturer,content,title)
+    msgs = getAllMessagesByUser(user)
+    print(errors)
+    return render(request, 'main/messages.html',{'messages':msgs, 'error': errors})
 
 def message(request):
-    return render(request, 'main/message.html')
+    msg = None
+    if request.method == 'POST':
+        message_id = request.POST.get('message')
+        user = User.objects.filter(id = request.user.id).first()
+        msg = getMessageDetails(message_id,user)
+        return render(request, 'main/message.html',{'message':msg})
+    return render(request, 'main/message.html',{'message':msg})
 
 def newMessage(request):
-    return render(request, 'main/newMessage.html')
+    msg = None
+    if request.method == 'POST':
+        message_id = request.POST.get('message_id')
+        if message_id != None:
+            msg = Messages.objects.filter(id=message_id).first()
+    return render(request, 'main/newMessage.html',{'message':msg})
 
 def settings(request):
     return render(request, 'main/settings.html')
@@ -158,3 +187,4 @@ def createTaskForStudent(user, stage):
 def getAnswer(task,user,stage_id):
     answer = Answer.objects.filter(task=task).filter(stageStudent=getStageStudentByStageId(user,stage_id)).first()
     return answer
+

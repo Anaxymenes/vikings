@@ -20,6 +20,13 @@
     padding-right: 15px;
     padding-left: 15px;
 }
+<<<<<<< HEAD
+.newMessage {
+    border-color: red;
+    color: darkred;
+}
+@media screen and (max-width: 768px){
+=======
 .messagesBody .backLink{
     float: left;
     position: absolute;
@@ -87,6 +94,7 @@
 
 
 @media screen and (max-width: 1300px){
+>>>>>>> a5cfff83d94f2793a0b915e3a5361f97396dc099
     .messagesBody{
         margin: 10px;
     }

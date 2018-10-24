@@ -1,20 +1,39 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<section>
-  <div class="container board">
-    <a href="/main/messages/"><i class="fa fa-arrow-left leftArrow"></i></a>
-    <h2 class="pb-6 " align="center">Wiadomość</h2>
-    <div class="messageDiv">
+<form action="{% url 'main:newMessage' %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="message_id" value="{{message.id}}" />
+  <section>
+    <div class="container board">
+      <a href="/main/messages/"><i class="fa fa-arrow-left leftArrow"></i></a>
+      <h2 class="pb-6 " align="center">Wiadomość</h2>
+      <div class="messageDiv">
         <p class="messageTitle">Temat</p>
-        <p>Lorem Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum d</p>
-        
+        <p>{{message.title}}</p>
+
         <p class="messageTitle">Treść</p>
-        <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dLorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum d</p>
-        <div align="center">
-          <a class="replyOnMessageButton" href="{% url 'main:newMessage' %}" title="Odpowiedz na tą wiadomość"><button class="btn"><i class="fa fa-paper-plane"></i>Odpowiedz</button><a>
+        <p>{{message.content}}</p>
+        <p class="messageTitle">Starsze wiadomości <br /></p>
+        {% if message.olders %}
+        {% for older in message.olders %}
+        <p type="button" data-toggle="collapse" data-target="#collapseExample{{forloop.counter}}" aria-expanded="false"
+          aria-controls="collapseExample">
+          {{older.first_name }} {{older.last_name}} Dnia {{older.date}}
+        </p>
+        <div class="collapse" id="collapseExample{{forloop.counter}}">
+          <p>{{older.content}}</p>
         </div>
+        {% endfor %}
+        {% endif %}
+
+
+        <div align="center">
+          <a class="replyOnMessageButton" href="{% url 'main:newMessage' %}" title="Odpowiedz na tą wiadomość"><button
+              type="submit" class="btn"><i class="fa fa-paper-plane"></i>Odpowiedz</button><a>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</form>
 {% endblock %}

@@ -4,39 +4,39 @@
 <section>
   <div class="container board">
     <div>
-      <a class="newMessageButton" href="{% url 'main:newMessage' %}" title="Nowa wiadomość"><button type="button" class="btn"><i class="fa fa-paper-plane"></i>Wyślij wiadomość</button></a>
+      <a class="newMessageButton" href="{% url 'main:newMessage' %}" title="Nowa wiadomość"><button type="button" class="btn"><i
+            class="fa fa-paper-plane"></i>Wyślij wiadomość</button></a>
       <h2 class="pb-6" align="center">Wiadomości</h2>
     </div>
-    <table class="table messageTable">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Temat</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Twoje rozwiązanie zostało ocenione!</td>
-          <td class="messageTableButton"><a href="/main/message">Otwórz</a></td>
-          <td class="messageTableButton">Usuń</td>
-        </tr>
-
-        <tr>
-          <th scope="row">2</th>
-          <td>Twoje rozwiązanie zostało ocenione!</td>
-          <td class="messageTableButton"><a href="/main/message">Otwórz</a></td>
-          <td class="messageTableButton">Usuń</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Twoje rozwiązanie zostało ocenione!</td>
-          <td class="messageTableButton"><a href="/main/message">Otwórz</a></td>
-          <td class="messageTableButton">Usuń</td>
-        </tr>
-
-      </tbody>
-    </table>
+    {%if messages %}
+    <form method="POST" action="{% url 'main:message' %}">
+      {% csrf_token %}
+      <table class="table messageTable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Temat</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {%for message in messages %}
+          <tr>
+              <th scope="row">{{forloop.counter}}</th>
+            {% if message.is_read == False %}
+            <td>{{message.title}}</td>
+            {% else %}
+            <td><b>{{message.title}}</b></td>
+            {% endif %}
+            <td class="messageTableButton"><button type="submit" name="message" value="{{message.id}}">Otwórz</button></td>
+            <td class="messageTableButton">Usuń</td>
+            
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </form>
+    {%endif%}
   </div>
 </section>
 {% endblock %}
