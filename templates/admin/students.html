@@ -1,7 +1,17 @@
 {% extends "admin/base.html" %}
 
 {% block content %}
+
 <div class="container studentsContainer">
+        {% if message == True %}
+        <div class="alert alert-success" role="alert">
+            Student utworzony pomyślnie
+        </div>
+        {%elif  message == False%}
+        <div class="alert alert-danger" role="alert">
+            Ups... Student nie został utworzony.
+        </div>
+        {%endif%}
     {% if students.count > 0 %}
         <div>
             <h1 class="py-2" align="center">Lista studentów</h1>

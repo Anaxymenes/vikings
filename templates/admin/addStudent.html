@@ -6,18 +6,19 @@
         <h1>Dodawanie studenta</h1>
         <a class="backButton" href="{% url 'adminSite:students' %}" title="Powrót do listy studentów"><button type="button" class="btn btn-danger text-center w-25"><i class="fa fa-times"></i></button></a>
     </div>
-    <form>
+    <form method="POST" action="{% url 'adminSite:students' %}">
+        {% csrf_token %}
         <div class="form-group">
             <label for="stedentName">Imię</label>
-            <input type="text" class="form-control" id="stedentName" placeholder="Podaj imię studenta">
+            <input type="text" class="form-control" name="first_name" id="stedentName" placeholder="Podaj imię studenta">
         </div>
         <div class="form-group">
             <label for="studentLastName">Nazwisko</label>
-            <input type="text" class="form-control" id="studentLastName" placeholder="Podaj nazwisko studenta">
+            <input type="text" class="form-control" name="last_name" id="studentLastName" placeholder="Podaj nazwisko studenta">
         </div>
         <div class="form-group">
             <label for="indexNumber">Index</label>
-            <input type="number" class="form-control" id="indexNumber" placeholder="123 456">
+            <input type="number" class="form-control" name="index_nr" id="indexNumber" placeholder="123 456">
         </div>
         <div align="center">
             <button type="submit" class="btn btn-primary addButton">Dodaj</button>

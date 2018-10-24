@@ -36,6 +36,12 @@ def responseDetails(request,answer_id):
         'medals': getAllMedals()})
 
 def students(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        index_nr = request.POST.get('index_nr')
+        msg = createUser(first_name, last_name, index_nr)
+        return render(request, 'admin/students.html',{'students':getStudentsList(), 'message':msg})
     return render(request, 'admin/students.html',{'students':getStudentsList()})
 
 def addStudent(request):
@@ -259,6 +265,19 @@ def createUsersFromWorkbook(file_in_memory, group):
     except:
         return False
 
+def createUser(first_name, last_name, index_nr):
+    try:
+        password = first_name[:3] + last_name[:3] + str(index_nr)[:3]
+        username = 's'+str(index_nr)
+        if User.objects.filter(username=username).exists():
+            return False
+        user = User.objects.create_user(username=username,password=password, first_name=first_name, last_name=last_name)
+        accountDetails = AccountDetails.objects.create(
+            user=user
+        )
+        return True
+    except:
+        return False
 def getStudentDetails(student_id):
     user = User.objects.filter(id=student_id).first()
     group = None
