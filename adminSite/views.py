@@ -8,6 +8,7 @@ from .forms import CreateGroup
 from django.contrib.auth.models import User
 from django.db import transaction
 import operator
+from django.db.models import Q
 
 def groups(request):
     if request.user.is_superuser == False:
@@ -149,7 +150,10 @@ def groupDetails(request, group_id):
     return render(request, 'admin/groupDetails.html',{'students':students,'group_id':group_id, 'students_without_group': students_without_group})
 
 def messages(request):
-    return render(request, 'admin/messages.html')
+    user = User.objects.filter(id=request.user.id).first()
+    msgs = getAllUserMessages(user)
+    print(msgs)
+    return render(request, 'admin/messages.html',{'messages':msgs})
 
 def addStudentToGroup(request,group_id):
     student_id = request.POST.get('student_id')
@@ -422,3 +426,26 @@ def getStudentsWithoutGroup():
                 'username' : student.username[1:]
             })
     return results
+
+def getAllUserMessages(user):
+    result = []
+    messagesAnswerList = MessagesAnswer.objects.all()
+    messagesAnswerIdList = []
+    for messageAnswer in messagesAnswerList:
+        messagesAnswerIdList.append(messageAnswer.message.id)
+    msgs = Messages.objects.filter(Q(from_user=user) | Q(to_user=user)).exclude(id__in=messagesAnswerIdList)
+    for msg in msgs:
+        from_user = User.objects.filter(id=msg.from_user.id).first()
+        is_read = msg.is_read
+        if MessagesAnswer.objects.filter(answer_to=msg).exists():
+            tempMsgA = MessagesAnswer.objects.filter(answer_to=msg).last()
+            last_msg = Messages.objects.filter(id=tempMsgA.message.id).first()
+            is_read = last_msg.is_read
+        result.append({
+            "from_user_id": from_user.id,
+            "from_user_name" : from_user.first_name + " "+ from_user.last_name,
+            "title" : msg.title,
+            "date": msg.send_date,
+            "is_read": is_read 
+        }) 
+    return result
