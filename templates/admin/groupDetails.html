@@ -65,32 +65,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for stage in stages %}
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">{{stage.id}}</th>
                             <td>
                                 <div class="form-group">
-                                    <input type="datetime-local" name="bday" max="3000-12-31" 
-                                        min="1000-01-01" class="form-control">
+                                    <input id="datePicker1 + {{stage.id}}" type="datetime-local" name="bday" max="3000-12-31" 
+                                        min="1000-01-01" class="form-control dateClass">
                                 </div>
                             </td>
                             <td>
-                                <input type="datetime-local" name="bday" max="3000-12-31" 
-                                    min="1000-01-01" class="form-control">
+                                <input id="datePicker2 + {{stage.id}}" type="datetime-local" name="bday" max="3000-12-31" 
+                                    min="1000-01-01" class="form-control dateClass">
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>
-                                <div class="form-group">
-                                    <input type="datetime-local" name="bday" max="3000-12-31" 
-                                        min="1000-01-01" class="form-control">
-                                </div>
-                            </td>
-                            <td>
-                                <input type="datetime-local" name="bday" max="3000-12-31" 
-                                    min="1000-01-01" class="form-control">
-                            </td>
-                        </tr>
+                        {% endfor %}
                 </tbody>
             </table>
             <button class="btn btn-primary btn-sm">Zachowaj zmiany</button>
@@ -116,4 +105,14 @@
         </div>
     </div>
 </div>
+<script>
+     var elements = document.getElementsByClassName("dateClass");
+     var index = [];
+     for(var i=0; i<elements.length; i++) {
+        index.push(elements[i].id); 
+     }
+     for(var i=0; i<index.length; i++) {
+        document.getElementById(index[i]).value = new Date().toISOString().substring(0, 16);
+     }
+</script>
 {% endblock %}

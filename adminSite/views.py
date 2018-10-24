@@ -153,7 +153,8 @@ def challenges(request):
 def groupDetails(request, group_id):
     students = getGroupDetails(group_id)
     students_without_group = getStudentsWithoutGroup()
-    return render(request, 'admin/groupDetails.html',{'students':students,'group_id':group_id, 'students_without_group': students_without_group})
+    stages = getStages()
+    return render(request, 'admin/groupDetails.html',{'students':students,'group_id':group_id, 'students_without_group': students_without_group, 'stages':stages})
 
 def messages(request):
     user = User.objects.filter(id=request.user.id).first()
@@ -205,6 +206,10 @@ def addGroup(request):
 def getStudentsList():
     students = User.objects.filter(is_superuser = False)
     return students
+
+def getStages():
+    stages = Stage.objects.filter()
+    return stages
 
 def getGroupDetails(group_id):
     students = []
