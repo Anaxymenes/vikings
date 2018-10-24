@@ -31,6 +31,9 @@ def responseDetails(request,answer_id):
 def students(request):
     return render(request, 'admin/students.html',{'students':getStudentsList()})
 
+def addStudent(request):
+    return render(request, 'admin/addStudent.html')
+
 def deleteStudent(request, student_id):
     User.objects.filter(is_superuser=False).filter(id=student_id).delete()
     return render(request, 'admin/students.html',{'students':getStudentsList()})

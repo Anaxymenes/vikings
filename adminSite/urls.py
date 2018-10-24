@@ -16,6 +16,7 @@ urlpatterns = [
     path('deleteExcercise/<int:stage_id>/<int:task_id>/', views.deleteExcercise, name='deleteExcercise'),
     path('challenges', views.challenges, name='challenges'),
     path('students', views.students, name='students'),
+    path('addStudent', views.addStudent, name='addStudent'),
     path('groupDetails/<int:group_id>/', views.groupDetails, name='groupDetails'),
     path('deleteStudent/<int:student_id>/', views.deleteStudent, name='deleteStudent'),
     path('editStudent/<int:student_id>/', views.editStudent, name='editStudent'),
