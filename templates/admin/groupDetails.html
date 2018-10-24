@@ -30,10 +30,10 @@
                             <td>{{student.last_name}}</td>
                             <td>{{student.username}}</td>
                             <td>{{student.email}}</td>
-                            <td><button class="btn btn-primary">Pokaż</button></td>
-                            <td><button class="btn btn-info">Edytuj</button></td>
-                            <td><button class="btn btn-danger">Usuń</button></td>
-                            <td><button class="btn">Napisz</button></td>
+                            <td><a href="{% url 'adminSite:editStudent' student.id %}"><button class="btn btn-primary">Pokaż</button></a></td>
+                            <td><a href="{% url 'adminSite:editStudent' student.id %}"><button class="btn btn-info">Edytuj</button></a></td>
+                            <td><a href="{% url 'adminSite:deleteFromGroup' student_id=student.id %}"><button class="btn btn-danger">Usuń</button></a></td>
+                            <td><a href=""><button class="btn">Napisz</button></a></td>
                             <td>
                                 <div>
                                     <input type="checkbox" />
@@ -97,10 +97,19 @@
         </div>
         <div class="col">
             <h3>Dodaj nowego studenta</h3>
-            <form>
+            <form method="POST" action="{% url 'adminSite:addStudentToGroup' group_id %}">
+                    {% csrf_token %}
                 <div class="form-group">
-                    <label for="Nr_albumu">Numer albumu</label>
-                    <input class="form-control" id="Nr_albumu" placeholder="Nr_albumu">
+                    {% if students_without_group %}
+                    <label for="student_id">Numer albumu</label>
+                    <select id="student_id"name="student_id">
+                        {% for student in students_without_group %}
+                        <option value="{{student.student_id}}">{{student.username|add:"-"|add:student.first_name|add:" "|add:student.last_name}}</option>
+                        {%endfor%}
+                    </select>
+                    {% else %}
+                    <p>Brak studentów nieprzypisanych do grup</p>
+                    {%endif%}
                 </div>
                 <button type="submit" class="btn btn-primary">Dodaj studenta</button>
             </form>

@@ -18,6 +18,12 @@ def deleteGroup(request, group_id):
     Group.objects.filter(lecturer=request.user).filter(id=group_id).delete()
     return render(request, 'admin/groups.html',{'form' : CreateGroup(), "groups":getGroups(request)})
 
+def deleteFromGroup(request,student_id):
+    student = User.objects.filter(id=student_id).first()
+    studentGroup =  StudentGroup.objects.filter(student=student).first()
+    group = Group.objects.filter(id=studentGroup.group.id).first()
+    studentGroup.delete()
+    return groupDetails(request, group.id)
 def responses(request):
     lecturer = User.objects.filter(id=request.user.id).first()
     return render(request, 'admin/responses.html',{'answers': getAllNotRatedAnswers(lecturer)})
@@ -139,26 +145,45 @@ def challenges(request):
 
 def groupDetails(request, group_id):
     students = getGroupDetails(group_id)
-    return render(request, 'admin/groupDetails.html',{'students':students})
+    students_without_group = getStudentsWithoutGroup()
+    return render(request, 'admin/groupDetails.html',{'students':students,'group_id':group_id, 'students_without_group': students_without_group})
 
 def messages(request):
     return render(request, 'admin/messages.html')
 
+def addStudentToGroup(request,group_id):
+    student_id = request.POST.get('student_id')
+    print(student_id)
+    student = User.objects.filter(id=student_id).first()
+    group = Group.objects.filter(id=group_id).first()
+    studentGroup = StudentGroup.objects.filter(student=student).first()
+    if studentGroup == None:
+        StudentGroup.objects.create(group=group,student=student)
+    else :
+        studentGroup.group = group
+        studentGroup.save()
+    return groupDetails(request, group_id)
+    
 def addGroup(request):
     if request.method == "POST":
         sid = transaction.savepoint()
         form = CreateGroup(request.POST, request.FILES)
         if form.is_valid():
-            file_in_memory = request.FILES['groupFile'].read()
-            group = Group.objects.create(name=request.POST.get('groupName'),lecturer=request.user)
-            
-            is_created = createUsersFromWorkbook(file_in_memory, group)
-            if is_created == False:
-                transaction.savepoint_rollback(sid)
-                Group.objects.filter(id=group.id).first().delete()
+            filepath = request.FILES['groupFile'] if 'groupFile' in request.FILES else False
+            if filepath != False:
+                file_in_memory = request.FILES['groupFile'].read()
+                group = Group.objects.create(name=request.POST.get('groupName'),lecturer=request.user)
+                
+                is_created = createUsersFromWorkbook(file_in_memory, group)
+                if is_created == False:
+                    transaction.savepoint_rollback(sid)
+                    Group.objects.filter(id=group.id).first().delete()
+                else :
+                    transaction.savepoint_commit(sid)
+                return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':is_created})
             else :
-                transaction.savepoint_commit(sid)
-            return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':is_created})
+                group = Group.objects.create(name=request.POST.get('groupName'),lecturer=request.user)
+                return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':True})
     return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup()})
 
 def getStudentsList():
@@ -173,6 +198,7 @@ def getGroupDetails(group_id):
         st = User.objects.filter(id=stg.student.id).first()
         stDetails = AccountDetails.objects.filter(user=st).first()
         students.append({
+            'id':st.id,
             'first_name': st.first_name,
             'last_name' : st.last_name,
             'username' : st.username,
@@ -231,8 +257,10 @@ def createUsersFromWorkbook(file_in_memory, group):
 
 def getStudentDetails(student_id):
     user = User.objects.filter(id=student_id).first()
-    studentGroup = StudentGroup.objects.filter(student=user).first()
-    group = Group.objects.filter(id=studentGroup.group.id).first()
+    group = None
+    if StudentGroup.objects.filter(student=user).exists():
+        studentGroup = StudentGroup.objects.filter(student=user).first()
+        group = Group.objects.filter(id=studentGroup.group.id).first()
     accountDetails = AccountDetails.objects.filter(user=user).first()
     index_number = str(user.username[1:])
     details = {
@@ -381,3 +409,16 @@ def getStudentGroup(student):
     studentGroup = StudentGroup.objects.filter(student=student).first()
     group = Group.objects.filter(id=studentGroup.group.id).first()
     return group
+
+def getStudentsWithoutGroup():
+    results = []
+    students = User.objects.filter(is_superuser = 0)
+    for student in students:
+        if not StudentGroup.objects.filter(student=student).exists():
+            results.append({
+                'student_id' : student.id ,
+                'first_name': student.first_name,
+                'last_name': student.last_name,
+                'username' : student.username[1:]
+            })
+    return results
