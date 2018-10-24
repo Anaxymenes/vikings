@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class AccountDetails(models.Model):
     user = models.ForeignKey(User , on_delete = models.CASCADE)
@@ -75,4 +75,14 @@ class StoryLevel(models.Model):
     title = models.CharField(max_length=120)
     content = models.CharField(max_length=1200)
 
+class Messages(models.Model):
+    from_user = models.ForeignKey(User, related_name='messageFrom', on_delete = models.CASCADE, blank = True, null=True)
+    to_user = models.ForeignKey(User,related_name='to_user_Message', on_delete = models.CASCADE)
+    title = models.CharField(max_length=120)
+    message = models.CharField(max_length=2000)
+    is_read = models.BooleanField(default=0)
+    send_date = models.DateTimeField(default=datetime.now())
 
+class MessagesAnswer(models.Model):
+    massage = models.ForeignKey(Messages, related_name="messageId", on_delete=models.CASCADE)
+    answer_to = models.ForeignKey(Messages,related_name='answerMessage', on_delete=models.CASCADE)    
