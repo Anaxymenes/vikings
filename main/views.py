@@ -98,6 +98,9 @@ def messages(request):
 def message(request):
     return render(request, 'main/message.html')
 
+def newMessage(request):
+    return render(request, 'main/newMessage.html')
+
 def settings(request):
     return render(request, 'main/settings.html')
 

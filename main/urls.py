@@ -10,6 +10,7 @@ urlpatterns = [
     path('playerProfile/', views.playerProfile, name="playerProfile"),
     path('messages/', views.messages, name="messages"),
     path('message/', views.message, name="message"),
+    path('newMessage/', views.newMessage, name="newMessage"),
     path('settings/', views.settings, name="settings"),
     path('lesson/<int:stage_id>/<int:task_id>/',views.task_data,name="task"),
     path('lesson/<int:stage_id>/excercise',views.exerciseDetails, name="excercise"),

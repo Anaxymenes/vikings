@@ -3,7 +3,10 @@
 {% block content %}
 <section>
   <div class="container board">
-    <h2 class="pb-6" align="center">Wiadomości</h2>
+    <div>
+      <a class="newMessageButton" href="{% url 'main:newMessage' %}" title="Nowa wiadomość"><button type="button" class="btn"><i class="fa fa-paper-plane"></i>Wyślij wiadomość</button></a>
+      <h2 class="pb-6" align="center">Wiadomości</h2>
+    </div>
     <table class="table messageTable">
       <thead>
         <tr>
