@@ -161,6 +161,12 @@ def messages(request):
     print(msgs)
     return render(request, 'admin/messages.html',{'messages':msgs})
 
+def sendMessage(request):
+    return render(request, 'admin/sendMessage.html')
+
+def readMessage(request):
+    return render(request, 'admin/readMessage.html')
+
 def addStudentToGroup(request,group_id):
     student_id = request.POST.get('student_id')
     print(student_id)
