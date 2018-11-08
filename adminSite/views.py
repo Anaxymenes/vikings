@@ -25,31 +25,38 @@ def deleteFromGroup(request,student_id):
     group = Group.objects.filter(id=studentGroup.group.id).first()
     studentGroup.delete()
     return groupDetails(request, group.id)
+
 def responses(request):
+    activeOverlap = "responses"
     lecturer = User.objects.filter(id=request.user.id).first()
-    return render(request, 'admin/responses.html',{'answers': getAllNotRatedAnswers(lecturer)})
+    return render(request, 'admin/responses.html',{'answers': getAllNotRatedAnswers(lecturer), 'activeOverlap': activeOverlap})
 
 def responseDetails(request,answer_id):
+    activeOverlap = "responses"
     lecturer = User.objects.filter(id=request.user.id).first()
     return render(request, 'admin/responseDetails.html',{
         'answer': getDataAboutAnswer(answer_id, lecturer)[0],
-        'medals': getAllMedals()})
+        'medals': getAllMedals(),
+        'activeOverlap': activeOverlap})
 
 def students(request):
+    activeOverlap = "students"
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         index_nr = request.POST.get('index_nr')
         msg = createUser(first_name, last_name, index_nr)
         return render(request, 'admin/students.html',{'students':getStudentsList(), 'message':msg})
-    return render(request, 'admin/students.html',{'students':getStudentsList()})
+    return render(request, 'admin/students.html',{'students':getStudentsList(), 'activeOverlap': activeOverlap})
 
 def addStudent(request):
-    return render(request, 'admin/addStudent.html')
+    activeOverlap = "students"
+    return render(request, 'admin/addStudent.html', {'activeOverlap': activeOverlap})
 
 def deleteStudent(request, student_id):
+    activeOverlap = "students"
     User.objects.filter(is_superuser=False).filter(id=student_id).delete()
-    return render(request, 'admin/students.html',{'students':getStudentsList()})
+    return render(request, 'admin/students.html',{'students':getStudentsList(), 'activeOverlap': activeOverlap})
 
 def editStudent(request,student_id):
     return render(request, 'admin/studentDetails.html',
@@ -59,12 +66,14 @@ def editStudent(request,student_id):
         })
 
 def excercises(request):
-    return render(request, 'admin/excercises.html')
+    activeOverlap = "excercises"
+    return render(request, 'admin/excercises.html', {'activeOverlap': activeOverlap})
 
 def excercisesWithTasks(request,stage_id):
+    activeOverlap = "excercises"
     stage = Stage.objects.filter(id = stage_id).first()
     tasks = getAllTaskByStage(stage)
-    return render(request,'admin/excercises.html',{'tasks': tasks, 'stageId':stage_id})
+    return render(request,'admin/excercises.html',{'tasks': tasks, 'stageId':stage_id, 'activeOverlap': activeOverlap})
 
 def getAllTaskByStage(stage):
     tasks = StageTasks.objects.filter(stage = stage)
@@ -79,6 +88,7 @@ def getAllTaskByStage(stage):
     return result
 
 def excerciseDetails(request,task_id):
+    activeOverlap = "excercises"
     task = StageTasks.objects.filter(id=task_id).first()
     stage = Stage.objects.filter(id=task.stage.id).first()
     if request.method == 'POST':
@@ -110,10 +120,11 @@ def excerciseDetails(request,task_id):
         'task_id' : task.id,
         'sample_answer': task.sampleAnswer
     }
-    return render(request, 'admin/excerciseDetails.html',{'task': result, 'range': range(5)})
+    return render(request, 'admin/excerciseDetails.html',{'task': result, 'range': range(5), 'activeOverlap': activeOverlap })
 
 
 def newExcercise(request,stage_id):
+    activeOverlap = "excercises"
     stage = Stage.objects.filter(id=stage_id).first()
     if request.method == "POST":
         task_content = request.POST.get("task_content")
@@ -136,7 +147,8 @@ def newExcercise(request,stage_id):
         return render(request, 'admin/newExcercise.html',{
             'stage_id' : stage_id,
             'stage_name': stage.name,
-            'range': range(5)
+            'range': range(5),
+            'activeOverlap': activeOverlap
         })
     
 
@@ -148,7 +160,8 @@ def deleteExcercise(request, stage_id, task_id):
     return excercisesWithTasks(request,stage_id)
 
 def challenges(request):
-    return render(request, 'admin/challenges.html')
+    activeOverlap = "challenges"
+    return render(request, 'admin/challenges.html', {'activeOverlap': activeOverlap})
 
 def groupDetails(request, group_id):
     students = getGroupDetails(group_id)
@@ -157,16 +170,19 @@ def groupDetails(request, group_id):
     return render(request, 'admin/groupDetails.html',{'students':students,'group_id':group_id, 'students_without_group': students_without_group, 'stages':stages})
 
 def messages(request):
+    activeOverlap = "messages"
     user = User.objects.filter(id=request.user.id).first()
     msgs = getAllUserMessages(user)
     print(msgs)
-    return render(request, 'admin/messages.html',{'messages':msgs})
+    return render(request, 'admin/messages.html',{'messages':msgs, 'activeOverlap': activeOverlap})
 
 def sendMessage(request):
-    return render(request, 'admin/sendMessage.html')
+    activeOverlap = "messages"
+    return render(request, 'admin/sendMessage.html', {'activeOverlap': activeOverlap})
 
 def readMessage(request):
-    return render(request, 'admin/readMessage.html')
+    activeOverlap = "messages"
+    return render(request, 'admin/readMessage.html', {'activeOverlap': activeOverlap})
 
 def addStudentToGroup(request,group_id):
     student_id = request.POST.get('student_id')

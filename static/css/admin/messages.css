@@ -7,7 +7,7 @@
 }
 .messagesBody h1{
     text-align: center;
-    padding-top: 10px;
+    padding-top: 20px;
     margin-bottom: 20px;
 }
 .messagesBody table tbody{
@@ -20,13 +20,11 @@
     padding-right: 15px;
     padding-left: 15px;
 }
-<<<<<<< HEAD
 .newMessage {
     border-color: red;
     color: darkred;
 }
-@media screen and (max-width: 768px){
-=======
+
 .messagesBody .backLink{
     float: left;
     position: absolute;
@@ -52,6 +50,9 @@
     margin-left: 20px;
     font-size: 2rem;
     color: rgb(51, 51, 51);
+}
+.sendMessageButton{
+    float: left !important;
 }
 .readMessageContainer .sendMessageButton:hover{
     color: black;
@@ -94,7 +95,6 @@
 
 
 @media screen and (max-width: 1300px){
->>>>>>> a5cfff83d94f2793a0b915e3a5361f97396dc099
     .messagesBody{
         margin: 10px;
     }

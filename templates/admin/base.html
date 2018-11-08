@@ -28,13 +28,13 @@
             <aside class="main_sidebar">
                 <ul id="myDIV">
                     <span class="logo">VIKINGS</span>
-                    <li class="active"><i class="fa fa-users"></i><a href="/adminSite">Grupy</a></li>
-                    <li><i class="fa fa-graduation-cap"></i><a href="/adminSite/students">Studenci</a></li>
-                    <li><i class="fa fa-briefcase"></i><a href="/adminSite/excercises">Ćwiczenia</a></li>
-                    <li><i class="fa fa-bell"></i><a href="/adminSite/challenges">Wyzwania</a></li>
-                    <li><i class="fa fa-pencil"></i><a href="/adminSite/responses">Rozwiązania</a></li>
-                    <li><i class="fa fa-envelope"></i><a href="/adminSite/messages">Wiadomości</a></li>
-                    <li><i class="fa fa-edit"></i><a href="#">Edycja</a></li>
+                    <li id="groups"><i class="fa fa-users"></i><a href="/adminSite">Grupy</a></li>
+                    <li id="students"><i class="fa fa-graduation-cap"></i><a href="/adminSite/students">Studenci</a></li>
+                    <li id="excercises"><i class="fa fa-briefcase"></i><a href="/adminSite/excercises">Ćwiczenia</a></li>
+                    <li id="challenges"><i class="fa fa-bell"></i><a href="/adminSite/challenges">Wyzwania</a></li>
+                    <li id="responses"><i class="fa fa-pencil"></i><a href="/adminSite/responses">Rozwiązania</a></li>
+                    <li id="messages"><i class="fa fa-envelope"></i><a href="/adminSite/messages">Wiadomości</a></li>
+                    <li id="edit"><i class="fa fa-edit"></i><a href="#">Edycja</a></li>
                     <li><i class="fa fa-sign-out"></i><a href="{% url 'login:logout' %}">Wyloguj</a></li>
                 </ul>
             </aside>
@@ -46,17 +46,10 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        // Add active class to the current button (highlight it)
-        var header = document.getElementById("myDIV");
-        var btns = header.getElementsByTagName("li");
-        for (var i = 0; i < btns.length; i++) {
-          btns[i].addEventListener("click", function() {
-            var current = document.getElementsByClassName("active");
-            console.log(current);
-            current[0].className = current[0].className.replace("active", "");
-            this.className += " active";
-          });
-        }
+        var active = '{{activeOverlap}}';
+        if(active === null || active === '') active="groups";
+        var header = document.getElementById(active);
+        header.className += "active";
     </script>
     
 </body>
