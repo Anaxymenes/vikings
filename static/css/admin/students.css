@@ -4,12 +4,17 @@
     background-color: rgb(179, 177, 177);
     border-radius: 25px;
 }
-.studentDetails .backButton{
+ .studentDetails .topButtons{
     float: right;
 }
-.studentDetails .backButton button{
+
+.studentDetails .topButtons button{
     width: 100px !important;
-}
+    margin-left: 20px;
+} 
+.studentDetails .topButtons button:last-child{
+    width: 200px !important;
+} 
 .addStudentButton button{
     float: right;
     margin-top: -50px;
