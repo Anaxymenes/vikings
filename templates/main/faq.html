@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<section>
+    <div class="container board">
+        <div class="newMessageContainer faqContainer">
+            <a class="backLink" href="{% url 'main:settings' %}" title="Wstecz"><i class="fa fa-arrow-left"></i></a>
+            <h1 align="center">FAQ</h1>
+
+            <p>TUTAJ ZNAJDZIESZ WSZYSTKIE POTRZEBNE WSKAZÓWKI JAK KORZYSTAĆ Z SERWISU</p>
+
+            <h4>MAPA ŚWIATA</h4>
+            <p>Wczuj się w rolę odkrywcy a to jest Twoja mapa. Kolejne elementy będziesz odkrywać przy kolejnych zajęciach, a ich daty są ustalane przez Twojego wykładowcę. Każdy punkt na mapie odpowiada jednym zajęciom, są to krainy, w których znajdują się zadania na które musisz udzielić odpowiedzi.</p>
+
+            <h4>ROZWIĄZYWANIE ZDAŃ</h4>
+            <p>Na mapach krainy rozmieszczone jest pięć zadań. Przy treści zadania widnieją podpowiedzi z których możesz skorzystać. Każde zadanie możesz wysłać wielokrotnie, jednak do sprawdzenia trafi ostatnie rozwiązanie i musisz pamiętać by mieścić się w terminach.</p>
+            
+            <h4>W RAZIE PROBLEMÓW</h4>
+            <p>W razie problemów z zadaniem możesz skorzystać z komunikatora aby napisać wiadomość do swojego wykładowcy, na pewno chętnie rozwieje Twoje wątpliwości.</p>
+            
+            <h4>PRACA PO GODZINACH</h4>
+            <p>Dodatkowe punkty można zdobyć utrwalając wiedzę zdobytą na zajęciach w dodatkowych zadaniach. Udział w nich nie jest obowiązkowy.</p>
+            
+            <h4>PANEL UŻYTKOWNIKA</h4>
+            <p>W panelu widnieją informacje Twojego postępu. Pasek hp: życie tracisz za nieobecności, rozwiązania które nie uzyskały maksymalnej liczby punktów oraz za brak rozwiązań. Pasek exp: dzięki niemu możesz zaobserwować ile punktów Ci brakuje by być najlepszym. Punkty rankingowe: to suma wyników rozwiązań zadań. Pozycja w rankingu światowym oraz grupowym. Podczas nauki jak na wojnie... może zabraknąć Ci życia, dlatego też przygotowaliśmy dla Ciebie leczniczą minksturę. Możesz ją wymienić za 20 punktów rankingowych. Musisz być czujny bo jeśli pasek życia spadnie do zera, stracisz jedną czwartą zdobytych punktów. Nasz zespół trzyma kciuki żeby do tego nie doszło. Powodzenia!</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

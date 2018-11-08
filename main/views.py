@@ -188,3 +188,8 @@ def getAnswer(task,user,stage_id):
     answer = Answer.objects.filter(task=task).filter(stageStudent=getStageStudentByStageId(user,stage_id)).first()
     return answer
 
+def reportError(request):
+    return render(request, 'main/reportError.html')
+
+def faq(request):
+    return render(request, 'main/faq.html')

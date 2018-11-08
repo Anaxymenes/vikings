@@ -163,6 +163,24 @@ table {
 .replyOnMessageButton button:hover{
     background-color: orangered;
 }
+
+.faqContainer p:first-of-type{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    text-indent: 2%;
+    font-style: italic;
+}
+.faqContainer h4{
+    text-align: center;
+    margin-top: 10px;
+    font-style: oblique;
+    font-weight: bold;
+}
+.faqContainer p{
+    text-indent: 3%;
+    line-height: 1.2;
+}
 @media screen and (max-width: 992px){
     .board {
         padding: 2rem 7rem 2rem 7rem !important;

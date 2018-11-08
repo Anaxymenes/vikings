@@ -4,9 +4,9 @@
 <div class="board" text-align: "center">
     <h1 class="text-center">Ustawienia</h1>
     <div class="settingsContent">
-        <button class="btn">Zgłoś błąd</button>
-        <button class="btn">FAQ</button>
-        <button class="btn">Zmień hasło</button>
+        <a href="{% url 'main:reportError' %}"><button class="btn">Zgłoś błąd</button></a>
+        <a href="{% url 'main:faq' %}"><button class="btn">FAQ</button></a>
+        <a href="{% url 'main:faq' %}"><button class="btn">Zmień hasło</button></a>
     </div>
 </div>
 {% endblock %}

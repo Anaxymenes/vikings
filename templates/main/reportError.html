@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<section>
+    <div class="container board">
+        <div class="newMessageContainer">
+            <div>
+                <a class="backLink" href="{% url 'main:settings' %}" title="Wstecz"><i class="fa fa-arrow-left"></i></a>
+                <h1 align="center">Zgłoś błąd</h1>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="name">Imię</label>
+                    <input type="text" class="form-control" id="name" placeholder="Imię">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Podaj swój email">
+                </div>
+                <div class="form-check">
+                    <label for="message">Wiadomość</label>
+                    <textarea class="form-control pb-4" id="message" rows="3" placeholder="Wiadomość..."></textarea>
+                </div>
+                <div align="center">
+                    <button type="submit" class="btn btn-primary" style="margin-top: 10px">Wyślij</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
