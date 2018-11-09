@@ -10,6 +10,7 @@ from django.db import transaction
 import operator
 from django.db.models import Q
 from .userManagement import *
+from main.msgUtil import *
 
 def groups(request):
     if request.user.is_superuser == False:
@@ -174,20 +175,29 @@ def messages(request):
     activeOverlap = "messages"
     user = User.objects.filter(id=request.user.id).first()
     msgs = getAllUserMessages(user)
-    print(msgs)
     return render(request, 'admin/messages.html',{'messages':msgs, 'activeOverlap': activeOverlap})
 
-def sendMessage(request):
+def sendMessage(request, message_id):
+    activeOverlap = "messages"
+    msg = getMessageDetails(message_id,request.user)
+    return render(request, 'admin/sendMessage.html', {
+        'activeOverlap': activeOverlap,
+        'message': msg
+    })
+
+def newMessage(request):
     activeOverlap = "messages"
     return render(request, 'admin/sendMessage.html', {'activeOverlap': activeOverlap})
 
-def readMessage(request):
+def readMessage(request,message_id):
     activeOverlap = "messages"
-    return render(request, 'admin/readMessage.html', {'activeOverlap': activeOverlap})
+    return render(request, 'admin/readMessage.html', {
+        'activeOverlap': activeOverlap,
+        'message':getMessageDetails(message_id,request.user)
+    })
 
 def addStudentToGroup(request,group_id):
     student_id = request.POST.get('student_id')
-    print(student_id)
     student = User.objects.filter(id=student_id).first()
     group = Group.objects.filter(id=group_id).first()
     studentGroup = StudentGroup.objects.filter(student=student).first()
@@ -435,6 +445,7 @@ def getAllUserMessages(user):
             last_msg = Messages.objects.filter(id=tempMsgA.message.id).first()
             is_read = last_msg.is_read
         result.append({
+            "id": msg.id,
             "from_user_id": from_user.id,
             "from_user_name" : from_user.first_name + " "+ from_user.last_name,
             "title" : msg.title,

@@ -31,14 +31,14 @@ def getAllMessagesByUser(user):
 def getMessageDetails(message_id, user):
     results = None
     older = []
-    readMessage(user,message_id)
+    checkReadMessage(user,message_id)
     msg = Messages.objects.filter(id=message_id).filter(Q(from_user=user) | Q(to_user=user)).first()
     msg.save()
     msg.message
     msgsA = MessagesAnswer.objects.filter(answer_to=msg).order_by('-message__send_date')
     if msgsA != None:
         for msgA in msgsA:
-            readMessage(user,msgA.message.id)
+            checkReadMessage(user,msgA.message.id)
             tempMsg = Messages.objects.filter(id=msgA.message.id).first()
             tempUser = User.objects.filter(id=tempMsg.from_user.id).first()
             older.append({
@@ -103,7 +103,7 @@ def isNewMessages(user):
     else:
         return False
 
-def readMessage(user, message_id):
+def checkReadMessage(user, message_id):
     if Messages.objects.filter(to_user=user).filter(id=message_id).exists():
         msg = Messages.objects.filter(to_user=user).filter(id=message_id).first()
         msg.is_read = True

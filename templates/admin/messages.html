@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container messagesBody">
     <div>
-        <a href="{% url 'adminSite:sendMessage' %}" class="sendMessageButton"><button class="btn btn-primary sendMessageButton mt-2"><i class="fa fa-paper-plane pr-2"></i>Wyślij wiadomość</button></a>
+        <a href="{% url 'adminSite:newMessage' %}" class="sendMessageButton"><button class="btn btn-primary sendMessageButton mt-2"><i class="fa fa-paper-plane pr-2"></i>Wyślij wiadomość</button></a>
         <h1>Wiadomości</h1>
     </div>
     <form>
@@ -25,12 +25,12 @@
                     <td>{{message.date}}</td>
                     <td class="redirectToPerson"><a href="{% url 'adminSite:editStudent' message.from_user_id %}">{{message.from_user_name}}</a></td>
                     <td>{{message.title}}</td>
-                    {% if message.is_read == 0 %}
+                    {% if message.is_read == False %}
                     <td><p class="badge badge-danger">Nieprzeczytana</p></td>
                     {% else %}
                     <td><p class="badge badge-success">Przeczytana</p></td>
                     {%endif%}
-                    <td><a href="{% url 'adminSite:readMessage' %}"><button class="btn btn-info px-2 w-75" title="Otwórz wiadomość">Otwórz</button></a></td>
+                    <td><a class="btn btn-info px-2 w-75" href="{% url 'adminSite:readMessage' message_id=message.id %}">Otwórz</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
