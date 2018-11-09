@@ -31,17 +31,15 @@ def getAllMessagesByUser(user):
 def getMessageDetails(message_id, user):
     results = None
     older = []
+    readMessage(user,message_id)
     msg = Messages.objects.filter(id=message_id).filter(Q(from_user=user) | Q(to_user=user)).first()
-    msg.is_read = 1
     msg.save()
     msg.message
     msgsA = MessagesAnswer.objects.filter(answer_to=msg).order_by('-message__send_date')
     if msgsA != None:
         for msgA in msgsA:
+            readMessage(user,msgA.message.id)
             tempMsg = Messages.objects.filter(id=msgA.message.id).first()
-            if tempMsg.to_user == user and tempMsg.is_read == 0:
-                tempMsg.is_read = 1
-                tempMsg.save()
             tempUser = User.objects.filter(id=tempMsg.from_user.id).first()
             older.append({
                 "first_name": tempUser.first_name,
@@ -98,3 +96,16 @@ def createMessage(from_user, to_user, content, title):
     except:
         transaction.savepoint_rollback(sid)
         return False
+
+def isNewMessages(user):
+    if Messages.objects.filter(to_user=user).filter(is_read=False).exists():
+        return True
+    else:
+        return False
+
+def readMessage(user, message_id):
+    if Messages.objects.filter(to_user=user).filter(id=message_id).exists():
+        msg = Messages.objects.filter(to_user=user).filter(id=message_id).first()
+        msg.is_read = True
+        msg.save()
+

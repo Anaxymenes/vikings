@@ -82,6 +82,8 @@ class Messages(models.Model):
     message = models.CharField(max_length=2000)
     is_read = models.BooleanField(default=0)
     send_date = models.DateTimeField(default=datetime.now())
+    delete_for_from_user = models.BooleanField(default=0)
+    delete_for_to_user = models.BooleanField(default=0)
 
 class MessagesAnswer(models.Model):
     message = models.ForeignKey(Messages, related_name="messageId", on_delete=models.CASCADE)

@@ -88,7 +88,11 @@
                         <li><img src="/static/img/settings.png" alt="Ustawienia" title="Ustawienia"></li>
                     </a>
                     <a href="/main/messages">
-                        <li><img src="/static/img/message.png" alt="Wiadomości" title="Wiadomości"></li>
+                        {% if new_msg %}
+                            <li><img src="/static/img/new_message.png" alt="Wiadomości" title="Wiadomości"></li>
+                        {% else %}
+                            <li><img src="/static/img/message.png" alt="Wiadomości" title="Wiadomości"></li>
+                        {% endif %}
                     </a>
                     <a href="/main/">
                         <li><img src="/static/img/challenge.png" alt="Wyzwania" title="Wyzwania"></li>

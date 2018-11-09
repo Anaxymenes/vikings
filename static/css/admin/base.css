@@ -75,6 +75,7 @@ body {
 .main_sidebar ul li.active i {
     color:#fff;
 }
+
 .main_sidebar ul li.active:hover {
     background:#167696;
 }

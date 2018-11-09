@@ -23,7 +23,7 @@
           {%for message in messages %}
           <tr>
               <th scope="row">{{forloop.counter}}</th>
-            {% if message.is_read == False %}
+            {% if message.is_read %}
             <td>{{message.title}}</td>
             {% else %}
             <td><b>{{message.title}}</b></td>

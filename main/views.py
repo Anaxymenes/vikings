@@ -60,7 +60,6 @@ def exerciseDetails(request, stage_id):
 
 def showPrompt(request, stage_id):
     if request.method == "POST":
-        print(request.POST)
         answer = Answer.objects.filter(id=request.POST.get('answerId')).filter(stageStudent=getStageStudentByStageId(request.user,stage_id)).first()
         setattr(answer,'usedPrompt',1)
         answer.save()
@@ -102,15 +101,13 @@ def messages(request):
         studentGroup = StudentGroup.objects.filter(student=user).first()
         group = Group.objects.filter(id = studentGroup.group.id).first()
         lecturer = User.objects.filter(id=group.lecturer.id).first()
-        
-        if request.POST.get('answer_to_message').exists():
+        if 'answer_to_message' in request.POST:
             answer_to_message = request.POST.get('answer_to_message')
             msg = Messages.objects.filter(id=answer_to_message)
             error = createMessageAnswer(msg,user,lecturer,content,title)
         else :
             error = createMessage(user,lecturer,content,title)
     msgs = getAllMessagesByUser(user)
-    print(errors)
     return render(request, 'main/messages.html',{'messages':msgs, 'error': errors})
 
 def message(request):
