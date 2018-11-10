@@ -187,7 +187,10 @@ def sendMessage(request, message_id):
 
 def newMessage(request):
     activeOverlap = "messages"
-    return render(request, 'admin/sendMessage.html', {'activeOverlap': activeOverlap})
+    return render(request, 'admin/sendMessage.html', {
+        'activeOverlap': activeOverlap,
+        'receivers' : getAllReceiver(request.user)
+        })
 
 def readMessage(request,message_id):
     activeOverlap = "messages"

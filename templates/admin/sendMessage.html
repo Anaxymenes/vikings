@@ -12,15 +12,15 @@
             <label for="recipient">Odbiorca</label>
             <input type="text" class="form-control" id="recipient" name="recipient" value="{{message.from_user_name}}" disabled
                     required maxlength="80">
-            {%else%}
-            <label for="recipient">Wybierz odbiorcę</label>
-            <select class="form-control" id="recipient" required>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+            {%elif receivers %}
+                <label for="recipient">Wybierz odbiorcę</label>
+                <select class="form-control" id="recipient" name="recipient" required>
+                    {% for receiver in receivers %}
+                        <option value="{{receiver.student_id}}">{{receiver.student_name}} - {{receiver.student_index}}</option>
+                    {% endfor%}
+                </select>
+            {% else %}
+                <p> Nie prowadzisz żadnej grupy !</p>
             {% endif %}
         </div>
         <div class="form-group">

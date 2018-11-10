@@ -109,3 +109,16 @@ def checkReadMessage(user, message_id):
         msg.is_read = True
         msg.save()
 
+def getAllReceiver(user):
+    receiverList = []
+    groups = Group.objects.filter(lecturer=user)
+    for group in groups:
+        studentGroups = StudentGroup.objects.filter(group=group)
+        for studentGroup in studentGroups:
+            receiverList.append({
+                "student_id": studentGroup.student.id,
+                "student_name": studentGroup.student.first_name + " " + studentGroup.student.last_name,
+                "student_index": studentGroup.student.username [1:]
+            })
+    return receiverList
+            
