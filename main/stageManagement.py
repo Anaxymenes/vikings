@@ -8,8 +8,5 @@ def openStages(user):
     openStages = []
     stageStudent = StageStudent.objects.filter(student = user).filter(complete = 0)
     for i in stageStudent:
-        openStages.append({
-            "openLevel": i.stage.id
-        }) 
-        print(i.stage.id)
+        openStages.append(i.stage.id) 
     return openStages
