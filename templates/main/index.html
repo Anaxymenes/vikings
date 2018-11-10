@@ -5,7 +5,7 @@
     <div>
         {% for level in levels %}
             <img src="../../static/img/lesson{{level}}.png" class="lesson{{level}}">
-            {% if level != levels|last %}
+            {% if level not in openLevels %}
                 <a href="/main/lesson/{{level}}"><img src="../../static/img/okmark.png" class="mark{{level}} top"></a>
             {% else %}
                 <a href="/main/lesson/{{level}}"><img src="../../static/img/xmark.png" class="mark{{level}} top"></a>
@@ -13,4 +13,7 @@
         {% endfor %}
     </div>
 </div>
+<script>
+    console.log({openLevels});
+</script>
 {% endblock %}

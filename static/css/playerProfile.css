@@ -109,6 +109,7 @@
 }
 .medalsTable{
     margin-top: 0;
+    width: 98%;
 }
 .medalsTable thead th{
     background-color: orange; 

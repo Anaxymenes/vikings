@@ -31,6 +31,9 @@ table {
 .messageTableButton{
     cursor: pointer;
 }
+.messageTableButton button{
+    width: 100%;
+}
 .messageTableButton:hover{
     background-color: orangered !important;
 }
