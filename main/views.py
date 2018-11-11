@@ -101,9 +101,9 @@ def messages(request):
         studentGroup = StudentGroup.objects.filter(student=user).first()
         group = Group.objects.filter(id = studentGroup.group.id).first()
         lecturer = User.objects.filter(id=group.lecturer.id).first()
-        if 'answer_to_message' in request.POST:
-            answer_to_message = request.POST.get('answer_to_message')
-            msg = Messages.objects.filter(id=answer_to_message)
+        if 'messageTopic' in request.POST:
+            answer_to_message = request.POST.get('messageTopic')
+            msg = Messages.objects.filter(id=answer_to_message).first()
             error = createMessageAnswer(msg,user,lecturer,content,title)
         else :
             error = createMessage(user,lecturer,content,title)
