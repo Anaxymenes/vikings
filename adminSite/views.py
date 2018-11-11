@@ -173,25 +173,30 @@ def groupDetails(request, group_id):
 
 def messages(request):
     activeOverlap = "messages"
+    is_created = None
     if request.method == 'POST':
         if 'newMessage' in request.POST:
-            createMessage(
+            is_created = createMessage(
                 request.user,
                 getUser(request.POST.get('recipient')),
                 request.POST.get('messageContent'),
                 request.POST.get('messageTopic')
                 )
         else :
-            print(createMessageAnswer(
+            is_created = createMessageAnswer(
                 getMessage(request.POST.get('answer_id')),
                 request.user,
                 getUser(request.POST.get('recipient')),
                 request.POST.get('messageContent'),
                 request.POST.get('messageTopic')
-            ))
+            )
     user = User.objects.filter(id=request.user.id).first()
     msgs = getAllUserMessages(user)
-    return render(request, 'admin/messages.html',{'messages':msgs, 'activeOverlap': activeOverlap})
+    return render(request, 'admin/messages.html',{
+        'messages':msgs, 
+        'activeOverlap': activeOverlap,
+        'is_created': is_created
+        })
 
 def sendMessage(request, message_id):
     activeOverlap = "messages"

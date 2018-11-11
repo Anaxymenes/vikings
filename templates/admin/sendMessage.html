@@ -36,10 +36,11 @@
         <div class="form-group">
             <label for="messageTopic">Temat wiadomości</label>
             {% if message %}
-                <input type="text" class="form-control" id="messageTopic" name="messageTopic" value="{{message.title}}" disabled
+                <input type="text" class="form-control" id="messageTopic"  value="{{message.title}}" disabled
                     required maxlength="80">
+                    <input type="hidden" name="messageTopic" value="{{message.title}}"/>
             {% else %}
-            <input type="text" class="form-control" id="messageTopic" name="messageTopic" placeholder="Wpisz temat wiadomości.." autofocus
+            <input type="text" class="form-control" name="messageTopic" id="messageTopic" placeholder="Wpisz temat wiadomości.." autofocus
                 required maxlength="80">
             {%endif%}
         </div>

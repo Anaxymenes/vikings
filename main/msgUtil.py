@@ -61,8 +61,27 @@ def getMessageDetails(message_id, user):
     return results
 
 def createMessageAnswer(answer_to, from_user, to_user, content, title):
-    print(answer_to.id)
-    return True
+    sid = transaction.savepoint()
+    try:
+        if MessagesAnswer.objects.filter(message=answer_to).exists():
+            answer_to = MessagesAnswer.objects.filter(message=answer_to).first().answer_to
+        msg =  Messages.objects.create(
+                from_user = from_user,
+                to_user = to_user,
+                title = title,
+                message = content,
+                is_read = False,
+                send_date = timezone.now()
+            )
+        msgAns = MessagesAnswer.objects.create(
+            answer_to = answer_to,
+            message = msg
+        )
+        transaction.savepoint_commit(sid)
+        return True
+    except :
+        transaction.savepoint_rollback(sid)
+        return False
 
 def createMessage(from_user, to_user, content, title):
     sid = transaction.savepoint()

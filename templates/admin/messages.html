@@ -1,6 +1,16 @@
 {% extends "admin/base.html" %}
 
 {% block content %}
+{% if is_created == False %}
+    <div class="alert alert-danger" role="alert">
+        Wiadomość nie została wysłana ! Skontaktuj się z administratorem.
+      </div>
+{% elif is_created %}
+    <div class="alert alert-success" role="alert">
+        Wiadomość wysłana pomyślnie .
+      </div>
+{% endif %}
+
 <div class="container messagesBody">
     <div>
         <a href="{% url 'adminSite:newMessage' %}" class="sendMessageButton"><button class="btn btn-primary sendMessageButton mt-2"><i class="fa fa-paper-plane pr-2"></i>Wyślij wiadomość</button></a>
