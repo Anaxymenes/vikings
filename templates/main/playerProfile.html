@@ -150,9 +150,19 @@
             </div>
 
             <!-- OCENA -->
-            <div id="rating" class="tab-pane fade">
-                <h3 class="text-center">Ocena</h3>
-                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            <div id="rating" class="tab-pane fade rating">
+                <h3 class="text-center">Aktualna ocena końcowa</h3>
+                <p>Proponowana ocena końcowa: 
+                    <span 
+                    class="{% if rate < 3 %} rate-red 
+                        {% elif rate < 4.5 %} rate-yellow
+                        {% else %} rate-green
+                        {% endif %}"
+                    >
+                        {{rate}}
+                    </span>
+                </p>
+                <small class="text-muted font-italic">Ocena końcowa wyliczna jest na podstawie punktów doświadczenia.</small>
             </div>
         </div>
     </div>

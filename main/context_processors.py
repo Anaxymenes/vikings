@@ -14,6 +14,7 @@ def add_variable_to_context(request):
         openLevels = openStages(request.user)
         exp_bar = (accountDetails.current_exp * 100) / accountDetails.exp_max
         hp_bar = (accountDetails.current_hp * 100) / accountDetails.hp_max
+        rate = calculate_rating(exp_bar)
         return {
             "player": request.user.get_full_name(), 
             "levels": levels, 
@@ -23,7 +24,8 @@ def add_variable_to_context(request):
             "hp_bar": hp_bar,
             "new_msg": isNewMessages(request.user),
             "global_rank": global_ranking,
-            "group_rank": group_ranking
+            "group_rank": group_ranking,
+            "rate": rate
             }
     elif request.user.is_authenticated and request.user.is_superuser :
         return {
@@ -53,3 +55,17 @@ def group_rank(user):
     groupStudentsSortedByPoints = sorted(groupStudents, key=lambda student: student.points, reverse=True)
     studentRank = groupStudentsSortedByPoints.index(AccountDetails.objects.filter(user = user).first()) + 1
     return studentRank
+
+def calculate_rating(exp_bar):
+    rate = 2.0
+    if exp_bar >= 91.0:
+        rate = 5.0
+    elif exp_bar >= 81.0:
+        rate = 4.5
+    elif exp_bar >= 71.0:
+        rate = 4.0
+    elif exp_bar >= 61.0:
+        rate = 3.5
+    elif exp_bar >= 51.0:
+        rate = 3.0
+    return rate
