@@ -33,7 +33,7 @@
                             <td><a href="{% url 'adminSite:editStudent' student.id %}"><button class="btn btn-primary">Pokaż</button></a></td>
                             <td><a href="{% url 'adminSite:editStudent' student.id %}"><button class="btn btn-info">Edytuj</button></a></td>
                             <td><a href="{% url 'adminSite:deleteFromGroup' student_id=student.id %}"><button class="btn btn-danger">Usuń</button></a></td>
-                            <td><a href=""><button class="btn">Napisz</button></a></td>
+                            <td><a href="{% url 'adminSite:newMessageStudent' student.id %}"><button class="btn">Napisz</button></a></td>
                             <td>
                                 <div>
                                     <input type="checkbox" />

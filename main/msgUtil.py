@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
 from models.models import *
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from django.db import transaction
 from django.db.models import Q
+from django.utils import timezone
 
 def getAllMessagesByUser(user):
     result = []
@@ -60,25 +61,8 @@ def getMessageDetails(message_id, user):
     return results
 
 def createMessageAnswer(answer_to, from_user, to_user, content, title):
-    sid = transaction.savepoint()
-    try: 
-        msg = Messages.objects.create(
-            from_user = from_user,
-            to_user = to_user,
-            title = title,
-            message = content,
-            is_read = False,
-            send_date = datetime.now()
-        )
-        msgA = MessagesAnswer.objects.create(
-            message = msg,
-            answer_to = answer_to
-        )
-        transaction.savepoint_commit(sid)
-        return True
-    except:
-        transaction.savepoint_rollback(sid)
-        return False
+    print(answer_to.id)
+    return True
 
 def createMessage(from_user, to_user, content, title):
     sid = transaction.savepoint()
@@ -89,7 +73,7 @@ def createMessage(from_user, to_user, content, title):
             title = title,
             message = content,
             is_read = False,
-            send_date = datetime.now()
+            send_date = timezone.now()
         )
         transaction.savepoint_commit(sid)
         return True
@@ -121,4 +105,16 @@ def getAllReceiver(user):
                 "student_index": studentGroup.student.username [1:]
             })
     return receiverList
-            
+
+def getStudentDetailsToMsg(student_id):
+    student = User.objects.filter(id=student_id).first()
+    return {
+        'id' : student.id,
+        'name' : student.first_name + " " + student.last_name
+    }
+
+def getMessage(message_id):
+    if Messages.objects.filter(id=message_id).exists():
+        return Messages.objects.filter(id=message_id).first()
+    else: 
+        return None

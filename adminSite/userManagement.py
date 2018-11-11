@@ -59,3 +59,7 @@ def createUser(first_name, last_name, index_nr):
         return True
     except:
         return False
+
+def getUser(user_id):
+    if User.objects.filter(id=user_id).exists():
+        return User.objects.filter(id=user_id).first()

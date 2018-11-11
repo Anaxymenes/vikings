@@ -173,6 +173,22 @@ def groupDetails(request, group_id):
 
 def messages(request):
     activeOverlap = "messages"
+    if request.method == 'POST':
+        if 'newMessage' in request.POST:
+            createMessage(
+                request.user,
+                getUser(request.POST.get('recipient')),
+                request.POST.get('messageContent'),
+                request.POST.get('messageTopic')
+                )
+        else :
+            print(createMessageAnswer(
+                getMessage(request.POST.get('answer_id')),
+                request.user,
+                getUser(request.POST.get('recipient')),
+                request.POST.get('messageContent'),
+                request.POST.get('messageTopic')
+            ))
     user = User.objects.filter(id=request.user.id).first()
     msgs = getAllUserMessages(user)
     return render(request, 'admin/messages.html',{'messages':msgs, 'activeOverlap': activeOverlap})
@@ -190,6 +206,13 @@ def newMessage(request):
     return render(request, 'admin/sendMessage.html', {
         'activeOverlap': activeOverlap,
         'receivers' : getAllReceiver(request.user)
+        })
+
+def newMessageForSpecificStudent(request,student_id):
+    activeOverlap = "messages"
+    return render(request, 'admin/sendMessage.html', {
+        'activeOverlap': activeOverlap,
+        'to': getStudentDetailsToMsg(student_id)
         })
 
 def readMessage(request,message_id):
