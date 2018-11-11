@@ -125,6 +125,29 @@
     line-height: 1.2 !important;
     font-weight: 100;
 }
+/* Rating */
+.rating p{
+    margin-top: 5rem;
+    font-size: 2rem;
+}
+.rating span{
+    font-size: 5rem;
+    font-style: italic;
+    margin-left: 5%;
+}
+.rating small{
+    font-style: italic;
+}
+.rating .rate-red{
+    color: red;
+}
+.rating .rate-yellow{
+    color: rgb(243, 243, 22);
+}
+.rating .rate-green{
+    color: green;
+}
+
 .alt{
     border: 1px solid red;
 }
