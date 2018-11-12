@@ -190,3 +190,14 @@ def reportError(request):
 
 def faq(request):
     return render(request, 'main/faq.html')
+
+def potion(request):
+    details = AccountDetails.objects.filter(user = request.user).first()
+    if details.current_exp >= 20:
+        exp = details.current_exp - 20
+        if details.current_hp >= 80:
+            hp = 100
+        else:
+            hp = details.current_hp + 20
+        AccountDetails.objects.filter(user = request.user).update(current_exp=exp, current_hp=hp)
+    return HttpResponseRedirect(reverse('main:home'))

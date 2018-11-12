@@ -14,6 +14,7 @@ urlpatterns = [
     path('settings/', views.settings, name="settings"),
     path('reportError/', views.reportError, name="reportError"),
     path('faq/', views.faq, name="faq"),
+    path('potion/', views.potion, name="potion"),
     path('lesson/<int:stage_id>/<int:task_id>/',views.task_data,name="task"),
     path('lesson/<int:stage_id>/excercise',views.exerciseDetails, name="excercise"),
     path('lesson/<int:stage_id>/usePrompt',views.showPrompt, name="usePrompt"),

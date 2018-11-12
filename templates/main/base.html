@@ -139,8 +139,16 @@
                         <p>aby użyć musisz mieć mniej niż <b>90 hp</b>.</p>
                     </div>
                     <div class="modal-footer logoutModal">
-                        <button type="button" class="btn btn-success logoutButton"><a>Tak</a></button>
-                        <button type="button" class="btn btn-danger logoutButton" data-dismiss="modal">Nie</button>
+                            <a href="{% url 'main:potion' %}"><button type="button" class="btn btn-success logoutButton" 
+                        {% if account.current_hp >= 90 %} 
+                            disabled title="Musisz mieć mniej niż 90 hp"> Kup
+                        {% elif account.current_exp < 20 %}
+                            disabled title="Masz za mało punktów exp"> Kup
+                        {% else %}
+                            >Kup
+                        {% endif %}
+                        </button></a>
+                        <button type="button" class="btn btn-danger logoutButton" data-dismiss="modal">Zamknij</button>
                     </div>
                 </div>
             </div>

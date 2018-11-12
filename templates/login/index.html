@@ -26,14 +26,14 @@
 
             <small>Nie masz konta? <a href="/register" class="alert-link">Zarejestruj się</a></small>
 
-            {% if message %}
-            <p class="alert alert-danger message">{{ message }}</p>
-            {% endif %}
             <div id="lower">
                 <input type="submit" value="Zaloguj"class="logButton">
             </div>
         </form>
     </section>
+    {% if message %}
+    <p class="alert alert-danger message">{{ message }}</p>
+    {% endif %}
 
 </body>
 
