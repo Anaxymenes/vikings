@@ -16,7 +16,32 @@ from main.stageManagement import updateStageStatus
 def groups(request):
     if request.user.is_superuser == False:
         return HttpResponseRedirect(reverse('main:home'))
-    return render(request, 'admin/groups.html',{'form' : CreateGroup(), "groups":getGroups(request)})
+    return render(request, 'admin/groups.html',{
+        'form' : CreateGroup(),
+        'groups':getGroups(request),
+        'global_rank': global_rank()
+    })
+def global_rank():
+    studentsSortedByPoints = sorted(AccountDetails.objects.all(), key=lambda student: student.points, reverse=True)
+    studentsWithDetails = []
+    for student in studentsSortedByPoints:
+        user = User.objects.filter(username=student.user).first()
+        if not user.is_superuser:
+            studentGroup = StudentGroup.objects.filter(student=student.user).first()
+            if studentGroup: 
+                groupName = Group.objects.filter(id=studentGroup.group.id).first().name
+            else:
+                groupName = "Brak grupy"
+            details = {
+                'student_id': student.user.id,
+                'points': student.points,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'id_number': user.username[1:],
+                'group': groupName,
+            }
+            studentsWithDetails.append(details)
+    return studentsWithDetails[:10]
 
 def deleteGroup(request, group_id):
     Group.objects.filter(lecturer=request.user).filter(id=group_id).delete()
