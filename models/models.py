@@ -52,14 +52,6 @@ class StageStudent(models.Model):
     start_at = models.DateTimeField(default=datetime.now())
     end_at = models.DateTimeField(default=datetime.now()+timedelta(days=7))
 
-    @property
-    def to_close(self):
-        return timezone.now() > self.end_at
-    
-    @property
-    def to_open(self):
-        return timezone.now() > self.start_at
-
 class Answer(models.Model):
     stageStudent = models.ForeignKey(StageStudent, on_delete = models.CASCADE)
     task = models.ForeignKey(StageTasks, on_delete=models.PROTECT)

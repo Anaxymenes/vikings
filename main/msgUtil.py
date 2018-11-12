@@ -137,3 +137,22 @@ def getMessage(message_id):
         return Messages.objects.filter(id=message_id).first()
     else: 
         return None
+
+def deletePermamentAllMessages(user):
+    if Messages.objects.filter(Q(from_user=user) | Q(to_user=user)).exists():
+        msgList = Messages.objects.filter(Q(from_user=user) | Q(to_user=user))
+        for msg in msgList:
+            deletePermamentMessageWithAnswers(msg)  
+
+def deletePermamentMessageWithAnswers(message):
+    if MessagesAnswer.objects.filter(answer_to = message).exists():
+        msgAList = MessagesAnswer.objects.filter(answer_to = message)
+        for msgA in msgAList:
+            deletePermamentMessage(msgA.message)
+    else:
+        deletePermamentMessage(message)
+    return True
+
+def deletePermamentMessage(message):
+    Messages.objects.filter(id=message.id).delete()
+

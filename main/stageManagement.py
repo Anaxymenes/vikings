@@ -41,10 +41,10 @@ def updateStageStatus():
     stageStudents = StageStudent.objects.all()
     current_date = timezone.now()
     for stageStudent in stageStudents:
-        if stageStudent .to_open and stageStudent.to_close == False:
+        if timezone.now() > stageStudent.start_at and (timezone.now()< stageStudent.end_at) == False:
             stageStudent.complete = 0
-            print(updateLevel(stageStudent.student,stageStudent.stage.id))
-        if stageStudent.to_close:
+            updateLevel(stageStudent.student,stageStudent.stage.id)
+        if timezone.now()> stageStudent.end_at :
             stageStudent.complete = 1
         stageStudent.save()
     return True
