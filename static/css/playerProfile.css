@@ -19,13 +19,14 @@
 .tabs li a{
     border: 1px solid #b4b4b4;
     border-radius: 15px 15px 0px 0px;
-    background-color: rgba(240, 255, 240, 0.767);
+    background-color: rgb(255, 214, 81);
     color: #3b3b3b;
     font-style: italic;
     white-space: nowrap;
     overflow: hidden;
-    
     display: block;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     background-color: orange;
@@ -34,7 +35,6 @@
     font-weight: bold;
     font-style: italic;
     color: rgb(255, 255, 255);
-    
     display: block;
 }
 .nav-tabs.nav-justified>li>a{
@@ -53,7 +53,7 @@
     border: 1px solid #b4b4b4;
     border-radius: 0px 15px 15px 15px;
     padding: 1rem 2rem;
-    background: rgba(240, 255, 240, 0.767);
+    background: rgb(252, 232, 151);
     min-height: 350px;
 }
 .detailsTable{
