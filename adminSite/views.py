@@ -11,6 +11,7 @@ import operator
 from django.db.models import Q
 from .userManagement import *
 from main.msgUtil import *
+from main.stageManagement import updateStageStatus
 
 def groups(request):
     if request.user.is_superuser == False:
@@ -47,7 +48,7 @@ def students(request):
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         index_nr = request.POST.get('index_nr')
-        msg = createUser(first_name, last_name, index_nr)
+        msg = createStudent(first_name, last_name, index_nr)
         return render(request, 'admin/students.html',{'students':getStudentsList(), 'message':msg})
     return render(request, 'admin/students.html',{'students':getStudentsList(), 'activeOverlap': activeOverlap})
 
@@ -249,7 +250,7 @@ def addGroup(request):
                 file_in_memory = request.FILES['groupFile'].read()
                 group = Group.objects.create(name=request.POST.get('groupName'),lecturer=request.user)
                 
-                is_created = createUsersFromWorkbook(file_in_memory, group)
+                is_created = createStudentFromWorkbook(file_in_memory, group)
                 if is_created == False:
                     transaction.savepoint_rollback(sid)
                     Group.objects.filter(id=group.id).first().delete()
@@ -262,15 +263,8 @@ def addGroup(request):
     return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup()})
 
 def stageStatus(request):
-    stageStudents = StageStudent.objects.all()
-    current_date = timezone.now()
-    for stageStudent in stageStudents:
-        if stageStudent .to_open:
-            stageStudent.complete = 0
-        if stageStudent.to_close:
-            stageStudent.complete = 1
-        stageStudent.save()
-    return HttpResponseRedirect(reverse('main:home'))
+    updateStageStatus()
+    return HttpResponseRedirect(reverse('adminSite:groups'))
 
 def getStudentsList():
     students = User.objects.filter(is_superuser = False)

@@ -1,5 +1,3 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, reverse
 from django.contrib.auth.hashers import make_password, check_password
 from models.models import *
 from io import BytesIO
@@ -9,8 +7,9 @@ from django.contrib.auth.models import User
 from django.db import transaction
 import operator
 from django.db.models import Q
+from main.stageManagement import createNewStudentStages
 
-def createUsersFromWorkbook(file_in_memory, group):
+def createStudentFromWorkbook(file_in_memory, group):
     try:
         wb = load_workbook(filename=BytesIO(file_in_memory))
         for sheetname in wb.sheetnames:
@@ -46,7 +45,7 @@ def createUsersFromWorkbook(file_in_memory, group):
     except:
         return False
 
-def createUser(first_name, last_name, index_nr):
+def createStudent(first_name, last_name, index_nr):
     try:
         password = first_name[:3] + last_name[:3] + str(index_nr)[:3]
         username = 's'+str(index_nr)
@@ -54,8 +53,10 @@ def createUser(first_name, last_name, index_nr):
             return False
         user = User.objects.create_user(username=username,password=password, first_name=first_name, last_name=last_name)
         accountDetails = AccountDetails.objects.create(
-            user=user
+            user=user,
+            level=0,
         )
+        createNewStudentStages(user)
         return True
     except:
         return False

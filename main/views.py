@@ -6,6 +6,7 @@ from models.models import *
 import logging
 from datetime import datetime, timedelta
 from .msgUtil import *
+from .exerciseManagement import *
 
 import random
 logger = logging.getLogger(__name__)
@@ -35,20 +36,13 @@ def lesson(request,stage_id):
 def exerciseDetails(request, stage_id):
     if request.method == "POST":
         action = request.POST.get('action')
-        if action == "save" or action == "close":
-            answer_id = request.POST.get('taskId')
-            usedPrompt = request.POST.get('usedPrompt')
-            answerSql = request.POST.get('answerSql')
-            student = User.objects.filter(id=request.user.id).first()
-            stage = Stage.objects.filter(id=stage_id).first()
-            stageStudent = StageStudent.objects.filter(student=student).filter(stage=stage).first()
-            answer = Answer.objects.filter(id=answer_id).filter(stageStudent=stageStudent).first()
-            answer.answerSql = answerSql
-            answer.usedPrompt = usedPrompt
-            if action == "close":
-                answer.completed = 1
-                answer.completed_at = datetime.now()
-            answer.save()
+        saveCloseExcercise(request.user.id,
+            stage_id,
+            request.POST.get('taskId'),
+            request.POST.get('answerSql'),
+            request.POST.get('usedPrompt'),
+            action == "close"
+        )
         task = StageTasks.objects.filter(id=request.POST.get('taskId')).first()
         stage = Stage.objects.filter(id=stage_id).first()
         answer = Answer.objects.filter(task=task).filter(stageStudent=getStageStudentByStageId(request.user,stage_id)).first()
