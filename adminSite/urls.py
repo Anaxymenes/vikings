@@ -29,6 +29,7 @@ urlpatterns = [
     path('newMessageStudent/<int:student_id>/', views.newMessageForSpecificStudent, name='newMessageStudent'),
     path('newMessage/',views.newMessage, name='newMessage'),
     path('addGroup/',views.addGroup, name='addGroup'),
+    path('stageStatus',views.stageStatus, name="stageStatus")
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

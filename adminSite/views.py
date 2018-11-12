@@ -286,6 +286,17 @@ def addGroup(request):
                 return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':True})
     return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup()})
 
+def stageStatus(request):
+    stageStudents = StageStudent.objects.all()
+    current_date = timezone.now()
+    for stageStudent in stageStudents:
+        if stageStudent .to_open:
+            stageStudent.complete = 0
+        if stageStudent.to_close:
+            stageStudent.complete = 1
+        stageStudent.save()
+    return HttpResponseRedirect(reverse('main:home'))
+
 def getStudentsList():
     students = User.objects.filter(is_superuser = False)
     return students
