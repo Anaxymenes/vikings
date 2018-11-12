@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, date
+from django.utils import timezone
 
 class AccountDetails(models.Model):
     user = models.ForeignKey(User , on_delete = models.CASCADE)
@@ -51,6 +52,14 @@ class StageStudent(models.Model):
     start_at = models.DateTimeField(default=datetime.now())
     end_at = models.DateTimeField(default=datetime.now()+timedelta(days=7))
 
+    @property
+    def to_close(self):
+        return timezone.now() > self.end_at
+    
+    @property
+    def to_open(self):
+        return timezone.now() > self.start_at
+
 class Answer(models.Model):
     stageStudent = models.ForeignKey(StageStudent, on_delete = models.CASCADE)
     task = models.ForeignKey(StageTasks, on_delete=models.PROTECT)
@@ -87,4 +96,4 @@ class Messages(models.Model):
 
 class MessagesAnswer(models.Model):
     message = models.ForeignKey(Messages, related_name="messageId", on_delete=models.CASCADE)
-    answer_to = models.ForeignKey(Messages,related_name='answerMessage', on_delete=models.CASCADE)    
+    answer_tois_created = models.ForeignKey(Messages,related_name='answerMessage', on_delete=models.CASCADE)    
