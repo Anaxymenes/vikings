@@ -48,12 +48,18 @@ def global_rank(user):
     return studentRank 
 
 def group_rank(user):
-    groupMates = StudentGroup.objects.filter(group = StudentGroup.objects.filter(student = user).first().group.id)
-    groupStudents = []
-    for mate in groupMates:
-        groupStudents.append(AccountDetails.objects.filter(user = mate.student).first())
-    groupStudentsSortedByPoints = sorted(groupStudents, key=lambda student: student.points, reverse=True)
-    studentRank = groupStudentsSortedByPoints.index(AccountDetails.objects.filter(user = user).first()) + 1
+    print(user)
+    group = StudentGroup.objects.filter(student = user).first()
+    print('______________', group)
+    if group:
+        groupMates = StudentGroup.objects.filter(group.group.id)
+        groupStudents = []
+        for mate in groupMates:
+            groupStudents.append(AccountDetails.objects.filter(user = mate.student).first())
+        groupStudentsSortedByPoints = sorted(groupStudents, key=lambda student: student.points, reverse=True)
+        studentRank = groupStudentsSortedByPoints.index(AccountDetails.objects.filter(user = user).first()) + 1
+    else:
+        studentRank = 0
     return studentRank
 
 def calculate_rating(exp_bar):

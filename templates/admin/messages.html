@@ -2,18 +2,23 @@
 
 {% block content %}
 {% if is_created == False %}
-    <div class="alert alert-danger" role="alert">
-        Wiadomość nie została wysłana ! Skontaktuj się z administratorem.
-      </div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert"> Wiadomość nie została wysłana! Skontaktuj się z administratorem
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 {% elif is_created %}
-    <div class="alert alert-success" role="alert">
-        Wiadomość wysłana pomyślnie .
-      </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert"> Wiadomość wysłana pomyślnie
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 {% endif %}
 
 <div class="container messagesBody">
     <div>
-        <a href="{% url 'adminSite:newMessage' %}" class="sendMessageButton"><button class="btn btn-primary sendMessageButton mt-2"><i class="fa fa-paper-plane pr-2"></i>Wyślij wiadomość</button></a>
+        <a href="{% url 'adminSite:newMessage' %}" class="sendMessageButton"><button class="btn btn-primary sendMessageButton mt-2"><i
+                    class="fa fa-paper-plane pr-2"></i>Wyślij wiadomość</button></a>
         <h1>Wiadomości</h1>
     </div>
     <form>
@@ -21,7 +26,7 @@
         <table class="table table-striped table-dark table-sm table-responsive-sm">
             <thead align="center">
                 <tr>
-                    <th scope="col"><input id="all" class="checkjq" type="checkbox" />  Lp.</th>
+                    <th scope="col"><input id="all" class="checkjq" type="checkbox" /> Lp.</th>
                     <th scope="col">Data</th>
                     <th scope="col">Od</th>
                     <th scope="col">Tytuł</th>
@@ -36,9 +41,13 @@
                     <td class="redirectToPerson"><a href="{% url 'adminSite:editStudent' message.from_user_id %}">{{message.from_user_name}}</a></td>
                     <td>{{message.title}}</td>
                     {% if message.is_read == False %}
-                    <td><p class="badge badge-danger">Nieprzeczytana</p></td>
+                    <td>
+                        <p class="badge badge-danger">Nieprzeczytana</p>
+                    </td>
                     {% else %}
-                    <td><p class="badge badge-success">Przeczytana</p></td>
+                    <td>
+                        <p class="badge badge-success">Przeczytana</p>
+                    </td>
                     {%endif%}
                     <td><a class="btn btn-info px-2 w-75" href="{% url 'adminSite:readMessage' message_id=message.id %}">Otwórz</a></td>
                 </tr>

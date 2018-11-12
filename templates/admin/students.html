@@ -3,48 +3,57 @@
 {% block content %}
 
 <div class="container studentsContainer">
-        {% if message == True %}
-        <div class="alert alert-success" role="alert">
-            Student utworzony pomyślnie
-        </div>
-        {%elif  message == False%}
-        <div class="alert alert-danger" role="alert">
-            Ups... Student nie został utworzony.
-        </div>
-        {%endif%}
+    {% if message == True %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert"> Student utworzony pomyślnie
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {%elif message == False%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert"> Ups... Student nie został utworzony.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {%endif%}
     {% if students.count > 0 %}
-        <div>
-            <h1 class="py-2" align="center">Lista studentów</h1>
-            <a href="{% url 'adminSite:addStudent' %}" class="addStudentButton"><button class="btn btn-primary"><i class="fa fa-plus pr-2"></i>Dodaj studenta</button></a>
-        </div>
-        <table class="table table-striped table-dark mt-3">
-            <thead>
-                <tr>
-                    <th scope="col">Lp</th>
-                    <th scope="col">Nazwa użytkownika</th>
-                    <th scope="col">Imię</th>
-                    <th scope="col">Nazwisko</th>
-                    <th>Adres email</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for student in students %}
-                    <tr>
-                        <th scope="row">{{forloop.counter}}</th>
-                        <td>{{student.username}}</td>
-                        <td>{{student.first_name}}</td>
-                        <td>{{student.last_name}}</td>
-                        <td>{{student.email}}</td>
-                        <td><a href="{% url 'adminSite:editStudent' student.id %}" class="badge badge-primary studentListButton">Detale</a></td>
-                        <td><a href="{% url 'adminSite:deleteStudent' student.id %}" class="badge badge-danger studentListButton">Usuń</a></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div>
+        <h1 class="py-2" align="center">Lista studentów</h1>
+        <a href="{% url 'adminSite:addStudent' %}" class="addStudentButton"><button class="btn btn-primary"><i class="fa fa-plus pr-2"></i>Dodaj
+                studenta</button></a>
+    </div>
+    <table class="table table-striped table-dark mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Lp</th>
+                <th scope="col">Nazwa użytkownika</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th>Adres email</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{student.username}}</td>
+                <td>{{student.first_name}}</td>
+                <td>{{student.last_name}}</td>
+                <td>{{student.email}}</td>
+                <td><a href="{% url 'adminSite:editStudent' student.id %}" class="badge badge-primary studentListButton">Detale</a></td>
+                <td><a href="{% url 'adminSite:deleteStudent' student.id %}" class="badge badge-danger studentListButton">Usuń</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     {% else %}
-        <div class="alert alert-warning" role="alert"> Brak studentów </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert"> Brak studentów
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     {% endif %}
 </div>
 {% endblock %}
