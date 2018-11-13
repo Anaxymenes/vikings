@@ -56,7 +56,13 @@ def exerciseDetails(request, stage_id):
         answer = Answer.objects.filter(task=task).filter(stageStudent=getStageStudentByStageId(request.user,stage_id)).first()
         difficultyLevel = DifficultyLevel.objects.filter(id = task.difficulty_level.id).first()
         story = StoryLevel.objects.filter(stage = stage).filter(difficulty_level = difficultyLevel).first()
-        return render(request, 'main/excercise.html', {"answer" : answer, "task":task,'story':story})
+        completed= answer.stageStudent.complete
+        return render(request, 'main/excercise.html', {
+            "answer" : answer,
+             "task":task,
+             'story':story,
+             'completed' : completed
+        })
     else :
         return render(request, 'main/index.html', {})
 

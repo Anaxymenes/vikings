@@ -32,10 +32,11 @@
           <p class="font-weight-light font-italic"><u>Podpowiedź : {{task.prompt}}</u></p>
         {% elif answer.completed == False and answer.usedPrompt == False %}
           <button type="button" class="btn btn-warning promptButton" data-toggle="modal" data-target="#myModal">Podpowiedź</button>
-        {% else %}
+          {% elif completed %}
+        
         {% endif %}
       </div>
-      {% if answer.completed %}
+      {% if answer.completed or completed %}
       <label class="font-italic responseLabel" for="comment">Odpowiedź:</label>
         <div class="form-group response">
         <p class="py-2 font-italic">"{{answer.answerSql}}"</p>
