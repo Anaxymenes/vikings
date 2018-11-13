@@ -79,9 +79,9 @@
                         <td>{{ rank.id_number }}
                         <td>{{ rank.group }}
                         <td><a href="{% url 'adminSite:editStudent' rank.student_id %}"><button class="btn btn-primary btn-sm">Pokaż</button></a>
-                        <td><a href="#"><button class="btn btn-info btn-sm">Edytuj</button></a>
+                        <td><a href="{% url 'adminSite:editStudent' rank.student_id %}"><button class="btn btn-info btn-sm">Edytuj</button></a>
                         <td><a href="{% url 'adminSite:deleteStudent' rank.student_id %}"><button class="btn btn-danger btn-sm">Usuń</button></a>
-                        <td><a href="#"><button class="btn btn-basic btn-sm">Napisz</button></a>
+                        <td><a href="{% url 'adminSite:newMessageStudent' rank.student_id %}"><button class="btn btn-basic btn-sm">Napisz</button></a>
                     </tr>
                     {% endfor %}
                 </tbody>

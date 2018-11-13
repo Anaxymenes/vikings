@@ -284,7 +284,8 @@ def addGroup(request):
                 return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':is_created})
             else :
                 group = Group.objects.create(name=request.POST.get('groupName'),lecturer=request.user)
-                return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':True})
+                #return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup(),'message':True})
+                return HttpResponseRedirect(reverse('adminSite:groups')) #, args=('message': True)))
     return render(request, 'admin/groups.html',{'groups':getGroups(request),'form' : CreateGroup()})
 
 def stageStatus(request):
