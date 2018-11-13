@@ -417,11 +417,12 @@ def getStudentStages(student_id):
     studentStage = StageStudent.objects.filter(student=user)
     stageDetails = []
     for stageStudent in studentStage:
-        completed = False
+        
         stage = Stage.objects.filter(id=stageStudent.stage.id).first()
         answers = Answer.objects.filter(stageStudent=stageStudent)
         answerDetails = []
         for answer in answers:
+            completed = False
             task = StageTasks.objects.filter(id=answer.task.id).first()
             difficultyLevel = DifficultyLevel.objects.filter(id=task.difficulty_level.id).first()
             if answer.completed or stageStudent.complete :
@@ -539,6 +540,7 @@ def getAllNotRatedAnswers(lecturer):
                                 'group_name': group.name,
                                 'date': answer.completed_at
                             })
+            if StageStudent.objects.filter(student=student).filter(complete=False).exists():
                 stageStudentList = StageStudent.objects.filter(student=student).filter(complete=False)
                 for stageStudent in stageStudentList:
                     #print(Answer.objects.filter(stageStudent=stageStudent).exists())
