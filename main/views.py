@@ -2,6 +2,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from models.models import *
 import logging
 from datetime import datetime, timedelta
@@ -195,3 +198,21 @@ def potion(request):
             hp = details.current_hp + 20
         AccountDetails.objects.filter(user = request.user).update(current_exp=exp, current_hp=hp)
     return HttpResponseRedirect(reverse('main:home'))
+
+def changePassword(request):
+    message=''
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            message="Hasło zmienione pomyślnie."
+            return redirect('main:home')
+        else:
+            message='Nieprawidłowe dane.'
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'main/changePassword.html', {
+        'form': form,
+        'message': message
+    })
