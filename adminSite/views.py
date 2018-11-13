@@ -14,8 +14,6 @@ from main.msgUtil import *
 from main.stageManagement import *
 from .groupManagement import *
 
-message_alert = ""
-
 def groups(request):
     if request.user.is_superuser == False:
         return HttpResponseRedirect(reverse('main:home'))
@@ -67,6 +65,7 @@ def responseDetails(request,answer_id):
     lecturer = User.objects.filter(id=request.user.id).first()
     return render(request, 'admin/responseDetails.html',{
         'answer': getDataAboutAnswer(answer_id, lecturer)[0],
+        'answer_id': answer_id,
         'medals': getAllMedals(),
         'activeOverlap': activeOverlap})
 
@@ -493,7 +492,16 @@ def getAllMedals():
 
 def rateAnswer(request):
     if request.method == 'POST':
-        print(request.POST)
+        addPoints = request.POST.get("excerciseScore")
+        answer_id = request.POST.get("answer_id")
+
+        answer = Answer.objects.filter(id=answer_id).first()
+        Answer.objects.filter(id=answer_id).update(rated=1 , note=addPoints)
+
+        accountDetails = AccountDetails.objects.filter(user=answer.stageStudent.student).first()
+        actualPoints = accountDetails.points + int(addPoints)
+        actualExp = accountDetails.current_exp + int(addPoints)
+        accountDetails = AccountDetails.objects.filter(user=answer.stageStudent.student).update(points=actualPoints, current_exp=actualExp)
     return responses(request)
 
 def getAllLecturerStudents(lecturer):
@@ -528,7 +536,7 @@ def getAllNotRatedAnswers(lecturer):
                 for stageStudent in stageStudentList:
                     #print(Answer.objects.filter(stageStudent=stageStudent).exists())
                     if Answer.objects.filter(stageStudent=stageStudent).exists():
-                        answers = Answer.objects.filter(stageStudent=stageStudent)
+                        answers = Answer.objects.filter(stageStudent=stageStudent).filter(rated=False)
                         #print("Odpowiedzi")
                         for answer in answers:
                             
@@ -545,7 +553,7 @@ def getAllNotRatedAnswers(lecturer):
                 for stageStudent in stageStudentList:
                     #print(Answer.objects.filter(stageStudent=stageStudent).exists())
                     if Answer.objects.filter(stageStudent=stageStudent).filter(completed=True).exists():
-                        answers = Answer.objects.filter(stageStudent=stageStudent).filter(completed=True)
+                        answers = Answer.objects.filter(stageStudent=stageStudent).filter(completed=True).filter(rated=False)
                         #print("Odpowiedzi")
                         for answer in answers:
                             

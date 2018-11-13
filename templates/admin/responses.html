@@ -16,7 +16,7 @@
             <tbody>
                 {% for answer in answers%}
                 <tr class="col-1">
-                    <td>{{answer.id}} </td>
+                    <td>{{forloop.counter}} </td>
                     <td><a class="redirectClick" href="{% url 'adminSite:editStudent' answer.student_id %}" title="Pokaż {{answer.student}}">{{answer.student}}</a> </td>
                     <td><a class="redirectClick" href="{% url 'adminSite:groupDetails' answer.group_id %}" title="Pokaż grupę '{{answer.group_name}}'">{{answer.group_name}}</a> </td>
                     <td>{{answer.date}} </td>
@@ -26,7 +26,7 @@
             </tbody>
         </table>
     {% else %}
-        <h4 class="pt-4 pb-4 font-italic" align="center">Nie ma jeszcze żadnych rozwiązań</h4>
+        <h4 class="pt-4 pb-4 font-italic" align="center">Nie masz żadnych rozwiązań</h4>
     {% endif %}
 </div>
 {% endblock %}

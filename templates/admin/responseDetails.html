@@ -22,8 +22,9 @@
                 {% if answer.usedPrompt == 1 %}
                 <span class="badge badge-pill badge-danger">Pula pukntów do zdobycia zmniejszona. Student użył podpowiedzi.</span>
                 {%endif%}
+                <input type="hidden" id="answer_id" name="answer_id" value="{{ answer_id }}"/>
             </label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select class="form-control" id="exampleFormControlSelect1" name="excerciseScore">
                 {%for point in answer.point_scale%}
                 <option>{{forloop.counter}}</option>
                 {%endfor%}
