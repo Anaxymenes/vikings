@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label for="messageTopic">Temat wiadomości</label>
                     {% if message %}
-                    <input type="hidden" name="messageTopic" value="{{message.id}}">
+                    <input type="hidden" name="messageId" value="{{message.id}}">
                     <input type="text" disabled value="{{message.title}}" class="form-control" id="messageTopic"
                         required minlength="5">
                     {% else %}

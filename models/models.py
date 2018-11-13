@@ -33,6 +33,7 @@ class UserAbsence(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     absence = models.BooleanField(default=0)
     lesson_nr = models.IntegerField(default=1,validators=[MaxValueValidator(8),MinValueValidator(1)])
+    absence_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
 
 class Achievement(models.Model):
     name = models.CharField(max_length=50)

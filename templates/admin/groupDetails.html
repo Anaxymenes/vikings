@@ -23,7 +23,10 @@
                 </thead>
                 <tbody>
                     {% for student in students %}
+                    <form action="{% url 'adminSite:groupDetails' group.id %}" method="POST">
+                    {% csrf_token %}
                         <tr>
+                            <input type="hidden" name="student_id" value="{{student.id}}">
                             <th scope="row">1</th>
                             <td>{{student.points}}</td>
                             <td>{{student.first_name}}</td>
@@ -36,19 +39,22 @@
                             <td><a href="{% url 'adminSite:newMessageStudent' student.id %}"><button class="btn">Napisz</button></a></td>
                             <td>
                                 <div>
-                                    <input type="checkbox" />
-                                    <input type="checkbox" />
-                                    <input type="checkbox" />
-                                    <input type="checkbox" />
-                                    <input type="checkbox" />
-                                    <input type="checkbox" />
+                                    {% for absence in student.absences %}
+                                        <input type="checkbox" name="lesson_{{absence.id}}"
+                                        {% if absence == True %}
+                                            checked
+                                        {% endif %}
+                                        >
+                                    {% endfor %}
+                                    
                                 </div>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <button class="btn btn-primary btn-sm">Zapisz obecności</button>
+            <button name="save_absence" type="submit" class="btn btn-primary btn-sm">Zapisz obecności</button>
+            </form>
         {% else %}
             <div class="alert alert-warning" role="alert"> Brak studentów w grupie </div>
         {% endif %}

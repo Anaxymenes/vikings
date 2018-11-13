@@ -205,6 +205,8 @@ def groupDetails(request, group_id):
             getGroupByIdShortDetails(group_id),
             request.POST.dict()
         )
+    elif request.method == 'POST' and 'save_absence' in request.POST:
+        print(request.POST)
     students = getGroupDetails(group_id)
     students_without_group = getStudentsWithoutGroup()
     # stages = getStages()
@@ -371,7 +373,8 @@ def getGroupDetails(group_id):
             'last_name' : st.last_name,
             'username' : st.username,
             'email' : st.email,
-            'points' : stDetails.points
+            'points' : stDetails.points,
+            'absences': getStudentAbsence(st)
         })
     students = sorted(students, key=lambda k: k.get('points'),reverse = True)
     return students

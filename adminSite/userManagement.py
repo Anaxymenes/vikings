@@ -8,6 +8,7 @@ from django.db import transaction
 import operator
 from django.db.models import Q
 from main.stageManagement import createNewStudentStages
+from .absenceManagement import *
 
 def createStudentFromWorkbook(file_in_memory, group):
     try:
@@ -51,6 +52,7 @@ def createStudent(first_name, last_name, index_nr):
             user=user,
             level=0,
         )
+        createAbsenceList(user)
         createNewStudentStages(user)
         return user
     except:
