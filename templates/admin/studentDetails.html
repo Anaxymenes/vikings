@@ -120,10 +120,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{% url 'adminSite:editStudent' student.id %}">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label>Numer lekcji</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select class="form-control" id="exampleFormControlSelect1" name="stage_id">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -134,17 +135,18 @@
                     </div>
                     <div class="form-group">
                         <label>Start</label>
-                        <input id="datePicker1" type="datetime-local" name="bday" max="3000-12-31" 
-                            min="2000-01-01" class="form-control dateClass">
+                        <input id="datePicker1" type="datetime-local" max="3000-12-31" 
+                            min="2000-01-01" class="form-control dateClass" name="min_date">
                         <label>Koniec</label>
-                        <input id="datePicker2" type="datetime-local" name="bday" max="3000-12-31" 
-                            min="2000-01-01" class="form-control dateClass">
+                        <input id="datePicker2" type="datetime-local" max="3000-12-31" 
+                            min="2000-01-01" class="form-control dateClass" name="max_date">
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Zamknij</button>
-                <button type="button" class="btn btn-primary">Zatwierdź</button>
+                <button type="submit" class="btn btn-primary">Zatwierdź</button>
+            </form>
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@ import operator
 from django.db.models import Q
 from .userManagement import *
 from main.msgUtil import *
-from main.stageManagement import updateStageStatus
+from main.stageManagement import *
 from .groupManagement import *
 
 message_alert = ""
@@ -90,6 +90,12 @@ def deleteStudent(request, student_id):
     return render(request, 'admin/students.html',{'students':getStudentsList(), 'activeOverlap': activeOverlap})
 
 def editStudent(request,student_id):
+    if request.method == 'POST':
+        udpateStageStudentDates(
+            User.objects.filter(id=student_id).first(),
+            getStageById(request.POST.get("stage_id")),
+            request.POST.dict()
+        )
     return render(request, 'admin/studentDetails.html',
         {
             'student':getStudentDetails(student_id),
@@ -195,7 +201,7 @@ def challenges(request):
     return render(request, 'admin/challenges.html', {'activeOverlap': activeOverlap})
 
 def groupDetails(request, group_id):
-    if request.method == 'POST':
+    if request.method == 'POST' and 'min_1' in request.POST:
         updateGroupDates(
             getGroupByIdShortDetails(group_id),
             request.POST.dict()
