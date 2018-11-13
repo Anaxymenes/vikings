@@ -417,16 +417,19 @@ def getStudentStages(student_id):
     studentStage = StageStudent.objects.filter(student=user)
     stageDetails = []
     for stageStudent in studentStage:
+        completed = False
         stage = Stage.objects.filter(id=stageStudent.stage.id).first()
         answers = Answer.objects.filter(stageStudent=stageStudent)
         answerDetails = []
         for answer in answers:
             task = StageTasks.objects.filter(id=answer.task.id).first()
             difficultyLevel = DifficultyLevel.objects.filter(id=task.difficulty_level.id).first()
+            if answer.completed or stageStudent.complete :
+                completed = True
             answerDetails.append({
                 "task_id" : task.id,
                 "answer_id": answer.id,
-                "completed" : answer.completed,
+                "completed" : completed,
                 "rated": answer.rated,
                 "note": answer.note,
                 "difficulty_level_id": difficultyLevel.id,
