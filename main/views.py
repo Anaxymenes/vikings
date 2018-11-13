@@ -38,14 +38,19 @@ def lesson(request,stage_id):
 
 def exerciseDetails(request, stage_id):
     if request.method == "POST":
-        action = request.POST.get('action')
-        saveCloseExcercise(request.user.id,
-            stage_id,
-            request.POST.get('taskId'),
-            request.POST.get('answerSql'),
-            request.POST.get('usedPrompt'),
-            action == "close"
-        )
+        if 'action' in request.POST:
+            action = request.POST.get('action')
+            is_close = False
+            if action == "close":
+                is_close = True
+            saveCloseExcercise(request.user.id,
+                stage_id,
+                request.POST.get('taskId'),
+                request.POST.get('answerSql'),
+                request.POST.get('usedPrompt'),
+                is_close
+            )
+            return HttpResponseRedirect(reverse('main:lesson',args=[stage_id]))
         task = StageTasks.objects.filter(id=request.POST.get('taskId')).first()
         stage = Stage.objects.filter(id=stage_id).first()
         answer = Answer.objects.filter(task=task).filter(stageStudent=getStageStudentByStageId(request.user,stage_id)).first()
