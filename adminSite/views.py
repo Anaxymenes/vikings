@@ -13,6 +13,8 @@ from .userManagement import *
 from main.msgUtil import *
 from main.stageManagement import updateStageStatus
 
+message_alert = ""
+
 def groups(request):
     if request.user.is_superuser == False:
         return HttpResponseRedirect(reverse('main:home'))

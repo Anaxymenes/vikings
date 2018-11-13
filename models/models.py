@@ -88,4 +88,4 @@ class Messages(models.Model):
 
 class MessagesAnswer(models.Model):
     message = models.ForeignKey(Messages, related_name="messageId", on_delete=models.CASCADE)
-    answer_tois_created = models.ForeignKey(Messages,related_name='answerMessage', on_delete=models.CASCADE)    
+    answer_to = models.ForeignKey(Messages,related_name='answerMessage', on_delete=models.CASCADE)    
