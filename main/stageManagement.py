@@ -5,6 +5,9 @@ from django.db import transaction
 from django.db.models import Q
 from django.utils import timezone
 
+def getStageById(stage_id) :
+    return Stage.objects.filter(id=stage_id).first()
+
 def openStages(user):
     openStages = []
     accDet = AccountDetails.objects.filter(user=user).first()
