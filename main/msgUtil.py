@@ -156,3 +156,9 @@ def deletePermamentMessageWithAnswers(message):
 def deletePermamentMessage(message):
     Messages.objects.filter(id=message.id).delete()
 
+def createMessageForGroup(from_user, group, content, title):
+    if StudentGroup.objects.filter(group=group).exists():
+        groupStudents = StudentGroup.objects.filter(group=group)
+        for groupStudent in groupStudents:
+            createMessage(from_user, groupStudent.student, content, title)
+
