@@ -603,6 +603,8 @@ def getAllUserMessages(user):
         result.append({
             "id": msg.id,
             "from_user_id": from_user.id,
+            "to_user_id" : msg.to_user.id,
+            "to_user_name" : msg.to_user.first_name + " "+ msg.to_user.last_name,
             "from_user_name" : from_user.first_name + " "+ from_user.last_name,
             "title" : msg.title,
             "date": msg.send_date,
