@@ -12,6 +12,7 @@ from django.db.models import Q
 from .userManagement import *
 from main.msgUtil import *
 from main.stageManagement import updateStageStatus
+from .groupManagement import *
 
 message_alert = ""
 
@@ -210,6 +211,13 @@ def messages(request):
                 request.POST.get('messageContent'),
                 request.POST.get('messageTopic')
                 )
+        elif 'groupMessage' in request.POST:
+            is_created = createMessageForGroup(
+                request.user,
+                getGroupByIdShortDetails(request.POST.get('recipient')),
+                request.POST.get('messageContent'),
+                request.POST.get('messageTopic')
+            )
         else :
             is_created = createMessageAnswer(
                 getMessage(request.POST.get('answer_id')),
@@ -246,6 +254,13 @@ def newMessageForSpecificStudent(request,student_id):
     return render(request, 'admin/sendMessage.html', {
         'activeOverlap': activeOverlap,
         'to': getStudentDetailsToMsg(student_id)
+        })
+
+def newMessageForSpecificGroup(request,group_id):
+    activeOverlap = "messages"
+    return render(request, 'admin/sendMessage.html', {
+        'activeOverlap': activeOverlap,
+        'group': getGroupByIdShortDetails(group_id)
         })
 
 def readMessage(request,message_id):

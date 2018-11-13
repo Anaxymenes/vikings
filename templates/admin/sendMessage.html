@@ -29,6 +29,12 @@
             <input type="text" class="form-control" id="recipient"  value="{{to.name}}" disabled
                     required maxlength="80">
             <input type="hidden" name="newMessage" value="newMessage"/>
+            {% elif group %}
+                <label for="recipient">Odbiorca</label>
+                <input type="hidden" name="recipient" value="{{group.id}}"/>
+                <input type="text" class="form-control" id="recipient"  value="Grupa : {{group.name}}" disabled
+                        required maxlength="80">
+                <input type="hidden" name="groupMessage" value="groupMessage"/>
             {% else %}
                 <p> Nie prowadzisz żadnej grupy !</p>
             {% endif %}

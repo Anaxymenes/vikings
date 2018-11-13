@@ -19,7 +19,7 @@
                         <td><a href="{% url 'adminSite:groupDetails' group.id %}"><button class="btn btn-primary">Pokaż</button></a>
                         <td><button class="btn btn-info">Edytuj</button>
                         <td><a href="{% url 'adminSite:deleteGroup' group.id %}"><button class="btn btn-danger">Usuń</button></a>
-                        <td><button class="btn btn-basic">Napisz</button>
+                        <td><a href="{% url 'adminSite:newMessageGroup' group.id %}"><button class="btn btn-basic">Napisz</button></a>
                     </tr>
                     {% endfor %}
                 </tbody>

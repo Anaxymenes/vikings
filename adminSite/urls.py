@@ -27,6 +27,7 @@ urlpatterns = [
     path('messages', views.messages, name='messages'),
     path('sendMessage/<int:message_id>/', views.sendMessage, name='sendMessage'),
     path('newMessageStudent/<int:student_id>/', views.newMessageForSpecificStudent, name='newMessageStudent'),
+    path('newMessageGroup/<int:group_id>/', views.newMessageForSpecificGroup, name='newMessageGroup'),
     path('newMessage/',views.newMessage, name='newMessage'),
     path('addGroup/',views.addGroup, name='addGroup'),
     path('stageStatus',views.stageStatus, name="stageStatus")
