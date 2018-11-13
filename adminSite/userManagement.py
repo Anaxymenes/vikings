@@ -61,3 +61,7 @@ def createStudent(first_name, last_name, index_nr):
 def getUser(user_id):
     if User.objects.filter(id=user_id).exists():
         return User.objects.filter(id=user_id).first()
+
+def deleteStudent(student):
+    deletePermamentMessageWithAnswers()
+    User.objects.filter(is_superuser=False).filter(id=student.id).delete()
