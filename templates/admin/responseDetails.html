@@ -3,7 +3,8 @@
 {% block content %}
 <div class="container responseDetailsContent">
     <a href="/adminSite/responses"><i class="fa fa-arrow-circle-left fa-3x backArrow" title="Wstecz"></i></a>
-    <h1 align="center">Rozwiązanie zadania studenta {{answer.student_firstname}} {{answer.student_lastname}}</h1>
+    <h1 align="center">Rozwiązanie zadania</h1>
+    <h3 class="font-italic" align="center">{{answer.student_firstname}} {{answer.student_lastname}}</h3>
     <h4>Treść</h4>
     <p>{{answer.task_description}}
     </p>
@@ -41,7 +42,7 @@
             <small class="form-text text-muted">Zasłużył na medal?</small>
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Oceń</button>
+            <button type="submit" class="btn btn-primary mb-5">Oceń</button>
         </div>
     </form>
 </div>
