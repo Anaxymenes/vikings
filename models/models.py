@@ -32,7 +32,7 @@ class StageTasks(models.Model):
 class UserAbsence(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     absence = models.BooleanField(default=0)
-    date = models.DateField(default=datetime.now())
+    lesson_nr = models.IntegerField(default=1,validators=[MaxValueValidator(8),MinValueValidator(1)])
 
 class Achievement(models.Model):
     name = models.CharField(max_length=50)
