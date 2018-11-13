@@ -48,11 +48,9 @@ def global_rank(user):
     return studentRank 
 
 def group_rank(user):
-    print(user)
     group = StudentGroup.objects.filter(student = user).first()
-    print('______________', group)
     if group:
-        groupMates = StudentGroup.objects.filter(group.group.id)
+        groupMates = StudentGroup.objects.filter(group = group.group)
         groupStudents = []
         for mate in groupMates:
             groupStudents.append(AccountDetails.objects.filter(user = mate.student).first())
