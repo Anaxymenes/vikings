@@ -16,12 +16,12 @@
         </button>
     </div>
     {%endif%}
-    {% if students.count > 0 %}
     <div>
         <h1 class="py-2" align="center">Lista studentów</h1>
         <a href="{% url 'adminSite:addStudent' %}" class="addStudentButton"><button class="btn btn-primary"><i class="fa fa-plus pr-2"></i>Dodaj
-                studenta</button></a>
-    </div>
+            studenta</button></a>
+        </div>
+        {% if students.count > 0 %}
     <table class="table table-striped table-dark mt-3">
         <thead>
             <tr>
@@ -49,11 +49,7 @@
         </tbody>
     </table>
     {% else %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert"> Brak studentów
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert"> Brak studentów</div>
     {% endif %}
 </div>
 {% endblock %}

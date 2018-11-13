@@ -48,14 +48,10 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <button class="btn btn-primary btn-sm">Zapisz obecności</button>
         {% else %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert"> Brak studentów w grupie 
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            <div class="alert alert-warning" role="alert"> Brak studentów w grupie </div>
         {% endif %}
-        <button class="btn btn-primary btn-sm">Zapisz obecności</button>
     </div>
     <div class="row">
         <div class="col">
@@ -105,11 +101,14 @@
                         <option value="{{student.student_id}}">{{student.username|add:"-"|add:student.first_name|add:" "|add:student.last_name}}</option>
                         {%endfor%}
                     </select>
+                    <button type="submit" class="btn btn-primary">Dodaj studenta</button>
+                </div>
                     {% else %}
                     <p>Brak studentów nieprzypisanych do grup</p>
-                    {%endif%}
                 </div>
-                <button type="submit" class="btn btn-primary">Dodaj studenta</button>
+                    {%endif%}
+                {% if students_without_group %}
+                {% endif %}
             </form>
         </div>
     </div>
