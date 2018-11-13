@@ -516,13 +516,18 @@ def getAllNotRatedAnswers(lecturer):
     students = getAllLecturerStudents(lecturer)
     if students != None :
         for student in students:
-            stageStudentList = StageStudent.objects.filter(student=student)
+            #print("\n\n"+str(student.id))
             group = getStudentGroup(student)
-            if stageStudentList != None:
+            #print(group.id)
+            if StageStudent.objects.filter(student=student).filter(complete=True).exists():
+                stageStudentList = StageStudent.objects.filter(student=student).filter(complete=True)
                 for stageStudent in stageStudentList:
-                    answers = Answer.objects.filter(stageStudent=stageStudent).filter(rated = 0).filter(completed=1)
-                    if answers != None :
+                    #print(Answer.objects.filter(stageStudent=stageStudent).exists())
+                    if Answer.objects.filter(stageStudent=stageStudent).exists():
+                        answers = Answer.objects.filter(stageStudent=stageStudent)
+                        #print("Odpowiedzi")
                         for answer in answers:
+                            
                             results.append({
                                 'id' : answer.id,
                                 'student_id':student.id,
@@ -531,6 +536,23 @@ def getAllNotRatedAnswers(lecturer):
                                 'group_name': group.name,
                                 'date': answer.completed_at
                             })
+                stageStudentList = StageStudent.objects.filter(student=student).filter(complete=False)
+                for stageStudent in stageStudentList:
+                    #print(Answer.objects.filter(stageStudent=stageStudent).exists())
+                    if Answer.objects.filter(stageStudent=stageStudent).filter(completed=True).exists():
+                        answers = Answer.objects.filter(stageStudent=stageStudent).filter(completed=True)
+                        #print("Odpowiedzi")
+                        for answer in answers:
+                            
+                            results.append({
+                                'id' : answer.id,
+                                'student_id':student.id,
+                                'student' : student.first_name + ' ' + student.last_name,
+                                'group_id': group.id,
+                                'group_name': group.name,
+                                'date': answer.completed_at
+                            })
+                            #print(answer.id)
     return results
 
 def getStudentGroup(student):
