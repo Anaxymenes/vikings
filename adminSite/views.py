@@ -195,10 +195,21 @@ def challenges(request):
     return render(request, 'admin/challenges.html', {'activeOverlap': activeOverlap})
 
 def groupDetails(request, group_id):
+    if request.method == 'POST':
+        updateGroupDates(
+            getGroupByIdShortDetails(group_id),
+            request.POST.dict()
+        )
     students = getGroupDetails(group_id)
     students_without_group = getStudentsWithoutGroup()
-    stages = getStages()
-    return render(request, 'admin/groupDetails.html',{'students':students,'group_id':group_id, 'students_without_group': students_without_group, 'stages':stages})
+    # stages = getStages()
+    stages = getDatesToPicker(getGroupByIdShortDetails(group_id))
+    return render(request, 'admin/groupDetails.html',{
+        'students':students,
+        'group':getGroupByIdShortDetails(group_id), 
+        'students_without_group': students_without_group, 
+        'stages':stages,
+        })
 
 def messages(request):
     activeOverlap = "messages"
@@ -316,6 +327,31 @@ def getStudentsList():
 def getStages():
     stages = Stage.objects.filter()
     return stages
+
+
+def getDatesToPicker(group):
+    dates = []
+    stuGr = StudentGroup.objects.filter(group=group)
+    for i in range(1,6):
+        stage = Stage.objects.filter(id=i).first()
+        value_min = timezone.now()
+        value_max = timezone.now()
+        for student in stuGr:
+            studentStage = StageStudent.objects.filter(student=student.student).filter(stage=stage).first()
+            condition_first = value_min < studentStage.start_at
+            condition_second = value_max < studentStage.end_at 
+            if condition_first :
+                value_min = studentStage.start_at
+            if condition_second :
+                value_max = studentStage.end_at
+        dates.append({
+            "id": stage.id,
+            "name": stage.name,
+            "date_min": value_min,
+            "date_max" : value_max
+        })
+    return dates
+            
 
 def getGroupDetails(group_id):
     students = []

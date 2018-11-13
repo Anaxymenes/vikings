@@ -41,14 +41,18 @@ def updateStageStatus():
     stageStudents = StageStudent.objects.all()
     current_date = timezone.now()
     for stageStudent in stageStudents:
+        
         condition_first = timezone.now() > stageStudent.start_at
-        condition_second = timezone.now()< stageStudent.end_at
-        condition_to_close = timezone.now()> stageStudent.end_at
+        condition_second = timezone.now() < stageStudent.end_at
+        condition_to_close = timezone.now() > stageStudent.end_at
+     #print("Stage student ==> " + str(stageStudent.id) + " Wyniki : " +str(condition_first)+ " ,"+ str(condition_second)+ " ,"+ str(condition_to_close))
         if condition_first and condition_second :
             stageStudent.complete = 0
+            #print("Otwieram stageStudent "+ str(stageStudent.id))
             updateLevel(stageStudent.student,stageStudent.stage.id)
         elif condition_to_close :
             stageStudent.complete = 1
+            #print("Zamykam stageStudent "+ str(stageStudent.id))
         stageStudent.save()
     return True
 
@@ -58,3 +62,9 @@ def updateLevel(student, stage_level):
         accDet.level = stage_level
         accDet.save()
     return True
+
+def updateLessonDate(student,stage, start_at, end_at):
+    studentStage = StageStudent.objects.filter(student=student).filter(stage=stage).first()
+    studentStage.start_at = start_at
+    studentStage.end_at = end_at
+    studentStage.save()
