@@ -36,8 +36,6 @@ def createStudentFromWorkbook(file_in_memory, group):
                     user = createStudent(first_name,last_name,index_nr)
                     studentGroup = StudentGroup.objects.create(group=group, student=user)
                     studentGroup.save()
-                    accountDetails = AccountDetails.objects.create(hp_max=100,current_hp=100,level=0,points=0,exp_max=100,current_exp=0,user=user)
-                    accountDetails.save()
         return True
     except:
         return False
@@ -54,9 +52,9 @@ def createStudent(first_name, last_name, index_nr):
             level=0,
         )
         createNewStudentStages(user)
-        return True
+        return user
     except:
-        return False
+        return None
 
 def getUser(user_id):
     if User.objects.filter(id=user_id).exists():

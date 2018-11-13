@@ -3,6 +3,7 @@
 {% block content %}
 <div class="map">
     <div>
+        {% if levels %}
         {% for level in levels %}
             <img src="../../static/img/lesson{{level}}.png" class="lesson{{level}}">
             {% if level not in openLevels %}
@@ -11,6 +12,7 @@
                 <a href="/main/lesson/{{level}}"><img src="../../static/img/xmark.png" class="mark{{level}} top"></a>
             {% endif %}
         {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
