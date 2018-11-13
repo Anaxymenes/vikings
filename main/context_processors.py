@@ -12,8 +12,8 @@ def add_variable_to_context(request):
         global_ranking = global_rank(request.user)
         group_ranking = group_rank(request.user)
         openLevels = openStages(request.user)
-        exp_bar = (accountDetails.current_exp * 100) / accountDetails.exp_max
-        hp_bar = (accountDetails.current_hp * 100) / accountDetails.hp_max
+        exp_bar = int((accountDetails.current_exp * 100) / accountDetails.exp_max)
+        hp_bar = int((accountDetails.current_hp * 100) / accountDetails.hp_max)
         rate = calculate_rating(exp_bar)
         return {
             "player": request.user.get_full_name(), 
