@@ -501,11 +501,32 @@ def rateAnswer(request):
         answer = Answer.objects.filter(id=answer_id).first()
         Answer.objects.filter(id=answer_id).update(rated=1 , note=addPoints)
 
-        accountDetails = AccountDetails.objects.filter(user=answer.stageStudent.student).first()
+        user = answer.stageStudent.student
+        accountDetails = AccountDetails.objects.filter(user=user).first()
         actualPoints = accountDetails.points + int(addPoints)
         actualExp = accountDetails.current_exp + int(addPoints)
-        accountDetails = AccountDetails.objects.filter(user=answer.stageStudent.student).update(points=actualPoints, current_exp=actualExp)
+        accountDetails = AccountDetails.objects.filter(user=user).update(points=actualPoints, current_exp=actualExp)
+
+        checkMedal(user, answer.stageStudent, answer.task)
     return responses(request)
+
+def checkMedal(user, stageStudent, task):
+    answers = Answer.objects.filter(stageStudent=stageStudent).filter(completed=True).filter(rated=True).filter(usedPrompt=False)
+    if answers and len(answers)==5:
+        counter=0
+        for answer in answers:
+            if (answer.task.points==answer.note): #<==== ALBO answer.task.exp_points
+                counter += 1
+            else:
+                break
+        if counter==5:
+            achievement = Achievement.objects.filter(name="Medal precyzja Odyna").first()
+            giveMedal(achievement, answer.stageStudent.student)
+
+def giveMedal(achievement, student):
+    points = AccountDetails.objects.filter(user=student.id).first().points + achievement.points
+    AccountDetails.objects.filter(user=student.id).update(points=points)
+    AchievementTask.objects.create(achievement=achievement, student=student)
 
 def getAllLecturerStudents(lecturer):
     students =[]
