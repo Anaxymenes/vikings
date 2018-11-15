@@ -40,7 +40,7 @@
                             <td>
                                 <div>
                                     {% for absence in student.absences %}
-                                        <input type="checkbox" name="lesson_{{absence.id}}"
+                                        <input type="checkbox" name="lesson_{{student.id}}__{{absence.id}}"
                                         {% if absence == True %}
                                             checked
                                         {% endif %}
@@ -53,7 +53,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <button name="save_absence" type="submit" class="btn btn-primary btn-sm">Zapisz obecności</button>
+            <button name="save_absence" type="submit" class="btn btn-primary btn-sm" value="save">Zapisz obecności</button>
             </form>
         {% else %}
             <div class="alert alert-warning" role="alert"> Brak studentów w grupie </div>

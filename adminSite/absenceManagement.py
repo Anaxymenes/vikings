@@ -7,7 +7,7 @@ from django.utils import timezone
 from main.stageManagement import *
 
 def createAbsenceList(user):
-    for i in range(1,6):
+    for i in range(1,7):
         UserAbsence.objects.create(
             absence = False,
             student = user,
