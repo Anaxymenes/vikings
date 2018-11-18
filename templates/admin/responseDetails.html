@@ -12,26 +12,27 @@
     <p>{{answer.answer}}
     </p>
     <h4>Nagroda</h4>
-    <p>{{answer.max_task_points}}</p>
+    <p>{{answer.max_task_exp}}</p>
     <form class="" action="{% url 'adminSite:rateAnswer' %}" method="POST">
         {% csrf_token %}
         
         <div class="form-group">
             <label>
-                <b>Przyznaj punkty</b>
+                <h4>Przyznaj punkty</h4>
                 {% if answer.usedPrompt == 1 %}
                 <span class="badge badge-pill badge-danger">Pula pukntów do zdobycia zmniejszona. Student użył podpowiedzi.</span>
                 {%endif%}
                 <input type="hidden" id="answer_id" name="answer_id" value="{{ answer_id }}"/>
             </label>
-            <select class="form-control" id="exampleFormControlSelect1" name="excerciseScore">
+            <!-- <select class="form-control" id="exampleFormControlSelect1" name="excerciseScore">
                 {%for point in answer.point_scale%}
                 <option>{{forloop.counter}}</option>
                 {%endfor%}
-              </select>
+              </select> -->
+            <input type="number" class="form-control" id="exampleFormControlSelect1" name="excerciseScore" min="0" max="{{ answer.max_task_exp }}" value="{{ answer.max_task_exp }}" style="display: block; width: 100px; padding-left: 10px"/>
             <small class="form-text text-muted">Przyznaj odpowiednią ilość punktów.</small>
         </div>
-        <div class="form-group  media-body">
+        <!-- <div class="form-group  media-body">
             <label><b>Wybierz medale</b></label><br/>
             {%for medal in medals %}
             <div class="form-check">
@@ -41,7 +42,7 @@
             </div>
             {%endfor%}
             <small class="form-text text-muted">Zasłużył na medal?</small>
-        </div>
+        </div> -->
         <div class="text-center">
             <button type="submit" class="btn btn-primary mb-5">Oceń</button>
         </div>

@@ -203,13 +203,13 @@ def faq(request):
 
 def potion(request):
     details = AccountDetails.objects.filter(user = request.user).first()
-    if details.current_exp >= 20:
-        exp = details.current_exp - 20
+    if details.points >= 20:
+        points = details.points - 20
         if details.current_hp >= 80:
             hp = 100
         else:
             hp = details.current_hp + 20
-        AccountDetails.objects.filter(user = request.user).update(current_exp=exp, current_hp=hp)
+        AccountDetails.objects.filter(user = request.user).update(points=points, current_hp=hp)
     return HttpResponseRedirect(reverse('main:home'))
 
 def changePassword(request):
