@@ -565,6 +565,9 @@ def rateAnswer(request):
                 dead(user)
                 accountDetails = AccountDetails.objects.filter(user=user).first()
                 student_hp = accountDetails.current_hp
+        else:
+            print("Szybkie kopytko")
+            checkSzybkieKopytkoMedal(answer.stageStudent, answer.task)
 
         actualPoints = accountDetails.points + stageTask.points
         actualExp = accountDetails.current_exp + int(answer_score)
@@ -577,11 +580,11 @@ def rateAnswer(request):
             current_hp=student_hp
             )
         
-        checkMedalOdyn(user, answer.stageStudent, answer.task)
+        checkOdynMedal(answer.stageStudent, answer.task)
     return responses(request)
 
-
-def checkMedalOdyn(user, stageStudent, task):
+# MEDALS
+def checkOdynMedal(stageStudent, task):
     answers = Answer.objects.filter(stageStudent=stageStudent).filter(
         completed=True).filter(rated=True).filter(usedPrompt=False)
     if answers and len(answers) == 5:
@@ -596,6 +599,28 @@ def checkMedalOdyn(user, stageStudent, task):
                 name="Medal precyzja Odyna").first()
             giveMedal(achievement, answer.stageStudent.student)
 
+def checkSzybkieKopytkoMedal(stageStudent, task):
+    answer_task = StageTasks.objects.filter(id=task.id).first()
+    difficulty_level = answer_task.difficulty_level
+    stage = answer_task.stage
+    group = StudentGroup.objects.filter(student=stageStudent.student).first().group
+
+    goodAnswers = Answer.objects.filter(rated=1)
+    goodAnswersInGroup = []
+    for answer in goodAnswers:
+        if StudentGroup.objects.filter(student=answer.stageStudent.student).first().group == group:
+            goodAnswersInGroup.append(answer)
+
+    medal = True
+    for answer in goodAnswersInGroup:
+        if(len(StageTasks.objects.filter(id=answer.task.id).filter(difficulty_level=difficulty_level).filter(stage=stage)) > 0):
+            medal = False
+            break
+    if medal:
+        giveMedal(Achievement.objects.filter(name="Szybkie kopytko").first(), stageStudent.student)
+        print("MEDAAAAAL !!!!!!!!!!!!!!!!!!")
+    else:
+        print("BEZ MEDALU")
 
 def giveMedal(achievement, student):
     points = AccountDetails.objects.filter(
