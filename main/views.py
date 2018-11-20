@@ -82,7 +82,7 @@ def playerProfile(request):
         for stageStudent in stagesStudent:
             for answer in Answer.objects.filter(stageStudent=stageStudent):
                 answers.append(answer)
-        absences = UserAbsence.objects.filter(student=request.user).order_by('date')
+        absences = UserAbsence.objects.filter(student=request.user).filter(absence = True).order_by('absence_date')
         max_points = 0
         actual_points = 0
         result_points = 0

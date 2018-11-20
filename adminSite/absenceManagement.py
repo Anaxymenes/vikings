@@ -26,4 +26,16 @@ def getStudentAbsence(student):
             "id" : userAbsence.id,
             "date" : userAbsence.absence_date
         })
+    print(results)
     return results
+
+def getAllStudentAbsence(student):
+    return UserAbsence.objects.filter(student=student)
+
+def setAbsenceForStudent(absence_id):
+    absence = UserAbsence.objects.filter(id=absence_id).first()
+    absence.absence = True
+    absence.absence_date = datetime.now()
+    print(absence.id)
+    absence.save()
+

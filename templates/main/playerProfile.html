@@ -8,7 +8,7 @@
         <ul id="navProfile" class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#excercises">Zadanie główne</a></li>
             <li style="display:none"><a data-toggle="tab" href="#challenges">Wyzwania</a></li>
-            <li><a data-toggle="tab" href="#presences">Obecności</a></li>
+            <li><a data-toggle="tab" href="#presences">Nieobecności</a></li>
             <li><a data-toggle="tab" href="#medals">Medale</a></li>
             <li><a data-toggle="tab" href="#rating">Ocena</a></li>
         </ul>
@@ -103,10 +103,8 @@
                             <tbody>
                                 <tr>
                                     <td>{{forloop.counter}}</td>
-                                    <td>{{absence.date}}</td>
+                                    <td>{{absence.absence_date}}</td>
                                     {% if absence.absence %}
-                                    <td style="color: green">Obecny </td>
-                                    {% else %}
                                         <td style="color: red">Nieobecny </td>
                                     {% endif %}
                             </tbody>

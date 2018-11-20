@@ -18,7 +18,7 @@
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
-                        <th scope="col">Obecność</th>
+                        <th scope="col">Nieobecności</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,7 +41,7 @@
                                 <div>
                                     {% for absence in student.absences %}
                                         <input type="checkbox" name="lesson_{{student.id}}__{{absence.id}}"
-                                        {% if absence == True %}
+                                        {% if absence.absence %}
                                             checked
                                         {% endif %}
                                         >

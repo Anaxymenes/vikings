@@ -65,3 +65,21 @@ def getUser(user_id):
 def deleteStudent(student):
     deletePermamentMessageWithAnswers()
     User.objects.filter(is_superuser=False).filter(id=student.id).delete()
+
+def getAllStudentsFromGroup(group_id):
+    results =[]
+    group = Group.objects.filter(id=group_id).first()
+    studentGroupList = StudentGroup.objects.filter(group = group)
+    for studentGroup in studentGroupList:
+        results.append(studentGroup.student.id)
+    return results
+
+def setUserAbsence(post, group_id):
+    studentsList = getAllStudentsFromGroup(group_id)
+    for student in studentsList:
+        absenceList = getAllStudentAbsence(getUser(student))
+        for absence in absenceList:
+            post_id = "lesson_"+str(student)+"__"+str(absence.id)
+            if post_id in post:
+                setAbsenceForStudent(absence.id)
+    return True

@@ -230,7 +230,7 @@ def groupDetails(request, group_id):
             request.POST.dict()
         )
     elif request.method == 'POST' and 'save_absence' in request.POST:
-        print(request.POST)
+        setUserAbsence(request.POST,group_id)
     students = getGroupDetails(group_id)
     students_without_group = getStudentsWithoutGroup()
     # stages = getStages()
