@@ -39,3 +39,6 @@ INSERT INTO viking.models_storylevel (title,content,difficulty_level_id,stage_id
 INSERT INTO viking.models_storylevel (title,content,difficulty_level_id,stage_id) VALUES ('Salwa śmiechu','Teściowa na chwilę oślepła po celnym strzale Bjorna. Wykorzystał on okazję, wskoczył do staruszki i zaczął ja gilgotać w stopy piórkiem drozda. Nie wytrzymując ze śmiechu, zaczęła się trząść jak galareta i kazać mu przestać. Bjorn odpowiedział, jej „Przestanę, jak obiecasz mi, że już nigdy nie tkniesz mojego bigosu”. Teściowa nie mając innego wyboru, od razu zgodziła się.',4,6);
 INSERT INTO viking.models_storylevel (title,content,difficulty_level_id,stage_id) VALUES ('Happy End','Zaniepokojeni ciszą Staruszek z ptakiem wybiegli ze swojej kryjówki, aby zobaczyć co się dzieje. Gdy Drozd zobaczył ich razem uśmiechnął się i powiedział: „ A morał z tej bajki jest krótki i niektórym znany: gdy teściowa swój nos wtyka, tylko bigos jej usta zamyka!',5,6);
 
+INSERT INTO viking.models_achievement(name, points, description, picture) VALUES 
+	('Medal precyzja Odyna', 5, 'Medal przyznawany za 100% punktów z zadania','medal_precyzja.png'),
+	('Szybkie kopytko', 5, 'Medal przyznawany za najszybszą odpowiedź','medal_speed.png');

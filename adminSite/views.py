@@ -623,8 +623,7 @@ def checkSzybkieKopytkoMedal(stageStudent, task):
         print("BEZ MEDALU")
 
 def giveMedal(achievement, student):
-    points = AccountDetails.objects.filter(
-        user=student.id).first().points + achievement.points
+    points = AccountDetails.objects.filter(user=student.id).first().points + achievement.points
     AccountDetails.objects.filter(user=student.id).update(points=points)
     AchievementTask.objects.create(achievement=achievement, student=student)
 
