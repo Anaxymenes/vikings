@@ -78,9 +78,10 @@ def playerProfile(request):
         achievements_id_list = AchievementTask.objects.filter(student=request.user).values_list('achievement')
         achivements = Achievement.objects.filter(id__in = achievements_id_list)
         answers = []
+        current_answers =[]
         stagesStudent = StageStudent.objects.filter(student = request.user)
         for stageStudent in stagesStudent:
-            for answer in Answer.objects.filter(stageStudent=stageStudent):
+            for answer in Answer.objects.filter(stageStudent=stageStudent).filter(completed=True):
                 answers.append(answer)
         absences = UserAbsence.objects.filter(student=request.user).filter(absence = True).order_by('absence_date')
         max_points = 0
@@ -89,12 +90,22 @@ def playerProfile(request):
         for answer in answers:
             task = getattr(answer,"task")
             max_points += getattr(task,"points")
-            actual_points += getattr(task,"points") * (getattr(answer,"note") / 100)
+            actual_points += getattr(answer,"note")
+            points = (getattr(answer,"note") * 100) / getattr(task,"points")
+            current_answers.append({
+                "lesson": answer.stageStudent.stage.name,
+                "task_id":answer.task.difficulty_level.title,
+                "points": points,
+                "content": answer.task.description,
+                "answer": answer.answerSql
+                 
+            })
         if max_points != 0 :
-            result_points = actual_points * 100 / max_points
+            result_points = (actual_points / max_points) * 100
+        print()
         return render(request, 'main/playerProfile.html', {
             "achievements" : achivements,
-            "answers":answers,
+            "answers":current_answers,
             "results_points": result_points,
             "absences":absences,
         })

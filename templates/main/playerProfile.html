@@ -16,7 +16,6 @@
         <div class="tab-content tabBorder">
             <div id="excercises" class="tab-pane fade in active">
                 <h3 class="text-center">Wyniki z zadań głównych</h3>
-                {% if answers.count > 1 %}
                 <table class="table messageTable detailsTable">
                     <thead>
                         <tr>
@@ -26,39 +25,43 @@
                             <th>Wynik [%]</th>
                         </tr>
                     </thead>
-                    {% for answer in answers %}
+                    
+                    
                         <tbody>
+                                {% for answer in answers %}
                             <tr>
                                 <td>{{forloop.counter}}</td>
-                                <td>{{answer.stage.id}}</td>
-                                <td>{{answer.task.id}}</td>
-                                <td>{{answer.note}}</td>
-                                <td class="detailsButton" data-toggle="collapse" data-target="#details">
+                                <td>{{answer.lesson}}</td>
+                                <td>{{answer.task_id}}</td>
+                                <td>{{answer.points}}</td>
+                                <td class="detailsButton" data-toggle="collapse" data-target="#details{{forloop.counter}}">
                                     Szczegóły
                                 </td>
                             </tr>
                             <tr>
                                 <td id="detailsTd" colspan="5">
-                                    <div id="details" class="collapse">
+                                    <div id="details{{forloop.counter}}" class="collapse">
     
                                         <h5>Treść zadania:</h3>
-                                        <p class="small text-justify">{{answer.task.content}}</p>
+                                        <p class="small text-justify">{{answer.content}}</p>
                                     
                                         <h5>Odpowiedź:</h3>
-                                        <p class="small text-justify">{{answer.answerSql}}</p>
+                                        <p class="small text-justify">{{answer.answer}}</p>
                                     
                                     </div>
                                 </td>
                             </tr>
+                            {% empty %}
+                                <p>Brak ocenionych zadań</p>
+                            {% endfor %}
                         </tbody>    
-                    {% endfor %}
+                    
                 </table>
                 <div>
                     <p class="h3 average" align="center">Średnia z zadań: {{results_points}}%</p>
                 </div>
-                {% else %}
-                    <p>Brak ocenionych zadań</p>
-                {% endif %}
+                
+                
             </div>
             
             <!-- WYZWANIA -->
