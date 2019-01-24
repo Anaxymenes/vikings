@@ -109,10 +109,16 @@ def editStudent(request, student_id):
             getStageById(request.POST.get("stage_id")),
             request.POST.dict()
         )
+    student_stages_all=getStudentStages(student_id)
+    student_stages=[]
+    for stage in student_stages_all:
+        if not stage['tasks'] == []:
+            student_stages.append(stage)
+
     return render(request, 'admin/studentDetails.html',
                   {
                       'student': getStudentDetails(student_id),
-                      'stages': getStudentStages(student_id)
+                      'stages': student_stages
                   })
 
 
