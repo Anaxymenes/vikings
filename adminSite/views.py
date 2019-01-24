@@ -21,39 +21,51 @@ def groups(request):
     return render(request, 'admin/groups.html', {
         'form': CreateGroup(),
         'groups': getGroups(request),
-        'global_rank': global_rank()
+        'global_rank': global_rank(request)
     })
 
 
-def global_rank():
-    studentsSortedByPoints = sorted(AccountDetails.objects.all(
-    ), key=lambda student: student.points, reverse=True)
-    studentsWithDetails = []
-    for student in studentsSortedByPoints:
-        user = User.objects.filter(username=student.user).first()
-        if not user.is_superuser:
-            studentGroup = StudentGroup.objects.filter(
-                student=student.user).first()
-            if studentGroup:
-                groupName = Group.objects.filter(
-                    id=studentGroup.group.id).first().name
-            else:
-                groupName = "Brak grupy"
-            details = {
-                'student_id': student.user.id,
-                'points': student.points,
-                'first_name': user.first_name,
-                'last_name': user.last_name,
-                'id_number': user.username[1:],
-                'group': groupName,
-            }
-            studentsWithDetails.append(details)
-    return studentsWithDetails[:10]
+def global_rank(request):
+    groups=Group.objects.filter(lecturer=request.user.id)
+    students=[]
+    students_details=[]
+    if groups:
+        for group in groups:
+            students_in_this_group=StudentGroup.objects.filter(group=group.id)
+            if students_in_this_group:
+                for st in students_in_this_group:
+                    students.append(st.student.id)
+    if students:
+        for student in students:
+            students_details.append(AccountDetails.objects.filter(user=student).first())
+        studentsSortedByPoints = sorted(students_details, key=lambda student: student.points, reverse=True)
+        studentsWithDetails = []
+        for student in studentsSortedByPoints:
+            user = User.objects.filter(username=student.user).first()
+            if not user.is_superuser:
+                studentGroup = StudentGroup.objects.filter(
+                    student=student.user).first()
+                if studentGroup:
+                    groupName = Group.objects.filter(
+                        id=studentGroup.group.id).first().name
+                else:
+                    groupName = "Brak grupy"
+                details = {
+                    'student_id': student.user.id,
+                    'points': student.points,
+                    'first_name': user.first_name,
+                    'last_name': user.last_name,
+                    'id_number': user.username[1:],
+                    'group': groupName,
+                }
+                studentsWithDetails.append(details)
+        return studentsWithDetails[:10]
+    return None
 
 
 def deleteGroup(request, group_id):
     Group.objects.filter(lecturer=request.user).filter(id=group_id).delete()
-    return render(request, 'admin/groups.html', {'form': CreateGroup(), "groups": getGroups(request)})
+    return render(request, 'admin/groups.html', {'form': CreateGroup(), "groups": getGroups(request), 'global_rank': global_rank(request)})
 
 
 def deleteFromGroup(request, student_id):
@@ -572,7 +584,6 @@ def rateAnswer(request):
                 accountDetails = AccountDetails.objects.filter(user=user).first()
                 student_hp = accountDetails.current_hp
         else:
-            print("Szybkie kopytko")
             checkSzybkieKopytkoMedal(answer.stageStudent, answer.task)
 
         actualPoints = accountDetails.points + stageTask.points
@@ -624,9 +635,6 @@ def checkSzybkieKopytkoMedal(stageStudent, task):
             break
     if medal:
         giveMedal(Achievement.objects.filter(name="Szybkie kopytko").first(), stageStudent.student)
-        print("MEDAAAAAL !!!!!!!!!!!!!!!!!!")
-    else:
-        print("BEZ MEDALU")
 
 def giveMedal(achievement, student):
     points = AccountDetails.objects.filter(user=student.id).first().points + achievement.points

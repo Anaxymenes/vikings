@@ -54,6 +54,7 @@
         </div>
         <div class="col-xl-8">
             <h3>Ranking Światowy</h3>
+            {% if global_rank %}
             <table class="table table-hover table-dark table-stripped table-sm">
                 <thead>
                     <tr>
@@ -82,6 +83,10 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+            <div>Nie masz jeszcze żadnych studentów...</div>
+            {% endif %}
+
         </div>
 
     </div>
