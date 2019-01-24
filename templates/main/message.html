@@ -9,23 +9,22 @@
       <a href="/main/messages/"><i class="fa fa-arrow-left leftArrow"></i></a>
       <h2 class="pb-6 " align="center">Wiadomość</h2>
       <div class="messageDiv">
-        <p class="messageTitle">Temat</p>
-        <p>{{message.title}}</p>
-
-        <p class="messageTitle">Treść</p>
-        <p>{{message.content}}</p>
-        <p class="messageTitle">Starsze wiadomości <br /></p>
+        <p class="messageTitle">Temat : {{message.title}}</p>
+        
         {% if message.olders %}
         {% for older in message.olders %}
-        <p type="button" data-toggle="collapse" data-target="#collapseExample{{forloop.counter}}" aria-expanded="false"
-          aria-controls="collapseExample">
-          {{older.first_name }} {{older.last_name}} Dnia {{older.date}}
-        </p>
-        <div class="collapse" id="collapseExample{{forloop.counter}}">
-          <p>{{older.content}}</p>
+        <div class="contentPanelMsg">
+        <div class="contentTop">{{older.first_name }} {{older.last_name}} Dnia {{older.date}}</div>
+        <div class="contentMsg">{{older.content}}</div>
         </div>
         {% endfor %}
         {% endif %}
+        <div class="contentPanelMsg">
+          <div class="contentTop">{{message.from_user_name }} Dnia {{message.date}}</div>
+          <div class="contentMsg">{{message.content}}</div>
+        </div>
+        <!--<p class="messageTitle">Starsze wiadomości <br /></p> -->
+        
 
 
         <div align="center">

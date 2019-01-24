@@ -140,6 +140,23 @@ table {
     font-size: 1.8rem;
     font-style: inherit;
 }
+.contentPanelMsg{
+    -webkit-box-shadow: 12px 10px 45px 2px rgba(0,0,0,0.58);
+    -moz-box-shadow: 12px 10px 45px 2px rgba(0,0,0,0.58);
+    box-shadow: 12px 10px 45px 2px rgba(0,0,0,0.58);
+    margin: 20px;
+    padding: 5px 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.contentTop{
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.contentMsg{
+    border-bottom: 2px solid #3b3b3b !important;
+}
 .board .leftArrow{
     font-size: 4rem;
     position: absolute;
@@ -184,6 +201,7 @@ table {
     text-indent: 3%;
     line-height: 1.2;
 }
+
 @media screen and (max-width: 992px){
     .board {
         padding: 2rem 7rem 2rem 7rem !important;

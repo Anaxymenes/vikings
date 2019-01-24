@@ -14,7 +14,7 @@
                     <label for="messageTopic">Temat wiadomości</label>
                     {% if message %}
                     <input type="hidden" name="messageId" value="{{message.id}}">
-                    <input type="text" disabled value="{{message.title}}" class="form-control" id="messageTopic"
+                    <input type="text" readonly value="{{message.title}}" class="form-control" id="messageTopic" name="messageTopic"
                         required minlength="5">
                     {% else %}
                     <input type="text" class="form-control" id="messageTopic" name="messageTopic" placeholder="Wpisz temat wiadomości.."

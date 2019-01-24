@@ -63,8 +63,15 @@ def getMessageDetails(message_id, user):
 def createMessageAnswer(answer_to, from_user, to_user, content, title):
     sid = transaction.savepoint()
     try:
+
         if MessagesAnswer.objects.filter(message=answer_to).exists():
             answer_to = MessagesAnswer.objects.filter(message=answer_to).first().answer_to
+        print("Istnieję")
+        print("Answer to ==> ",answer_to)
+        print("To user ==> ",to_user)
+        print("From user ==> ",from_user)
+        print("Content ==> ",content)
+        print("Title ==> ",title)
         msg =  Messages.objects.create(
                 from_user = from_user,
                 to_user = to_user,
@@ -73,6 +80,7 @@ def createMessageAnswer(answer_to, from_user, to_user, content, title):
                 is_read = False,
                 send_date = timezone.now()
             )
+        print("asd")
         msgAns = MessagesAnswer.objects.create(
             answer_to = answer_to,
             message = msg
@@ -81,6 +89,7 @@ def createMessageAnswer(answer_to, from_user, to_user, content, title):
         return True
     except :
         transaction.savepoint_rollback(sid)
+        print("Ni groma")
         return False
 
 def createMessage(from_user, to_user, content, title):

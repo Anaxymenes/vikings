@@ -117,6 +117,7 @@ def messages(request):
     if request.method == 'POST':
         content = request.POST.get('messageContent')
         title = request.POST.get('messageTopic')
+        print("TITLE <++>" , request.POST)
         studentGroup = StudentGroup.objects.filter(student=user).first()
         group = Group.objects.filter(id = studentGroup.group.id).first()
         lecturer = User.objects.filter(id=group.lecturer.id).first()
@@ -135,6 +136,7 @@ def message(request):
     msg = None
     if request.method == 'POST':
         message_id = request.POST.get('message')
+        print(message_id)
         user = User.objects.filter(id = request.user.id).first()
         msg = getMessageDetails(message_id,user)
         return render(request, 'main/message.html',{'message':msg})
