@@ -58,6 +58,14 @@ def createStudent(first_name, last_name, index_nr):
     except:
         return None
 
+def createLecturer(name,last_name,login,email,password):
+    try:
+        user = User.objects.create_user(username=login,password=password,first_name=name, email=email, last_name=last_name, is_superuser=True)
+        
+        return user
+    except:
+        return None
+
 def getUser(user_id):
     if User.objects.filter(id=user_id).exists():
         return User.objects.filter(id=user_id).first()

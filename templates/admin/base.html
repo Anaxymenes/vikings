@@ -29,7 +29,14 @@
                 <ul id="myDIV">
                     <span class="logo">VIKINGS</span>
                     <li id="groups"><i class="fa fa-users"></i><a href="/adminSite">Grupy</a></li>
-                    <li id="students"><i class="fa fa-graduation-cap"></i><a href="/adminSite/students">Studenci</a></li>
+                    <li id="users">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span class="users" onclick="usersSlide()">Użytkownicy</span>
+                        <div class="usersMenu" id="usersMenu">
+                            <a href="/adminSite/students">Studenci</a>
+                            <a href="/adminSite/lecturers">Prowadzący</a>
+                        </div>
+                    </li>
                     <li id="excercises"><i class="fa fa-briefcase"></i><a href="/adminSite/excercises">Ćwiczenia</a></li>
                     <li id="challenges"><i class="fa fa-bell"></i><a href="/adminSite/challenges">Wyzwania</a></li>
                     <li id="responses"><i class="fa fa-pencil"></i><a href="/adminSite/responses">Rozwiązania</a></li>
@@ -55,6 +62,14 @@
         if(active === null || active === '') active="groups";
         var header = document.getElementById(active);
         header.className += "active";
+
+        function usersSlide() {
+            var usersMenu=document.getElementById("usersMenu")
+            if(usersMenu.style.display == 'block')
+                usersMenu.style.display = 'none'
+            else
+                usersMenu.style.display = 'block'
+        }
     </script>
     
 </body>

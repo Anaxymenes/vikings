@@ -1,0 +1,78 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+
+<div class="container studentsContainer">
+    {% if message == True %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert"> Użytkownik utworzony pomyślnie
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {%elif message == False%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert"> Ups... Użytkownik nie został utworzony.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {%endif%}
+    <div>
+        <h1 class="py-2" align="center">Lista prowadzących</h1>
+        <a href="{% url 'adminSite:addLecturer' %}" class="addUserButton"><button class="btn btn-primary"><i class="fa fa-plus pr-2"></i>Dodaj
+            prowadzącego</button></a>
+        </div>
+        {% if lecturers.count > 0 %}
+    <table class="table table-striped table-dark mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Lp</th>
+                <th scope="col">Nazwa użytkownika</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th>Adres email</th>
+                {% if lecturer.is_staff %}
+                    <th></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for lecturer in lecturers %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{lecturer.username}}</td>
+                <td>
+                    {% if lecturer.first_name %}
+                        {{lecturer.first_name}}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>
+                    {% if lecturer.last_name %}
+                        {{lecturer.last_name}}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>
+                    {% if lecturer.email %}
+                        {{lecturer.email}}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td> 
+                {% if not user.username == lecturer.username %}
+                    <td><a href="{% url 'adminSite:deleteLecturer' lecturer.id %}" class="badge badge-danger studentListButton">Usuń</a></td>
+                {% else %}
+                    <td><a class="badge badge-success studentListButton">To Ty</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert"> Brak użytkowników do wyświetlenia</div>
+    {% endif %}
+</div>
+{% endblock %}

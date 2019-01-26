@@ -17,7 +17,7 @@
                     <tr>
                         <td>{{group.name}}
                         <td><a href="{% url 'adminSite:groupDetails' group.id %}"><button class="btn btn-primary">Pokaż</button></a>
-                        <td><button class="btn btn-info">Edytuj</button>
+                        <td><a href="{% url 'adminSite:groupDetails' group.id %}"><button class="btn btn-info">Edytuj</button></a>
                         <td><a href="{% url 'adminSite:deleteGroup' group.id %}"><button class="btn btn-danger">Usuń</button></a>
                         <td><a href="{% url 'adminSite:newMessageGroup' group.id %}"><button class="btn btn-basic">Napisz</button></a>
                     </tr>
@@ -46,11 +46,18 @@
                 <div class="form-group ">
                     <label for="{{ form.groupName.id_for_label }}">Nazwa grupy</label>
                     {{ form.groupName }}
-                    {{ form.groupFile }}
-                    <button type="submit" class="btn btn-primary" value="Submit">Stwórz grupę</button>
+                    <div>
+                        <input class="mb-2" type="checkbox" id="fileCheckbox" onclick="chooseFileForm()"> Wczytaj z pliku 
+                    </div>
+                    <div id="chooseFile" style="display:none">
+                        {{ form.groupFile }}
+                    </div>
+                    <button type="submit" class="btn btn-success" value="Submit">Stwórz grupę</button>
                 </div>
             </form>
-            <a href="{% url 'adminSite:stageStatus' %}" class="btn btn-primary" >Uaktualnij statusy ćwiczeń</a>
+            <div>
+                <a href="{% url 'adminSite:stageStatus' %}" class="btn btn-warning" >Uaktualnij statusy ćwiczeń</a>
+            </div>
         </div>
         <div class="col-xl-8">
             <h3>Ranking Światowy</h3>
@@ -91,4 +98,16 @@
 
     </div>
 </div>
+<script>
+    function chooseFileForm() {
+        var checkBox = document.getElementById("fileCheckbox");
+        var form = document.getElementById("chooseFile");
+    
+        if (checkBox.checked == true){
+        form.style.display = "block";
+        } else {
+        form.style.display = "none";
+        }
+    }
+</script>
 {% endblock %}

@@ -15,7 +15,7 @@
 .studentDetails .topButtons button:last-child{
     width: 200px !important;
 } 
-.addStudentButton button{
+.addUserButton button{
     float: right;
     margin-top: -50px;
     margin-bottom: 15px;
@@ -58,7 +58,7 @@
 }
 
 /* AddStudent */
-.addStudentContainer {
+.addUserCont {
     width: 60%;
     margin-top: 1%;
     padding-bottom: 15px;
@@ -66,27 +66,27 @@
     border-radius: 25px;
 }
 @media screen and (max-width: 1000px){
-    .addStudentContainer{
+    .addUserCont{
         width: 95%;
     }
 }
-.addStudentContainer h1{
+.addUserCont h1{
     text-align: center;
     padding-top: 10px;
 }
-.addStudentContainer .backButton{
+.addUserCont .backButton{
     float: right;
     margin-top: -50px;
     margin-bottom: 15px;
     font-weight: bold;
 }
-.addStudentContainer .backButton button{
+.addUserCont .backButton button{
     width: auto !important;
     border-radius: 50%;
     font-size: 20px;
     padding: 1px 8px;
 }
-.addStudentContainer .addButton{
+.addUserCont .addButton{
     width: 20%;
     font-size: 1.2rem;
     font-weight: bold;

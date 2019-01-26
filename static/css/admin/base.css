@@ -100,7 +100,44 @@ body {
 .custom-file-input{
     opacity: 1 !important;
 }
-
+.users{
+    color: #fff !important;
+    cursor: pointer;
+}
+.usersMenu{
+    z-index: -1;
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 121px;
+    -webkit-animation-name: userMenuAnimation; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: userMenuAnimation;
+    animation-duration: 0.3s;
+}
+@-webkit-keyframes userMenuAnimation {
+    from {left: 20%; opacity: 0}
+    to {left: 100%; opacity: 1}
+}
+@keyframes userMenuAnimation {
+from {left: 20%; opacity: 0}
+to {left: 100%; opacity: 1}
+}
+.usersMenu a{
+    z-index: -1;
+    padding: 10px 20px;
+    background-color: #253238;
+    cursor: pointer;
+}
+.usersMenu a:first-child{
+    border-top-right-radius: 10px;
+}
+.usersMenu a:last-child{
+    border-bottom-right-radius: 10px;
+}
+.usersMenu a:hover{
+    background-color: #167696;
+}
 @media screen and (min-width: 1600px){
     .container{
         max-width: 1540px;

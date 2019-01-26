@@ -18,7 +18,7 @@
     {%endif%}
     <div>
         <h1 class="py-2" align="center">Lista studentów</h1>
-        <a href="{% url 'adminSite:addStudent' %}" class="addStudentButton"><button class="btn btn-primary"><i class="fa fa-plus pr-2"></i>Dodaj
+        <a href="{% url 'adminSite:addStudent' %}" class="addUserButton"><button class="btn btn-primary"><i class="fa fa-plus pr-2"></i>Dodaj
             studenta</button></a>
         </div>
         {% if students.count > 0 %}

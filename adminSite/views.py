@@ -64,7 +64,7 @@ def global_rank(request):
 
 
 def deleteGroup(request, group_id):
-    Group.objects.filter(lecturer=request.user).filter(id=group_id).delete()
+    Group.objects.filter(id=group_id).delete()
     return render(request, 'admin/groups.html', {'form': CreateGroup(), "groups": getGroups(request), 'global_rank': global_rank(request)})
 
 
@@ -93,7 +93,7 @@ def responseDetails(request, answer_id):
 
 
 def students(request):
-    activeOverlap = "students"
+    activeOverlap = "users"
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -102,14 +102,32 @@ def students(request):
         return render(request, 'admin/students.html', {'students': getStudentsList(), 'message': msg})
     return render(request, 'admin/students.html', {'students': getStudentsList(), 'activeOverlap': activeOverlap})
 
+def lecturers(request):
+    activeOverlap = "users"
+    if request.method == 'POST':
+        name,last_name,email,login,password=request.POST.get('name'),request.POST.get('last_name'), request.POST.get('email'), request.POST.get('login'), request.POST.get('password')
+        msg = createLecturer(name,last_name,login, email,password)
+        return render(request, 'admin/lecturers.html', {'lecturers': getLecturers(), 'activeOverlap': activeOverlap, 'message': msg})
+    return render(request, 'admin/lecturers.html', {'lecturers': getLecturers(), 'activeOverlap': activeOverlap})
+
+def addLecturer(request):
+    return render(request, 'admin/addLecturer.html')
+
+def deleteLecturer(request, user_id):
+    activeOverlap = "users"
+    groups=Group.objects.filter(lecturer=user_id)
+    for group in groups:
+        deleteGroup(request, group.id)
+    User.objects.filter(is_superuser=True).filter(id=user_id).delete()
+    return render(request, 'admin/lecturers.html', {'lecturers': getLecturers(), 'activeOverlap': activeOverlap})
 
 def addStudent(request):
-    activeOverlap = "students"
+    activeOverlap = "users"
     return render(request, 'admin/addStudent.html', {'activeOverlap': activeOverlap})
 
 
 def deleteStudent(request, student_id):
-    activeOverlap = "students"
+    activeOverlap = "users"
     User.objects.filter(is_superuser=False).filter(id=student_id).delete()
     return render(request, 'admin/students.html', {'students': getStudentsList(), 'activeOverlap': activeOverlap})
 
@@ -376,6 +394,7 @@ def addGroup(request):
     return render(request, 'admin/groups.html', {'groups': getGroups(request), 'form': CreateGroup()})
 
 
+
 def stageStatus(request):
     updateStageStatus()
     return HttpResponseRedirect(reverse('adminSite:groups'))
@@ -385,6 +404,9 @@ def getStudentsList():
     students = User.objects.filter(is_superuser=False)
     return students
 
+def getLecturers():
+    lecturers = User.objects.filter(is_superuser=True)
+    return lecturers
 
 def getStages():
     stages = Stage.objects.filter()
