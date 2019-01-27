@@ -18,7 +18,7 @@
 <div class="container messagesBody">
     <div>
         <a href="{% url 'adminSite:newMessage' %}" class="sendMessageButton"><button class="btn btn-primary sendMessageButton mt-2"><i
-                    class="fa fa-paper-plane pr-2"></i>Wyślij wiadomość</button></a>
+            class="fa fa-paper-plane pr-2"></i>Wyślij wiadomość</button></a>
         <h1>Wiadomości</h1>
     </div>
     <form>
@@ -28,7 +28,7 @@
                 <tr>
                     <th scope="col"><input id="all" class="checkjq" type="checkbox" /> Lp.</th>
                     <th scope="col">Data</th>
-                    <th scope="col">Od</th>
+                    <th scope="col">Student</th>
                     <th scope="col">Tytuł</th>
                     <th scope="col">Przeczytana</th>
                 </tr>
@@ -38,7 +38,7 @@
                 <tr>
                     <td scope="row"><input type="checkbox" /> {{forloop.counter}}.</td>
                     <td>{{message.date}}</td>
-                    <td class="redirectToPerson"><a href="{% url 'adminSite:editStudent' message.from_user_id %}">{{message.from_user_name}}</a></td>
+                    <td class="redirectToPerson"><a href="{% url 'adminSite:editStudent' message.from_user_id %}">{{message.to_user_name}}</a></td>
                     <td>{{message.title}}</td>
                     {% if message.is_read == False %}
                     <td>

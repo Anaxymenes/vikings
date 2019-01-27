@@ -111,7 +111,8 @@ def lecturers(request):
     return render(request, 'admin/lecturers.html', {'lecturers': getLecturers(), 'activeOverlap': activeOverlap})
 
 def addLecturer(request):
-    return render(request, 'admin/addLecturer.html')
+    activeOverlap = "users"
+    return render(request, 'admin/addLecturer.html', {'activeOverlap': activeOverlap})
 
 def deleteLecturer(request, user_id):
     activeOverlap = "users"

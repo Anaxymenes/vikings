@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container excerciseDetailsContent">
         
-           <a href="/adminSite/excercises"><i class="fa fa-arrow-circle-left fa-3x backArrow" title="Wstecz"></i></a>
+           <a href="{% url 'adminSite:excercisesWithTable' stage_id=task.stage_id %}"><i class="fa fa-arrow-circle-left fa-3x backArrow" title="Wstecz"></i></a>
             <h2 align="center">
                 {% if task != None %}
                     {{task.stage_name}}
@@ -56,7 +56,6 @@
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary text-center w-25">Zapisz</button>
-                    <a href="{% url 'adminSite:excercisesWithTable' stage_id=task.stage_id %}"><button type="button" class="btn btn-danger text-center w-25">Wróć</button></a>
                 </div>
             </form>
         </div>

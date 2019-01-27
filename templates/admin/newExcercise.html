@@ -3,12 +3,12 @@
 {% block content %}
     <div class="container excerciseDetailsContent">
         
-           <a href="/adminSite/excercises"><i class="fa fa-arrow-circle-left fa-3x backArrow" title="Wstecz"></i></a>
+           <a href="{% url 'adminSite:excercisesWithTable' stage_id=stage_id %}"><i class="fa fa-arrow-circle-left fa-3x backArrow" title="Wstecz"></i></a>
             <h2 align="center">
-                    {{stage_name}}
+                {{stage_name}}
             </h2>
             <h3 align="center">
-                        Nowe zadanie
+                Nowe zadanie 
             </h3>
         
             <form class="excerciseForm" action="{% url 'adminSite:newExcercise' stage_id=stage_id %}" method="POST">
@@ -37,7 +37,6 @@
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary text-center w-25">Dodaj</button>
-                    <a href="{% url 'adminSite:excercisesWithTable' stage_id=stage_id %}"><button type="button" class="btn btn-danger text-center w-25">Wróć</button></a>
                 </div>
             </form>
         </div>

@@ -9,16 +9,16 @@
     <form method="POST" action="{% url 'adminSite:students' %}">
         {% csrf_token %}
         <div class="form-group">
-            <label for="stedentName">Imię</label>
-            <input type="text" class="form-control" name="first_name" id="stedentName" placeholder="Podaj imię studenta">
+            <label for="stedentName">Imię*</label>
+            <input type="text" class="form-control" name="first_name" required minlength="2" id="stedentName" placeholder="Podaj imię studenta">
         </div>
         <div class="form-group">
-            <label for="studentLastName">Nazwisko</label>
-            <input type="text" class="form-control" name="last_name" id="studentLastName" placeholder="Podaj nazwisko studenta">
+            <label for="studentLastName">Nazwisko*</label>
+            <input type="text" class="form-control" name="last_name" required minlength="2" id="studentLastName" placeholder="Podaj nazwisko studenta">
         </div>
         <div class="form-group">
-            <label for="indexNumber">Index</label>
-            <input type="number" class="form-control" name="index_nr" id="indexNumber" placeholder="123 456">
+            <label for="indexNumber">Index*</label>
+            <input type="number" class="form-control" name="index_nr" required minlength="5" id="indexNumber" placeholder="123 456">
         </div>
         <div align="center">
             <button type="submit" class="btn btn-primary addButton">Dodaj</button>

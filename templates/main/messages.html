@@ -36,7 +36,9 @@
         </tbody>
       </table>
     </form>
-    {%endif%}
+    {% else %}
+      <span>Nie masz jeszcze żadnych wiadomości</span>
+    {% endif %}
   </div>
 </section>
 {% endblock %}
