@@ -3,7 +3,7 @@
 {% block content %}
 <div class="board profileBoard">
     <h1 class="text-center">Profil Gracza</h1>
-    
+
     <div class="container tabs">
         <ul id="navProfile" class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#excercises">Zadanie główne</a></li>
@@ -25,96 +25,105 @@
                             <th>Wynik [%]</th>
                         </tr>
                     </thead>
-                    
-                    
-                        <tbody>
-                                {% for answer in answers %}
-                            <tr>
-                                <td>{{forloop.counter}}</td>
-                                <td>{{answer.lesson}}</td>
-                                <td>{{answer.task_id}}</td>
+
+
+                    <tbody>
+                        {% for answer in answers %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{answer.lesson}}</td>
+                            <td>{{answer.task_id}}</td>
+                            {% if answer.rated %}
                                 <td>{{answer.points}}</td>
-                                <td class="detailsButton" data-toggle="collapse" data-target="#details{{forloop.counter}}">
-                                    Szczegóły
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id="detailsTd" colspan="5">
-                                    <div id="details{{forloop.counter}}" class="collapse">
-    
-                                        <h5>Treść zadania:</h3>
-                                        <p class="small text-justify">{{answer.content}}</p>
-                                    
-                                        <h5>Odpowiedź:</h3>
-                                        <p class="small text-justify">{{answer.answer}}</p>
-                                    
+                            {% else %}
+                                <td class="notRated">Nieocenione</td>
+                            {%endif%}
+                            <td class="detailsButton" data-toggle="collapse" data-target="#details{{forloop.counter}}">
+                                Szczegóły
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="detailsTd" colspan="5">
+                                <div id="details{{forloop.counter}}" class="collapse">
+                                    <div class="card_dark">
+                                        <div class="card_body">
+                                                <div class="card_title">Treść zadania:</div>
+                                                <div class="card_text">{{answer.content}}</div>
+                                                </div>
+                                                <div class="card_body">
+                                            <div class="card_title">Odpowiedź:</div>
+                                            <div class="card_text">{{answer.answer}}</div>
+                                        </div>
                                     </div>
-                                </td>
-                            </tr>
-                            {% empty %}
-                                <p>Brak ocenionych zadań</p>
-                            {% endfor %}
-                        </tbody>    
-                    
+
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <p>Brak ocenionych zadań</p>
+                        {% endfor %}
+                    </tbody>
+
                 </table>
                 <div>
                     <p class="h3 average" align="center">Średnia z zadań: {{results_points}}%</p>
                 </div>
-                
-                
+
+
             </div>
-            
+
             <!-- WYZWANIA -->
             <div id="challenges" class="tab-pane fade" style="display:none">
                 <h3 class="text-center">Wyzwania</h3>
                 <table class="table presencesTable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Treść wyzwania</th>
-                                <th>Punkty</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1. </td>
-                                <td>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </td>
-                                <td>40 pkt</td>
-                            </tr>
-                            <tr>
-                                <td>2. </td>
-                                <td>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </td>
-                                <td>80 pkt</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Treść wyzwania</th>
+                            <th>Punkty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. </td>
+                            <td>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem
+                                ipsum dolor sit amet </td>
+                            <td>40 pkt</td>
+                        </tr>
+                        <tr>
+                            <td>2. </td>
+                            <td>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </td>
+                            <td>80 pkt</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <!-- OBECNOŚCI -->
             <div id="presences" class="tab-pane fade">
                 <h3 class="text-center">Obecności</h3>
                 {% if absences.count > 0 %}
-                    <table class="table presencesTable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Data</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                    {% for absence in absences %}    
-                            <tbody>
-                                <tr>
-                                    <td>{{forloop.counter}}</td>
-                                    <td>{{absence.absence_date}}</td>
-                                    {% if absence.absence %}
-                                        <td style="color: red">Nieobecny </td>
-                                    {% endif %}
-                            </tbody>
+                <table class="table presencesTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    {% for absence in absences %}
+                    <tbody>
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{absence.absence_date}}</td>
+                            {% if absence.absence %}
+                            <td style="color: red">Nieobecny </td>
+                            {% endif %}
+                    </tbody>
                     {% endfor %}
-                    </table>
+                </table>
                 {% else %}
-                    <p>Brak danych</p>
+                <p>Brak danych</p>
                 {% endif %}
             </div>
 
@@ -122,44 +131,43 @@
             <div id="medals" class="tab-pane fade">
                 <h3 class="text-center">Medale</h3>
                 {% if achievements.count == 0 %}
-                    <p>Aktualnie nie posiadasz żadnych medali.</p>
+                <p>Aktualnie nie posiadasz żadnych medali.</p>
                 {% else %}
-                    <div class="table-responsive">
-                        <table class="table medalsTable">
-                                <thead align="center">
-                                    <tr>
-                                        <th>Medal
-                                        <th>Nazwa
-                                        <th>Opis
-                                        <th>Bonus
-                                    </tr>
-                                </thead>
-                                {% for achievement in achievements %}
-                                    <tbody>
-                                        <tr>
-                                            <td  class="medalImageField"><img class="medalImage" src="../../static/img/Medals/{{achievement.picture}}"> </td>
-                                            <td>„{{achievement.name}}” </td>
-                                            <td>{{achievement.description}} </td>
-                                            <td>+ {{achievement.points}} punktów rankingowych </td>
-                                        </tr>
-                                    </tbody>
-                                {% endfor %}
-                            </table>
-                        </table>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table medalsTable">
+                        <thead align="center">
+                            <tr>
+                                <th>Medal
+                                <th>Nazwa
+                                <th>Opis
+                                <th>Bonus
+                            </tr>
+                        </thead>
+                        {% for achievement in achievements %}
+                        <tbody>
+                            <tr>
+                                <td class="medalImageField"><img class="medalImage" src="../../static/img/Medals/{{achievement.picture}}">
+                                </td>
+                                <td>„{{achievement.name}}” </td>
+                                <td>{{achievement.description}} </td>
+                                <td>+ {{achievement.points}} punktów rankingowych </td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                    </table>
+                </div>
                 {% endif %}
             </div>
 
             <!-- OCENA -->
             <div id="rating" class="tab-pane fade rating">
                 <h3 class="text-center">Aktualna ocena końcowa</h3>
-                <p>Proponowana ocena końcowa: 
-                    <span 
-                    class="{% if rate < 3 %} rate-red 
+                <p>Proponowana ocena końcowa:
+                    <span class="{% if rate < 3 %} rate-red 
                         {% elif rate < 4.5 %} rate-yellow
                         {% else %} rate-green
-                        {% endif %}"
-                    >
+                        {% endif %}">
                         {{rate}}
                     </span>
                 </p>

@@ -551,6 +551,8 @@ def getDataAboutAnswer(answer_id, lecturer):
         minus_points = task.points * 0.2
         minus_exp = task.exp_points * 0.2
     max_points_to_gain = task.points - minus_points
+    max_points_to_gain = int(max_points_to_gain)
+    print(max_points_to_gain)
     max_exp_to_gain = task.exp_points - minus_exp
     response.append({
         "task_description": task.description,

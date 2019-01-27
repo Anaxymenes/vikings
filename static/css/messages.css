@@ -207,3 +207,9 @@ table {
         padding: 2rem 7rem 2rem 7rem !important;
     }
 }
+.alert_messages_missing{
+    text-align: center;
+    width: auto;
+    font-size: 0.9em;
+    color: rgb(85, 85, 83);
+}

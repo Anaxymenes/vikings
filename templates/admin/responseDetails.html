@@ -29,7 +29,7 @@
                 <option>{{forloop.counter}}</option>
                 {%endfor%}
               </select> -->
-            <input type="number" class="form-control" id="exampleFormControlSelect1" name="excerciseScore" min="0" max="{{ answer.max_task_points }}" value="{{ answer.max_task_points }}" style="display: block; width: 100px; padding-left: 10px"/>
+            <input type="number" class="form-control" id="exampleFormControlSelect1" name="excerciseScore" min="0" max="{{ answer.max_points_to_gain }}" value="{{ answer.max_points_to_gain }}" style="display: block; width: 100px; padding-left: 10px"/>
             <small class="form-text text-muted">Przyznaj odpowiednią ilość punktów.</small>
         </div>
         <!-- <div class="form-group  media-body">
