@@ -103,9 +103,12 @@
 /* MEDALS */
 .medalImageField{
     padding: 0 !important;
+    width: 20px !important; 
+    
 }
 .medalImage{
-   width: 100%;
+   width: auto;
+   max-height: 50px !important;
 }
 .medalsTable{
     margin-top: 0;
@@ -124,6 +127,15 @@
     background-color: rgb(255, 214, 81);
     line-height: 1.2 !important;
     font-weight: 100;
+    font-size: 1.3em;
+    vertical-align: middle !important;
+}
+.medalDesc{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: auto auto;
+    display: block;
 }
 /* Rating */
 .rating p{
